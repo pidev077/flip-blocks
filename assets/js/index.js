@@ -6,6 +6,7 @@ import Insight from "./blocks/insights";
 import Team from "./blocks/team";
 import Sectors from "./blocks/sectors";
 import ContentMedia from "./blocks/content-media";
+import ServicesPopup from "./blocks/services-popup";
 
 document.addEventListener("DOMContentLoaded", async () => {
 	FunctionsJs.init();
@@ -15,4 +16,5 @@ document.addEventListener("DOMContentLoaded", async () => {
 	Team.init();
 	Sectors.init();
 	ContentMedia.init();
+	ServicesPopup.init();
 });

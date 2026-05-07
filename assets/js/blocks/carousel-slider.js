@@ -14,6 +14,7 @@ export default {
 		testimonialsCarousel();
 		logoCarousel();
 		galleryCarousel();
+		productCarousel();
 	},
 };
 
@@ -114,5 +115,47 @@ function galleryCarousel() {
 			disableOnInteraction: false,
 		},
 		allowTouchMove: false,
+	});
+}
+
+function productCarousel() {
+	const $blocks = document.querySelectorAll(".block-product-carousel");
+	if (!$blocks.length) return;
+
+	$blocks.forEach(($block) => {
+		const swiperEl = $block.querySelector(".swiper");
+		if (!swiperEl) return;
+
+		const dataStr = swiperEl.getAttribute("data-carousel");
+		const data = dataStr ? JSON.parse(dataStr) : {};
+
+		const slidesPerView = data.slidesPerView || 3;
+
+		new Swiper(swiperEl, {
+			modules: [Navigation, Autoplay],
+			slidesPerView: slidesPerView,
+			spaceBetween: data.spaceBetween || 20,
+			speed: data.speed || 500,
+			loop: data.loop !== false,
+			grabCursor: true,
+			navigation: {
+				nextEl: swiperEl.querySelector(".swiper-button-next"),
+				prevEl: swiperEl.querySelector(".swiper-button-prev"),
+			},
+			autoplay: data.autoplay
+				? { delay: data.autoplayDelay || 3000, disableOnInteraction: false }
+				: false,
+			breakpoints: {
+				0: {
+					slidesPerView: 1,
+				},
+				768: {
+					slidesPerView: Math.min(2, slidesPerView),
+				},
+				1024: {
+					slidesPerView: slidesPerView,
+				},
+			},
+		});
 	});
 }

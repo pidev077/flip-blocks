@@ -175,6 +175,28 @@ if (!function_exists('flip_init_register_block')) {
 		));
 
 
+		register_block_type('flip-blocks/block-services-list', array(
+			'render_callback' => 'flip_services_list_render',
+			'attributes' => array(
+				'selectedIds' => array(
+					'type'    => 'array',
+					'default' => [],
+					'items'   => array('type' => 'number'),
+				),
+				'columns' => array(
+					'type'    => 'number',
+					'default' => 3,
+				),
+				'className' => array(
+					'type' => 'string',
+				),
+				'anchor' => array(
+					'type'    => 'string',
+					'default' => '',
+				),
+			),
+		));
+
 		register_block_type('flip-blocks/block-insights', array(
 			'render_callback' => 'block_insights_render',
 			'attributes' => array(
