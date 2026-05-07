@@ -1,0 +1,242 @@
+.gform_confirmation_wrapper {
+	border-radius: 24px;
+	background: #fff5d2;
+	padding: 32px;
+}
+
+.subscribe-form {
+	@include media-breakpoint-down(xl) {
+		padding: 24px !important;
+	}
+
+	@include media-breakpoint-down(md) {
+		padding: 32px 16px !important;
+	}
+}
+
+.gform_wrapper {
+	border-radius: 24px;
+	background: #fff5d2;
+	padding: 32px;
+
+	@include media-breakpoint-down(xl) {
+		padding: 24px;
+	}
+
+	@include media-breakpoint-down(md) {
+		padding: 32px 16px;
+	}
+
+	&.no-padding_wrapper {
+		padding: 0;
+	}
+
+	&.no-background_wrapper {
+		background: none;
+	}
+
+	.gform_heading {
+		display: none;
+	}
+
+	.gform_validation_errors {
+		display: none;
+	}
+
+	form {
+		.gform-body {
+			.gform_fields {
+				display: grid;
+				grid-template-columns: repeat(12, 1fr);
+				grid-row-gap: 32px;
+				width: 100%;
+				grid-column-gap: 24px;
+
+				@include media-breakpoint-down(xl) {
+					grid-row-gap: 24px;
+					grid-column-gap: 16px;
+				}
+
+				.gfield {
+					&.gfield--width-full {
+						grid-column: span 12;
+					}
+
+					&.gfield--width-half {
+						grid-column: span 6;
+					}
+					&.gfield--type-html {
+						h3 {
+							font-size: 32px;
+
+							@include media-breakpoint-down(xl) {
+								font-size: calc(1.35rem + 1.2vw);
+							}
+						}
+					}
+
+					.gfield_label {
+						font-weight: normal;
+						font-family: $font-second;
+						font-weight: 500;
+						font-size: 18px;
+
+						@include media-breakpoint-down(xl) {
+							font-size: 16px;
+						}
+					}
+
+					.ginput_container {
+						input,
+						select,
+						textarea {
+							color: #120a00;
+							font-family: $font-second;
+							font-size: 18px;
+							font-style: normal;
+							font-weight: 500;
+							line-height: 140%;
+							width: 100%;
+							padding: 23px 0;
+							background: transparent;
+							border: none;
+							border-bottom: 1px solid rgba(60, 33, 14, 0.2);
+							outline: none;
+							box-shadow: none;
+
+							@include media-breakpoint-down(xl) {
+								font-size: 16px;
+								padding: 16px 0;
+							}
+
+							@include media-breakpoint-down(md) {
+								padding: 12px 0;
+							}
+
+							&::placeholder {
+								opacity: 0.7;
+							}
+						}
+
+						textarea {
+							height: 146px;
+						}
+
+						select {
+							border-radius: 8px;
+							background: #f2e9c8;
+							border: none;
+							padding: 18px 12px;
+							appearance: none;
+							background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTI0IDEyTDE2IDIyTDggMTJIMjRaIiBmaWxsPSIjM0MyMTBFIi8+Cjwvc3ZnPgo=);
+							background-repeat: no-repeat;
+							background-position: right 12px center;
+							background-size: 32px;
+							font-weight: 600;
+
+							@include media-breakpoint-down(md) {
+								padding: 14px 12px;
+							}
+						}
+					}
+
+					&.gfield_error {
+						input,
+						select,
+						textarea {
+							border-bottom: 1px solid #c02b0a;
+						}
+					}
+
+					.validation_message {
+						padding: 0;
+						border: none;
+						background: none;
+					}
+
+					&.gfield--type-checkbox,
+					&.gfield--type-radio {
+						.ginput_container {
+							.gfield_checkbox,
+							.gfield_radio {
+								display: flex;
+								flex-direction: column;
+								gap: 10px;
+
+								.gfield-choice-input {
+									background: white;
+									height: 24px;
+									width: 24px;
+
+									@include media-breakpoint-down(md) {
+										height: 18px;
+										width: 18px;
+									}
+								}
+
+								.gform-field-label {
+									font-size: 18px;
+									font-weight: 500;
+									margin-left: 8px;
+
+									@include media-breakpoint-down(xl) {
+										font-size: 16px;
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+
+		.gform-footer {
+			padding: 0 !important;
+			margin-top: 48px !important;
+			position: relative;
+
+			@include media-breakpoint-down(xl) {
+				margin-top: 32px !important;
+			}
+
+			input[type="submit"] {
+				color: #120a00;
+				text-align: center;
+				font-family: $font-second;
+				font-size: 18px;
+				font-style: normal;
+				font-weight: 600;
+				line-height: 24px;
+				padding: 16px 32px 16px 58px;
+				letter-spacing: -0.18px;
+				border-radius: 9999px;
+				background-color: #ffe071;
+				border: none;
+				outline: none;
+				transition: $transition-base;
+				margin: 0;
+				position: relative;
+				background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAiIGhlaWdodD0iMTAiIHZpZXdCb3g9IjAgMCAxMCAxMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iNSIgY3k9IjUiIHI9IjUiIGZpbGw9IiMxMjBBMDAiLz4KPC9zdmc+Cg==);
+				background-repeat: no-repeat;
+				background-position: left 32px center;
+				background-size: 10px;
+
+				@include media-breakpoint-down(xl) {
+					font-size: 16px;
+					padding: 16px 24px 16px 50px;
+					background-position: left 24px center;
+				}
+
+				@include media-breakpoint-down(md) {
+					padding: 8px 24px 8px 48px;
+				}
+
+				&:hover {
+					background-color: #120a00;
+					background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAiIGhlaWdodD0iMTAiIHZpZXdCb3g9IjAgMCAxMCAxMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iNSIgY3k9IjUiIHI9IjUiIGZpbGw9IiNGRkYiLz4KPC9zdmc+Cg==);
+					color: white;
+				}
+			}
+		}
+	}
+}

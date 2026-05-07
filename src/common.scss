@@ -1,0 +1,62 @@
+/**
+ * #.# Common SCSS
+ *
+ * Can include things like variables and mixins
+ * that are used across the project.
+*/
+
+$transition-base: all 0.3s ease-in-out !default;
+@import "~bootstrap-scss/functions";
+@import "./variables";
+@import "~bootstrap-scss/variables";
+@import "~bootstrap-scss/mixins";
+
+//font
+$font-primary: "SVN-Ogg", sans-serif !default;
+$font-second: "be-vietnam-pro", sans-serif !default;
+
+//color
+$color-primary: #ffe071;
+$color-second: #fff5d2;
+$color-third: #efffb3;
+$color-blue: #97ecff;
+$color-brown: #120a00;
+
+$color-palette: (
+	"primary": $color-primary,
+	"second": $color-second,
+	"third": $color-third,
+	"blue": $color-blue,
+	"brown": $color-brown,
+	"black": black,
+	"white": #fff,
+);
+
+$fz-root: 1rem !default;
+$fz-base: 1.375rem !default;
+$fz-base-heading: 1rem !default;
+$h1-size: $fz-root * 6 !default;
+$h2-size: $fz-root * 5.6 !default;
+$h3-size: $fz-root * 4.5 !default;
+$h4-size: $fz-root * 3 !default;
+$h5-size: $fz-root * 2 !default;
+$h6-size: $fz-root * 1.5 !default;
+
+$fw-base: 400 !default;
+$lh-base: 150% !default;
+
+@function em($pixels, $context: 16) {
+	@return #{$pixels / $context}em;
+}
+
+@mixin bg-cover {
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+@mixin bg-contain {
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: contain;
+}

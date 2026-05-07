@@ -1,0 +1,167 @@
+/**
+Editor style
+*/
+
+.has-metaboxes .editor-visual-editor {
+	flex: 1 0 auto;
+}
+
+.editor-styles-wrapper {
+	.editor-visual-editor__post-title-wrapper {
+		h1 {
+			font-size: 56px;
+			font-family: $font-primary;
+			font-weight: 400;
+			line-height: 100%;
+			color: $color-brown;
+		}
+	}
+}
+
+.is-root-container {
+	overflow: hidden;
+	.wp-block-image img {
+		opacity: 1;
+		filter: none;
+		transform: none;
+	}
+	.post-type-post & {
+		max-width: 60%;
+		margin: 0 auto;
+	}
+
+	.wp-block {
+		max-width: 100%;
+	}
+
+	.wp-block[data-align="left"],
+	.wp-block[data-align="right"] {
+		height: auto;
+	}
+
+	.wp-block[data-align="full"] {
+		max-width: none;
+	}
+
+	.wp-block[data-align="wide"] {
+		max-width: none;
+		padding-left: 32px;
+		padding-right: 32px;
+	}
+
+	*,
+	:after,
+	:before {
+		box-sizing: border-box;
+	}
+
+	p,
+	span:not(.dashicon),
+	div {
+		color: $color-brown;
+		font-family: $font-second;
+		line-height: $lh-base;
+		font-size: $fz-base;
+		font-weight: $fw-base;
+	}
+
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		font-weight: 400;
+		color: $color-brown;
+		margin-top: 0;
+		line-height:100%;
+
+		span,
+		a,
+		span[data-rich-text-placeholder] {
+			font-size: inherit;
+			font-family: inherit;
+			font-weight: inherit;
+			line-height: inherit;
+		}
+	}
+
+	h1,
+	.h1 {
+		font-size: $h1-size;
+	}
+
+	h2,
+	.h2 {
+		font-size: $h2-size;
+	}
+
+	h3,
+	.h3 {
+		font-size: $h3-size;
+	}
+
+	h4,
+	.h4 {
+		font-size: $h4-size;
+	}
+
+	h5,
+	.h5 {
+		font-size: $h5-size;
+	}
+
+	h6,
+	.h6 {
+		font-size: $h6-size;
+	}
+
+	.wp-block-table {
+		table {
+			thead {
+				th {
+					div {
+						color: inherit !important;
+						font-size: inherit;
+						font-weight: inherit;
+						line-height: inherit;
+						font-family: inherit;
+						text-align: left;
+					}
+				}
+			}
+
+			tbody {
+				td,
+				th {
+					div {
+						color: inherit !important;
+					}
+				}
+			}
+		}
+	}
+}
+
+html :where(.wp-block) {
+	margin-bottom: 10px;
+	margin-top: 10px;
+}
+
+.block-editor-line-height-control {
+	.components-input-control__container {
+		width: auto;
+	}
+}
+
+.components-base-control.block-editor-url-input {
+	min-width: auto;
+}
+
+.block-editor-link-control {
+	min-width: auto;
+
+	.block-editor-link-control__field {
+		margin: 0 0 8px 0;
+	}
+}

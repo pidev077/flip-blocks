@@ -1,0 +1,20 @@
+.is-root-container {
+	.block-sectors-list {
+		.sector-item {
+			> a {
+				display: none;
+			}
+
+			&-media {
+				top: 50%;
+				left: inherit;
+				right: 130px;
+				transform: translate(0%, -50%) scale(0);
+			}
+
+			.sector-item-media {
+				display: none;
+			}
+		}
+	}
+}

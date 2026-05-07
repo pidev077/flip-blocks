@@ -1,0 +1,24 @@
+.block-logo-carousel {
+	.block-logo-carousel__inner {
+		.swiper-wrapper {
+			transition-timing-function: linear !important;
+			align-items: center;
+
+			.swiper-slide {
+				width: auto;
+
+				img {
+					max-width: 324px;
+
+					@include media-breakpoint-down(xl) {
+						max-width: 200px;
+					}
+
+					@include media-breakpoint-down(md) {
+						max-width: 160px;
+					}
+				}
+			}
+		}
+	}
+}

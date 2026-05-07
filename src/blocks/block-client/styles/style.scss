@@ -1,0 +1,51 @@
+.client-block-frontend {
+    &__label {
+        margin-bottom: 16px;
+        font-size: 18px;
+        color: $color-second;
+        font-family: $font-second;
+        font-weight: 400;
+    }
+
+    &__info {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+    }
+    &__logo {
+        width: 88px;
+        height: 88px;
+        border-radius: 12px;
+        object-fit: cover;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #252525;
+    }
+    .client-logo {
+        max-width: 64px;
+        height: auto;
+        border-radius: 12px;
+    }
+
+    .client-name {
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 4px;
+        color: $color-second;
+        font-family: $font-second;
+    }
+
+    .client-visit {
+        color: $color-second;
+        font-family: $font-second;
+        text-decoration: underline;
+        font-size: 18px;
+        font-weight: 400;
+
+        &:hover {
+            opacity: 0.8;
+        }
+    }
+
+}

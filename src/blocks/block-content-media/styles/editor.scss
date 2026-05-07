@@ -1,0 +1,32 @@
+.block-editor-block-inspector {
+	.item-icon-content-media {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 20px;
+		border-bottom: 1px solid #ddd;
+		padding-bottom: 10px;
+		img {
+			max-width: 24px;
+			margin-bottom: 0 !important;
+		}
+		button {
+			height: 30px;
+			margin-bottom: 0 !important;
+		}
+	}
+	.item-img-content-media {
+		button {
+			height: 30px;
+			margin-bottom: 0 !important;
+		}
+	}
+	.inner-item-content-media {
+		padding: 5px;
+		margin: 5px;
+		border: 1px solid #ddd;
+	}
+	.remove-item-content-media {
+		text-align: right;
+	}
+}

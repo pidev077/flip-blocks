@@ -1,0 +1,13 @@
+.is-root-container .hero-block {
+	&-content {
+		h1 {
+			margin-left: 0;
+			margin-right: 0;
+			letter-spacing: -2.03px;
+		}
+	}
+
+	.container {
+		margin: 0 auto;
+	}
+}

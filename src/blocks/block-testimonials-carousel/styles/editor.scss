@@ -1,0 +1,19 @@
+
+
+.is-root-container{
+    .block-testimonials-carousel{
+        .testimonials-carousel{
+            overflow: inherit;
+            .swiper-wrapper{
+               gap: 20px;
+            }
+        }
+    }   
+}
+
+.media-upload-placeholder-content{
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}

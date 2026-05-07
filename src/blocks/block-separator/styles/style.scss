@@ -1,0 +1,27 @@
+.flip-separator-blocks {
+	display: flex;
+
+	&.separator-fullwidth {
+		.separators{
+			width: 100% !important;
+		}
+	}
+
+	&.separator-center {
+		justify-content: center;
+	}
+
+	&.separator-left {
+		justify-content: flex-start;
+	}
+
+	&.separator-right {
+		justify-content: flex-end;
+	}
+
+	.separators {
+		height: 1px;
+		width: 63px;
+		background: var(--color, #273138);
+	}
+}
