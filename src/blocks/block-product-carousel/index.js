@@ -11,6 +11,7 @@ const attributes = {
 	items: {
 		type: "array",
 		default: [],
+		// each item: { id, url, alt, brand, name, subtitle, link, linkTarget }
 	},
 	slidesPerView: {
 		type: "number",

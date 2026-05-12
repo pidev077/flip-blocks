@@ -2,6 +2,7 @@ import Swiper from "swiper";
 import {
 	Navigation,
 	Pagination,
+	Scrollbar,
 	EffectFade,
 	Autoplay,
 	EffectCube,
@@ -132,9 +133,9 @@ function productCarousel() {
 		const slidesPerView = data.slidesPerView || 3;
 
 		new Swiper(swiperEl, {
-			modules: [Navigation, Autoplay],
+			modules: [Navigation, Pagination, Autoplay],
 			slidesPerView: slidesPerView,
-			spaceBetween: data.spaceBetween || 20,
+			spaceBetween: data.spaceBetween || 30,
 			speed: data.speed || 500,
 			loop: data.loop !== false,
 			grabCursor: true,
@@ -142,19 +143,18 @@ function productCarousel() {
 				nextEl: swiperEl.querySelector(".swiper-button-next"),
 				prevEl: swiperEl.querySelector(".swiper-button-prev"),
 			},
+			pagination: {
+				el: swiperEl.querySelector(".swiper-pagination"),
+				clickable: true,
+				type: "bullets",
+			},
 			autoplay: data.autoplay
 				? { delay: data.autoplayDelay || 3000, disableOnInteraction: false }
 				: false,
 			breakpoints: {
-				0: {
-					slidesPerView: 1,
-				},
-				768: {
-					slidesPerView: Math.min(2, slidesPerView),
-				},
-				1024: {
-					slidesPerView: slidesPerView,
-				},
+				0:    { slidesPerView: 1.2, spaceBetween: 16 },
+				640:  { slidesPerView: 2,   spaceBetween: 20 },
+				1024: { slidesPerView: slidesPerView, spaceBetween: data.spaceBetween || 30 },
 			},
 		});
 	});

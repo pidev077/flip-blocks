@@ -25,6 +25,46 @@ const Save = (props) => {
 		autoplayDelay,
 	});
 
+	const renderItem = (item, index) => {
+		const inner = (
+			<>
+				<div className="block-product-carousel__img-wrap">
+					<img
+						src={item.url}
+						alt={item.alt || item.name || `Product ${index + 1}`}
+					/>
+				</div>
+				{(item.brand || item.name) && (
+					<div className="block-product-carousel__info">
+						{item.brand && (
+							<span className="block-product-carousel__brand">{item.brand}</span>
+						)}
+						{item.name && (
+							<h3 className="block-product-carousel__name">{item.name}</h3>
+						)}
+					</div>
+				)}
+			</>
+		);
+
+		return (
+			<div key={index} className="swiper-slide">
+				{item.link ? (
+					<a
+						href={item.link}
+						target={item.linkTarget || "_self"}
+						rel={item.linkTarget === "_blank" ? "noopener noreferrer" : undefined}
+						className="block-product-carousel__item"
+					>
+						{inner}
+					</a>
+				) : (
+					<div className="block-product-carousel__item">{inner}</div>
+				)}
+			</div>
+		);
+	};
+
 	return (
 		<div {...blockProps}>
 			<div className="image-container">
@@ -38,48 +78,11 @@ const Save = (props) => {
 				>
 					{items && items.length > 0 && (
 						<div className="swiper-wrapper">
-							{items.map((item, index) =>
-								item.link ? (
-									<div key={index} className="swiper-slide">
-										<a
-											href={item.link}
-											target={item.linkTarget || "_self"}
-											rel={
-												item.linkTarget === "_blank"
-													? "noopener noreferrer"
-													: undefined
-											}
-											className="block-product-carousel__item"
-										>
-											<img
-												src={item.url}
-												alt={item.alt || item.name || `Product ${index + 1}`}
-											/>
-											{item.name && (
-												<div className="block-product-carousel__name">
-													{item.name}
-												</div>
-											)}
-										</a>
-									</div>
-								) : (
-									<div key={index} className="swiper-slide">
-										<div className="block-product-carousel__item">
-											<img
-												src={item.url}
-												alt={item.alt || item.name || `Product ${index + 1}`}
-											/>
-											{item.name && (
-												<div className="block-product-carousel__name">
-													{item.name}
-												</div>
-											)}
-										</div>
-									</div>
-								)
-							)}
+							{items.map((item, index) => renderItem(item, index))}
 						</div>
 					)}
+
+					<div className="swiper-pagination"></div>
 					<div className="swiper-button-prev"></div>
 					<div className="swiper-button-next"></div>
 				</div>

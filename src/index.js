@@ -33,3 +33,4 @@ import "./blocks/block-logo-carousel";
 import "./blocks/block-gallery-carousel";
 import "./blocks/block-product-carousel";
 import "./blocks/block-services-list";
+import "./blocks/block-products-list";

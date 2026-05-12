@@ -233,13 +233,12 @@ function flip_services_list_render($atts)
 
                 <?php /* ── RIGHT: sticky — ảnh + features + CTA ── */ ?>
                 <div class="service-popup__right">
-                    <button class="service-popup__close" aria-label="Đóng">
+                    <div class="service-popup__image-wrap">
+                        <button class="service-popup__close" aria-label="Đóng">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
                         </svg>
                     </button>
-
-                    <div class="service-popup__image-wrap">
                         <?php
                         $right_img = $popup_image;
                         if (empty($right_img['url'])) {
@@ -274,10 +273,10 @@ function flip_services_list_render($atts)
 
                         <a href="<?= esc_url($cta_url) ?>" class="service-popup__cta service-popup__cta--desktop"
                             target="_blank" rel="noopener noreferrer">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            Tư vấn ngay
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="#D5E3C3">
                                 <path d="M12 2C6.477 2 2 6.145 2 11.243c0 2.836 1.357 5.371 3.49 7.067V22l3.185-1.749A11.05 11.05 0 0012 20.486c5.523 0 10-4.145 10-9.243C22 6.145 17.523 2 12 2zm1.022 12.443l-2.554-2.72-4.986 2.72 5.49-5.822 2.616 2.72 4.924-2.72-5.49 5.822z"/>
                             </svg>
-                            Tư vấn ngay
                         </a>
                         <p class="service-popup__cta-note"><?= esc_html($cta_note) ?></p>
                     </div>

@@ -10409,6 +10409,7 @@ var DEFAULT_ITEM = {
   id: 0,
   url: "",
   alt: "",
+  brand: "",
   name: "",
   link: "",
   linkTarget: "_self"
@@ -10481,14 +10482,23 @@ var ProductForm = function ProductForm(_ref3) {
       }));
     }
   }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.TextControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Name", "flip-blocks"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Thương hiệu (Brand)", "flip-blocks"),
+    value: itemData.brand,
+    onChange: function onChange(value) {
+      return setItemData(_objectSpread(_objectSpread({}, itemData), {}, {
+        brand: value
+      }));
+    },
+    placeholder: "LIVONE, RECV..."
+  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.TextControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Tên sản phẩm", "flip-blocks"),
     value: itemData.name,
     onChange: function onChange(value) {
       return setItemData(_objectSpread(_objectSpread({}, itemData), {}, {
         name: value
       }));
     },
-    placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Product name (shown on hover)", "flip-blocks")
+    placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Tên đầy đủ của sản phẩm", "flip-blocks")
   }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.TextControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Link URL", "flip-blocks"),
     value: itemData.link,
@@ -10851,6 +10861,31 @@ var Save = function Save(props) {
     autoplay: autoplay,
     autoplayDelay: autoplayDelay
   });
+  var renderItem = function renderItem(item, index) {
+    var inner = /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+      className: "block-product-carousel__img-wrap"
+    }, /*#__PURE__*/React.createElement("img", {
+      src: item.url,
+      alt: item.alt || item.name || "Product ".concat(index + 1)
+    })), (item.brand || item.name) && /*#__PURE__*/React.createElement("div", {
+      className: "block-product-carousel__info"
+    }, item.brand && /*#__PURE__*/React.createElement("span", {
+      className: "block-product-carousel__brand"
+    }, item.brand), item.name && /*#__PURE__*/React.createElement("h3", {
+      className: "block-product-carousel__name"
+    }, item.name)));
+    return /*#__PURE__*/React.createElement("div", {
+      key: index,
+      className: "swiper-slide"
+    }, item.link ? /*#__PURE__*/React.createElement("a", {
+      href: item.link,
+      target: item.linkTarget || "_self",
+      rel: item.linkTarget === "_blank" ? "noopener noreferrer" : undefined,
+      className: "block-product-carousel__item"
+    }, inner) : /*#__PURE__*/React.createElement("div", {
+      className: "block-product-carousel__item"
+    }, inner));
+  };
   return /*#__PURE__*/React.createElement("div", blockProps, /*#__PURE__*/React.createElement("div", {
     className: "image-container"
   }, /*#__PURE__*/React.createElement("div", {
@@ -10865,31 +10900,10 @@ var Save = function Save(props) {
   }, items && items.length > 0 && /*#__PURE__*/React.createElement("div", {
     className: "swiper-wrapper"
   }, items.map(function (item, index) {
-    return item.link ? /*#__PURE__*/React.createElement("div", {
-      key: index,
-      className: "swiper-slide"
-    }, /*#__PURE__*/React.createElement("a", {
-      href: item.link,
-      target: item.linkTarget || "_self",
-      rel: item.linkTarget === "_blank" ? "noopener noreferrer" : undefined,
-      className: "block-product-carousel__item"
-    }, /*#__PURE__*/React.createElement("img", {
-      src: item.url,
-      alt: item.alt || item.name || "Product ".concat(index + 1)
-    }), item.name && /*#__PURE__*/React.createElement("div", {
-      className: "block-product-carousel__name"
-    }, item.name))) : /*#__PURE__*/React.createElement("div", {
-      key: index,
-      className: "swiper-slide"
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "block-product-carousel__item"
-    }, /*#__PURE__*/React.createElement("img", {
-      src: item.url,
-      alt: item.alt || item.name || "Product ".concat(index + 1)
-    }), item.name && /*#__PURE__*/React.createElement("div", {
-      className: "block-product-carousel__name"
-    }, item.name)));
+    return renderItem(item, index);
   })), /*#__PURE__*/React.createElement("div", {
+    className: "swiper-pagination"
+  }), /*#__PURE__*/React.createElement("div", {
     className: "swiper-button-prev"
   }), /*#__PURE__*/React.createElement("div", {
     className: "swiper-button-next"
@@ -10928,6 +10942,7 @@ var attributes = {
   items: {
     type: "array",
     "default": []
+    // each item: { id, url, alt, brand, name, subtitle, link, linkTarget }
   },
   slidesPerView: {
     type: "number",
@@ -10973,6 +10988,548 @@ var attributes = {
     return /*#__PURE__*/React.createElement(_components_save__WEBPACK_IMPORTED_MODULE_5__["default"], props);
   }
 }));
+
+/***/ },
+
+/***/ "./src/blocks/block-products-list/components/edit.js"
+/*!***********************************************************!*\
+  !*** ./src/blocks/block-products-list/components/edit.js ***!
+  \***********************************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/api-fetch */ "@wordpress/api-fetch");
+/* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _inspector__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./inspector */ "./src/blocks/block-products-list/components/inspector.js");
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+
+
+
+
+
+
+var Edit = function Edit(props) {
+  var attributes = props.attributes;
+  var _attributes$selectedI = attributes.selectedIds,
+    selectedIds = _attributes$selectedI === void 0 ? [] : _attributes$selectedI,
+    columns = attributes.columns;
+  var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)({}),
+    _useState2 = _slicedToArray(_useState, 2),
+    postsMap = _useState2[0],
+    setPostsMap = _useState2[1];
+  var _useState3 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(true),
+    _useState4 = _slicedToArray(_useState3, 2),
+    loading = _useState4[0],
+    setLoading = _useState4[1];
+  var blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps)({
+    className: "block-products-list",
+    style: {
+      "--product-cols": columns
+    }
+  });
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_2___default()({
+      path: "/wp/v2/sanpham?per_page=-1&status=publish&_embed=true"
+    }).then(function (posts) {
+      var map = {};
+      posts.forEach(function (p) {
+        return map[p.id] = p;
+      });
+      setPostsMap(map);
+    })["catch"](function () {})["finally"](function () {
+      return setLoading(false);
+    });
+  }, []);
+  var getThumb = function getThumb(post) {
+    var _post$_embedded, _post$_embedded2;
+    return (post === null || post === void 0 || (_post$_embedded = post._embedded) === null || _post$_embedded === void 0 || (_post$_embedded = _post$_embedded["wp:featuredmedia"]) === null || _post$_embedded === void 0 || (_post$_embedded = _post$_embedded[0]) === null || _post$_embedded === void 0 || (_post$_embedded = _post$_embedded.media_details) === null || _post$_embedded === void 0 || (_post$_embedded = _post$_embedded.sizes) === null || _post$_embedded === void 0 || (_post$_embedded = _post$_embedded.medium) === null || _post$_embedded === void 0 ? void 0 : _post$_embedded.source_url) || (post === null || post === void 0 || (_post$_embedded2 = post._embedded) === null || _post$_embedded2 === void 0 || (_post$_embedded2 = _post$_embedded2["wp:featuredmedia"]) === null || _post$_embedded2 === void 0 || (_post$_embedded2 = _post$_embedded2[0]) === null || _post$_embedded2 === void 0 ? void 0 : _post$_embedded2.source_url) || "";
+  };
+  var displayPosts = selectedIds.length > 0 ? selectedIds.map(function (id) {
+    return postsMap[id];
+  }).filter(Boolean) : Object.values(postsMap);
+  return /*#__PURE__*/React.createElement("div", blockProps, /*#__PURE__*/React.createElement(_inspector__WEBPACK_IMPORTED_MODULE_5__["default"], props), loading ? /*#__PURE__*/React.createElement("div", {
+    style: {
+      padding: 40,
+      display: "flex",
+      alignItems: "center",
+      gap: 12
+    }
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Spinner, null), /*#__PURE__*/React.createElement("span", {
+    style: {
+      color: "#888"
+    }
+  }, "\u0110ang t\u1EA3i s\u1EA3n ph\u1EA9m...")) : displayPosts.length === 0 ? /*#__PURE__*/React.createElement("div", {
+    style: {
+      padding: 40,
+      border: "2px dashed #ddd",
+      borderRadius: 12,
+      textAlign: "center",
+      color: "#aaa",
+      fontSize: 14
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 32,
+      marginBottom: 8
+    }
+  }, "\uD83D\uDCE6"), /*#__PURE__*/React.createElement("strong", {
+    style: {
+      display: "block",
+      marginBottom: 4
+    }
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Chưa có sản phẩm nào", "flip-blocks")), /*#__PURE__*/React.createElement("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Thêm sản phẩm trong mục Sản phẩm ở sidebar.", "flip-blocks"))) : /*#__PURE__*/React.createElement("div", {
+    className: "block-products-list__grid",
+    style: {
+      gridTemplateColumns: "repeat(".concat(columns, ", 1fr)")
+    }
+  }, displayPosts.map(function (post) {
+    var _post$title, _post$acf, _post$title2, _post$acf2;
+    var thumb = getThumb(post);
+    return /*#__PURE__*/React.createElement("div", {
+      key: post.id,
+      className: "product-card",
+      style: {
+        cursor: "default",
+        pointerEvents: "none"
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "product-card__image-wrap"
+    }, thumb ? /*#__PURE__*/React.createElement("img", {
+      className: "product-card__image",
+      src: thumb,
+      alt: ((_post$title = post.title) === null || _post$title === void 0 ? void 0 : _post$title.rendered) || ""
+    }) : /*#__PURE__*/React.createElement("div", {
+      style: {
+        width: "100%",
+        height: "100%",
+        background: "#f0ece4",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        color: "#999",
+        fontSize: 12
+      }
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Chưa có ảnh", "flip-blocks"))), /*#__PURE__*/React.createElement("div", {
+      className: "product-card__info"
+    }, ((_post$acf = post.acf) === null || _post$acf === void 0 ? void 0 : _post$acf.product_brand) && /*#__PURE__*/React.createElement("span", {
+      className: "product-card__brand"
+    }, post.acf.product_brand), /*#__PURE__*/React.createElement("h3", {
+      className: "product-card__title",
+      dangerouslySetInnerHTML: {
+        __html: ((_post$title2 = post.title) === null || _post$title2 === void 0 ? void 0 : _post$title2.rendered) || ""
+      }
+    }), ((_post$acf2 = post.acf) === null || _post$acf2 === void 0 ? void 0 : _post$acf2.product_subtitle) && /*#__PURE__*/React.createElement("p", {
+      className: "product-card__subtitle"
+    }, post.acf.product_subtitle)));
+  })));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Edit);
+
+/***/ },
+
+/***/ "./src/blocks/block-products-list/components/inspector.js"
+/*!****************************************************************!*\
+  !*** ./src/blocks/block-products-list/components/inspector.js ***!
+  \****************************************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/api-fetch */ "@wordpress/api-fetch");
+/* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _dnd_kit_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @dnd-kit/core */ "./node_modules/@dnd-kit/core/dist/core.esm.js");
+/* harmony import */ var _dnd_kit_sortable__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @dnd-kit/sortable */ "./node_modules/@dnd-kit/sortable/dist/sortable.esm.js");
+/* harmony import */ var _dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @dnd-kit/utilities */ "./node_modules/@dnd-kit/utilities/dist/utilities.esm.js");
+function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
+function _arrayWithoutHoles(r) { if (Array.isArray(r)) return _arrayLikeToArray(r); }
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
+
+
+
+
+
+
+
+
+
+/* ── Sortable selected item ─────────────────────────────────── */
+var SortableProductItem = function SortableProductItem(_ref) {
+  var _post$_embedded, _post$_embedded2, _post$title;
+  var post = _ref.post,
+    id = _ref.id,
+    onRemove = _ref.onRemove;
+  var _useSortable = (0,_dnd_kit_sortable__WEBPACK_IMPORTED_MODULE_6__.useSortable)({
+      id: id
+    }),
+    attributes = _useSortable.attributes,
+    listeners = _useSortable.listeners,
+    setNodeRef = _useSortable.setNodeRef,
+    transform = _useSortable.transform,
+    transition = _useSortable.transition;
+  var thumbUrl = ((_post$_embedded = post._embedded) === null || _post$_embedded === void 0 || (_post$_embedded = _post$_embedded["wp:featuredmedia"]) === null || _post$_embedded === void 0 || (_post$_embedded = _post$_embedded[0]) === null || _post$_embedded === void 0 || (_post$_embedded = _post$_embedded.media_details) === null || _post$_embedded === void 0 || (_post$_embedded = _post$_embedded.sizes) === null || _post$_embedded === void 0 || (_post$_embedded = _post$_embedded.thumbnail) === null || _post$_embedded === void 0 ? void 0 : _post$_embedded.source_url) || ((_post$_embedded2 = post._embedded) === null || _post$_embedded2 === void 0 || (_post$_embedded2 = _post$_embedded2["wp:featuredmedia"]) === null || _post$_embedded2 === void 0 || (_post$_embedded2 = _post$_embedded2[0]) === null || _post$_embedded2 === void 0 ? void 0 : _post$_embedded2.source_url) || "";
+  return /*#__PURE__*/React.createElement("div", {
+    ref: setNodeRef,
+    style: {
+      transform: _dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_7__.CSS.Transform.toString(transform),
+      transition: transition,
+      display: "flex",
+      alignItems: "center",
+      gap: 8,
+      padding: "8px 10px",
+      marginBottom: 6,
+      background: "#fff",
+      border: "1px solid #e0e0e0",
+      borderRadius: 6
+    }
+  }, thumbUrl && /*#__PURE__*/React.createElement("img", {
+    src: thumbUrl,
+    alt: "",
+    style: {
+      width: 44,
+      height: 44,
+      objectFit: "contain",
+      borderRadius: 4,
+      flexShrink: 0,
+      background: "#f5f5f5"
+    }
+  }), /*#__PURE__*/React.createElement("span", {
+    style: {
+      flex: 1,
+      fontSize: 12,
+      fontWeight: 600,
+      color: "#1e1e1e",
+      lineHeight: 1.4
+    }
+  }, ((_post$title = post.title) === null || _post$title === void 0 ? void 0 : _post$title.rendered) || "—"), /*#__PURE__*/React.createElement("button", {
+    onClick: function onClick() {
+      return onRemove(post.id);
+    },
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Bỏ chọn", "flip-blocks"),
+    style: {
+      background: "none",
+      border: "none",
+      cursor: "pointer",
+      color: "#cc1818",
+      fontSize: 16,
+      lineHeight: 1,
+      padding: "0 4px",
+      flexShrink: 0
+    }
+  }, "\xD7"), /*#__PURE__*/React.createElement("div", _extends({}, listeners, attributes, {
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Kéo để sắp xếp", "flip-blocks"),
+    style: {
+      cursor: "grab",
+      color: "#aaa",
+      padding: "0 4px",
+      flexShrink: 0
+    }
+  }), "\u283F"));
+};
+
+/* ── Main Inspector ─────────────────────────────────────────── */
+var Inspector = function Inspector(_ref2) {
+  var attributes = _ref2.attributes,
+    setAttributes = _ref2.setAttributes;
+  var _attributes$selectedI = attributes.selectedIds,
+    selectedIds = _attributes$selectedI === void 0 ? [] : _attributes$selectedI,
+    columns = attributes.columns;
+  var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)(null),
+    _useState2 = _slicedToArray(_useState, 2),
+    allPosts = _useState2[0],
+    setAllPosts = _useState2[1];
+  var _useState3 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)(""),
+    _useState4 = _slicedToArray(_useState3, 2),
+    search = _useState4[0],
+    setSearch = _useState4[1];
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
+    _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_4___default()({
+      path: "/wp/v2/sanpham?per_page=-1&status=publish&_embed=true"
+    }).then(function (posts) {
+      return setAllPosts(posts);
+    })["catch"](function () {
+      return setAllPosts([]);
+    });
+  }, []);
+  var getPost = function getPost(id) {
+    return allPosts === null || allPosts === void 0 ? void 0 : allPosts.find(function (p) {
+      return p.id === id;
+    });
+  };
+  var selectedPosts = selectedIds.map(getPost).filter(Boolean);
+  var unselectedPosts = (allPosts || []).filter(function (p) {
+    return !selectedIds.includes(p.id);
+  });
+  var filteredUnselected = search.trim() ? unselectedPosts.filter(function (p) {
+    var _p$title;
+    return (_p$title = p.title) === null || _p$title === void 0 || (_p$title = _p$title.rendered) === null || _p$title === void 0 ? void 0 : _p$title.toLowerCase().includes(search.toLowerCase());
+  }) : unselectedPosts;
+  var addProduct = function addProduct(id) {
+    return setAttributes({
+      selectedIds: [].concat(_toConsumableArray(selectedIds), [id])
+    });
+  };
+  var removeProduct = function removeProduct(id) {
+    return setAttributes({
+      selectedIds: selectedIds.filter(function (i) {
+        return i !== id;
+      })
+    });
+  };
+  var handleDragEnd = function handleDragEnd(_ref3) {
+    var active = _ref3.active,
+      over = _ref3.over;
+    if (!over || active.id === over.id) return;
+    var oldIdx = selectedIds.indexOf(Number(active.id));
+    var newIdx = selectedIds.indexOf(Number(over.id));
+    if (oldIdx === -1 || newIdx === -1) return;
+    setAttributes({
+      selectedIds: (0,_dnd_kit_sortable__WEBPACK_IMPORTED_MODULE_6__.arrayMove)(selectedIds, oldIdx, newIdx)
+    });
+  };
+  var getThumbnail = function getThumbnail(post) {
+    var _post$_embedded3, _post$_embedded4;
+    return ((_post$_embedded3 = post._embedded) === null || _post$_embedded3 === void 0 || (_post$_embedded3 = _post$_embedded3["wp:featuredmedia"]) === null || _post$_embedded3 === void 0 || (_post$_embedded3 = _post$_embedded3[0]) === null || _post$_embedded3 === void 0 || (_post$_embedded3 = _post$_embedded3.media_details) === null || _post$_embedded3 === void 0 || (_post$_embedded3 = _post$_embedded3.sizes) === null || _post$_embedded3 === void 0 || (_post$_embedded3 = _post$_embedded3.thumbnail) === null || _post$_embedded3 === void 0 ? void 0 : _post$_embedded3.source_url) || ((_post$_embedded4 = post._embedded) === null || _post$_embedded4 === void 0 || (_post$_embedded4 = _post$_embedded4["wp:featuredmedia"]) === null || _post$_embedded4 === void 0 || (_post$_embedded4 = _post$_embedded4[0]) === null || _post$_embedded4 === void 0 ? void 0 : _post$_embedded4.source_url) || "";
+  };
+  return /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.InspectorControls, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Sản phẩm đã chọn", "flip-blocks"),
+    initialOpen: true
+  }, /*#__PURE__*/React.createElement("p", {
+    style: {
+      fontSize: 11,
+      color: "#888",
+      margin: "0 0 8px"
+    }
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Để trống = hiển thị tất cả sản phẩm.", "flip-blocks")), allPosts === null ? /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      alignItems: "center",
+      gap: 8,
+      padding: "8px 0"
+    }
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Spinner, null), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 12,
+      color: "#888"
+    }
+  }, "\u0110ang t\u1EA3i...")) : selectedPosts.length === 0 ? /*#__PURE__*/React.createElement("p", {
+    style: {
+      fontSize: 12,
+      color: "#999",
+      margin: 0
+    }
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Chưa chọn sản phẩm nào — hiển thị tất cả.", "flip-blocks")) : /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("p", {
+    style: {
+      fontSize: 11,
+      color: "#888",
+      marginBottom: 8
+    }
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Kéo ⠿ để sắp xếp lại.", "flip-blocks")), /*#__PURE__*/React.createElement(_dnd_kit_core__WEBPACK_IMPORTED_MODULE_5__.DndContext, {
+    collisionDetection: _dnd_kit_core__WEBPACK_IMPORTED_MODULE_5__.closestCenter,
+    onDragEnd: handleDragEnd
+  }, /*#__PURE__*/React.createElement(_dnd_kit_sortable__WEBPACK_IMPORTED_MODULE_6__.SortableContext, {
+    items: selectedIds.map(String),
+    strategy: _dnd_kit_sortable__WEBPACK_IMPORTED_MODULE_6__.verticalListSortingStrategy
+  }, selectedPosts.map(function (post) {
+    return /*#__PURE__*/React.createElement(SortableProductItem, {
+      key: post.id,
+      id: String(post.id),
+      post: post,
+      onRemove: removeProduct
+    });
+  }))))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Thêm sản phẩm", "flip-blocks"),
+    initialOpen: false
+  }, allPosts === null ? /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Spinner, null) : /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.TextControl, {
+    placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Tìm kiếm...", "flip-blocks"),
+    value: search,
+    onChange: setSearch
+  }), filteredUnselected.length === 0 ? /*#__PURE__*/React.createElement("p", {
+    style: {
+      fontSize: 12,
+      color: "#999",
+      margin: 0
+    }
+  }, allPosts.length === selectedIds.length ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Đã chọn tất cả sản phẩm.", "flip-blocks") : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Không tìm thấy.", "flip-blocks")) : filteredUnselected.map(function (post) {
+    var _post$title2;
+    var thumb = getThumbnail(post);
+    return /*#__PURE__*/React.createElement("div", {
+      key: post.id,
+      style: {
+        display: "flex",
+        alignItems: "center",
+        gap: 8,
+        padding: "8px 0",
+        borderBottom: "1px solid #f0f0f0"
+      }
+    }, thumb ? /*#__PURE__*/React.createElement("img", {
+      src: thumb,
+      alt: "",
+      style: {
+        width: 40,
+        height: 40,
+        objectFit: "contain",
+        borderRadius: 4,
+        flexShrink: 0,
+        background: "#f5f5f5"
+      }
+    }) : /*#__PURE__*/React.createElement("div", {
+      style: {
+        width: 40,
+        height: 40,
+        background: "#f0f0f0",
+        borderRadius: 4,
+        flexShrink: 0
+      }
+    }), /*#__PURE__*/React.createElement("span", {
+      style: {
+        flex: 1,
+        fontSize: 12,
+        color: "#1e1e1e"
+      }
+    }, ((_post$title2 = post.title) === null || _post$title2 === void 0 ? void 0 : _post$title2.rendered) || "—"), /*#__PURE__*/React.createElement("button", {
+      onClick: function onClick() {
+        return addProduct(post.id);
+      },
+      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Thêm", "flip-blocks"),
+      style: {
+        background: "#0073aa",
+        color: "#fff",
+        border: "none",
+        borderRadius: 4,
+        padding: "4px 10px",
+        cursor: "pointer",
+        fontSize: 12,
+        flexShrink: 0
+      }
+    }, "+"));
+  }))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Cài đặt hiển thị", "flip-blocks"),
+    initialOpen: false
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Số cột (desktop)", "flip-blocks"),
+    value: columns,
+    onChange: function onChange(v) {
+      return setAttributes({
+        columns: v
+      });
+    },
+    min: 1,
+    max: 6
+  })));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Inspector);
+
+/***/ },
+
+/***/ "./src/blocks/block-products-list/components/save.js"
+/*!***********************************************************!*\
+  !*** ./src/blocks/block-products-list/components/save.js ***!
+  \***********************************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (function () {
+  return null;
+});
+
+/***/ },
+
+/***/ "./src/blocks/block-products-list/index.js"
+/*!*************************************************!*\
+  !*** ./src/blocks/block-products-list/index.js ***!
+  \*************************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _styles_style_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./styles/style.scss */ "./src/blocks/block-products-list/styles/style.scss");
+/* harmony import */ var _styles_editor_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./styles/editor.scss */ "./src/blocks/block-products-list/styles/editor.scss");
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _components_edit__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/edit */ "./src/blocks/block-products-list/components/edit.js");
+/* harmony import */ var _components_save__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/save */ "./src/blocks/block-products-list/components/save.js");
+
+
+
+
+
+
+(0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__.registerBlockType)("flip-blocks/block-products-list", {
+  apiVersion: 3,
+  title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)("Danh sách sản phẩm", "flip-blocks"),
+  description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)("Hiển thị danh sách sản phẩm với popup chi tiết.", "flip-blocks"),
+  icon: "products",
+  category: "flip-blocks",
+  keywords: [(0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)("sản phẩm"), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)("products"), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)("popup")],
+  attributes: {
+    selectedIds: {
+      type: "array",
+      "default": [],
+      items: {
+        type: "number"
+      }
+    },
+    columns: {
+      type: "number",
+      "default": 4
+    },
+    anchor: {
+      type: "string",
+      "default": ""
+    }
+  },
+  supports: {
+    anchor: true
+  },
+  edit: function edit(props) {
+    return /*#__PURE__*/React.createElement(_components_edit__WEBPACK_IMPORTED_MODULE_4__["default"], props);
+  },
+  save: function save() {
+    return null;
+  }
+});
 
 /***/ },
 
@@ -14803,6 +15360,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _blocks_block_gallery_carousel__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./blocks/block-gallery-carousel */ "./src/blocks/block-gallery-carousel/index.js");
 /* harmony import */ var _blocks_block_product_carousel__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./blocks/block-product-carousel */ "./src/blocks/block-product-carousel/index.js");
 /* harmony import */ var _blocks_block_services_list__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./blocks/block-services-list */ "./src/blocks/block-services-list/index.js");
+/* harmony import */ var _blocks_block_products_list__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./blocks/block-products-list */ "./src/blocks/block-products-list/index.js");
 /**
  * Gutenberg Blocks
  *
@@ -14825,6 +15383,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 // Add more block here
+
 
 
 
@@ -20302,6 +20861,32 @@ __webpack_require__.r(__webpack_exports__);
 /*!*************************************************************!*\
   !*** ./src/blocks/block-product-carousel/styles/style.scss ***!
   \*************************************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ },
+
+/***/ "./src/blocks/block-products-list/styles/editor.scss"
+/*!***********************************************************!*\
+  !*** ./src/blocks/block-products-list/styles/editor.scss ***!
+  \***********************************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ },
+
+/***/ "./src/blocks/block-products-list/styles/style.scss"
+/*!**********************************************************!*\
+  !*** ./src/blocks/block-products-list/styles/style.scss ***!
+  \**********************************************************/
 (__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

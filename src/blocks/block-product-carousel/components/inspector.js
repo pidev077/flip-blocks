@@ -27,6 +27,7 @@ const DEFAULT_ITEM = {
 	id: 0,
 	url: "",
 	alt: "",
+	brand: "",
 	name: "",
 	link: "",
 	linkTarget: "_self",
@@ -97,10 +98,16 @@ const ProductForm = ({
 			onRemove={() => setItemData({ ...itemData, id: 0, url: "", alt: "" })}
 		/>
 		<TextControl
-			label={__("Name", "flip-blocks")}
+			label={__("Thương hiệu (Brand)", "flip-blocks")}
+			value={itemData.brand}
+			onChange={(value) => setItemData({ ...itemData, brand: value })}
+			placeholder="LIVONE, RECV..."
+		/>
+		<TextControl
+			label={__("Tên sản phẩm", "flip-blocks")}
 			value={itemData.name}
 			onChange={(value) => setItemData({ ...itemData, name: value })}
-			placeholder={__("Product name (shown on hover)", "flip-blocks")}
+			placeholder={__("Tên đầy đủ của sản phẩm", "flip-blocks")}
 		/>
 		<TextControl
 			label={__("Link URL", "flip-blocks")}
