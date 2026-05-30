@@ -37,6 +37,18 @@ const attributes = {
 		type: "number",
 		default: 3000,
 	},
+	title: {
+		type: "string",
+		default: "Our Product",
+	},
+	titleColor: {
+		type: "string",
+		default: "#b5ceae",
+	},
+	backgroundColor: {
+		type: "string",
+		default: "#eeeee6",
+	},
 };
 
 export default registerBlockType("flip-blocks/product-carousel", {

@@ -8769,7 +8769,7 @@ function Edit(_ref) {
   }, [items]);
   var activeItem = items[active];
   var blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps)({
-    className: ["flip-content-media", className].join(" ")
+    className: ["flip-content-media", className].filter(Boolean).join(" ")
   });
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_inspector__WEBPACK_IMPORTED_MODULE_2__["default"], {
     items: items,
@@ -8790,7 +8790,9 @@ function Edit(_ref) {
     className: "left"
   }, /*#__PURE__*/React.createElement("div", {
     className: "thumb-list"
-  }, items.map(function (item, i) {
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "active-indicator"
+  }), items.map(function (item, i) {
     return /*#__PURE__*/React.createElement("div", {
       key: item.id,
       className: "content-item ".concat(i === active ? "is-active" : ""),
@@ -8979,7 +8981,7 @@ function Save(_ref) {
     contentText = attributes.contentText;
   if (!(items !== null && items !== void 0 && items.length)) return null;
   var blockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.useBlockProps.save({
-    className: ["flip-content-media", className].join(" ")
+    className: ["flip-content-media", className].filter(Boolean).join(" ")
   });
   return /*#__PURE__*/React.createElement("div", blockProps, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.RichText.Content, {
     tagName: "h3",
@@ -10312,16 +10314,39 @@ __webpack_require__.r(__webpack_exports__);
 
 var Edit = function Edit(props) {
   var attributes = props.attributes,
+    setAttributes = props.setAttributes,
     className = props.className;
   var items = attributes.items,
     slidesPerView = attributes.slidesPerView,
     spaceBetween = attributes.spaceBetween,
     speed = attributes.speed,
-    loop = attributes.loop;
+    loop = attributes.loop,
+    title = attributes.title,
+    titleColor = attributes.titleColor,
+    backgroundColor = attributes.backgroundColor;
   var blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useBlockProps)({
-    className: ["block-product-carousel", className].join(" ")
+    className: ["block-product-carousel", className].join(" "),
+    style: {
+      backgroundColor: backgroundColor
+    }
   });
-  return /*#__PURE__*/React.createElement(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, /*#__PURE__*/React.createElement(_inspector__WEBPACK_IMPORTED_MODULE_5__["default"], props), /*#__PURE__*/React.createElement("div", blockProps, /*#__PURE__*/React.createElement("div", {
+  return /*#__PURE__*/React.createElement(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, /*#__PURE__*/React.createElement(_inspector__WEBPACK_IMPORTED_MODULE_5__["default"], props), /*#__PURE__*/React.createElement("div", blockProps, title && /*#__PURE__*/React.createElement("div", {
+    className: "block-product-carousel__title-wrap"
+  }, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.RichText, {
+    tagName: "h2",
+    className: "block-product-carousel__title",
+    style: {
+      color: titleColor
+    },
+    value: title,
+    onChange: function onChange(value) {
+      return setAttributes({
+        title: value
+      });
+    },
+    placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Our Product", "flip-blocks"),
+    allowedFormats: []
+  })), /*#__PURE__*/React.createElement("div", {
     className: "image-container"
   }, /*#__PURE__*/React.createElement("div", {
     className: "fade-image type01"
@@ -10629,6 +10654,41 @@ var SortableProductItem = function SortableProductItem(_ref4) {
     }
   }), "\u2630")));
 };
+var TITLE_COLOR_PALETTE = [{
+  name: "Light Green",
+  color: "#b5ceae"
+}, {
+  name: "Sage",
+  color: "#8aab82"
+}, {
+  name: "Dark Green",
+  color: "#4a7a42"
+}, {
+  name: "Light Gray",
+  color: "#c8c8c0"
+}, {
+  name: "Dark",
+  color: "#2a2a2a"
+}, {
+  name: "White",
+  color: "#ffffff"
+}];
+var BG_COLOR_PALETTE = [{
+  name: "Cream",
+  color: "#eeeee6"
+}, {
+  name: "Light Gray",
+  color: "#f5f5f5"
+}, {
+  name: "White",
+  color: "#ffffff"
+}, {
+  name: "Light Green",
+  color: "#e8f0e5"
+}, {
+  name: "Beige",
+  color: "#f0ede5"
+}];
 var Inspector = function Inspector(_ref5) {
   var attributes = _ref5.attributes,
     setAttributes = _ref5.setAttributes;
@@ -10639,7 +10699,10 @@ var Inspector = function Inspector(_ref5) {
     speed = attributes.speed,
     loop = attributes.loop,
     autoplay = attributes.autoplay,
-    autoplayDelay = attributes.autoplayDelay;
+    autoplayDelay = attributes.autoplayDelay,
+    title = attributes.title,
+    titleColor = attributes.titleColor,
+    backgroundColor = attributes.backgroundColor;
   var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)(_objectSpread({}, DEFAULT_ITEM)),
     _useState2 = _slicedToArray(_useState, 2),
     newItem = _useState2[0],
@@ -10820,7 +10883,39 @@ var Inspector = function Inspector(_ref5) {
     },
     min: 500,
     max: 10000
-  })));
+  })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Title & Colors", "flip-blocks"),
+    initialOpen: false
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.TextControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Tiêu đề", "flip-blocks"),
+    value: title,
+    onChange: function onChange(value) {
+      return setAttributes({
+        title: value
+      });
+    },
+    placeholder: "Our Product"
+  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.BaseControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Màu tiêu đề", "flip-blocks")
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ColorPalette, {
+    colors: TITLE_COLOR_PALETTE,
+    value: titleColor,
+    onChange: function onChange(value) {
+      return setAttributes({
+        titleColor: value
+      });
+    }
+  })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.BaseControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Màu nền", "flip-blocks")
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ColorPalette, {
+    colors: BG_COLOR_PALETTE,
+    value: backgroundColor,
+    onChange: function onChange(value) {
+      return setAttributes({
+        backgroundColor: value
+      });
+    }
+  }))));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Inspector);
 
@@ -10849,9 +10944,15 @@ var Save = function Save(props) {
     speed = attributes.speed,
     loop = attributes.loop,
     autoplay = attributes.autoplay,
-    autoplayDelay = attributes.autoplayDelay;
+    autoplayDelay = attributes.autoplayDelay,
+    title = attributes.title,
+    titleColor = attributes.titleColor,
+    backgroundColor = attributes.backgroundColor;
   var blockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.useBlockProps.save({
-    className: ["block-product-carousel", className].join(" ")
+    className: ["block-product-carousel", className].join(" "),
+    style: {
+      backgroundColor: backgroundColor
+    }
   });
   var carouselData = JSON.stringify({
     slidesPerView: slidesPerView,
@@ -10886,7 +10987,16 @@ var Save = function Save(props) {
       className: "block-product-carousel__item"
     }, inner));
   };
-  return /*#__PURE__*/React.createElement("div", blockProps, /*#__PURE__*/React.createElement("div", {
+  return /*#__PURE__*/React.createElement("div", blockProps, title && /*#__PURE__*/React.createElement("div", {
+    className: "block-product-carousel__title-wrap"
+  }, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.RichText.Content, {
+    tagName: "h2",
+    className: "block-product-carousel__title",
+    style: {
+      color: titleColor
+    },
+    value: title
+  })), /*#__PURE__*/React.createElement("div", {
     className: "image-container"
   }, /*#__PURE__*/React.createElement("div", {
     className: "fade-image type01"
@@ -10967,6 +11077,18 @@ var attributes = {
   autoplayDelay: {
     type: "number",
     "default": 3000
+  },
+  title: {
+    type: "string",
+    "default": "Our Product"
+  },
+  titleColor: {
+    type: "string",
+    "default": "#b5ceae"
+  },
+  backgroundColor: {
+    type: "string",
+    "default": "#eeeee6"
   }
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__.registerBlockType)("flip-blocks/product-carousel", {

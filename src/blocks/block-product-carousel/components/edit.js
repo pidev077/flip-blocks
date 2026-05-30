@@ -1,22 +1,36 @@
 import { __ } from "@wordpress/i18n";
 import { Fragment } from "@wordpress/element";
-import { useBlockProps } from "@wordpress/block-editor";
+import { useBlockProps, RichText } from "@wordpress/block-editor";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import Inspector from "./inspector";
 
 const Edit = (props) => {
-	const { attributes, className } = props;
-	const { items, slidesPerView, spaceBetween, speed, loop } = attributes;
+	const { attributes, setAttributes, className } = props;
+	const { items, slidesPerView, spaceBetween, speed, loop, title, titleColor, backgroundColor } = attributes;
 
 	const blockProps = useBlockProps({
 		className: ["block-product-carousel", className].join(" "),
+		style: { backgroundColor },
 	});
 
 	return (
 		<Fragment>
 			<Inspector {...props} />
 			<div {...blockProps}>
+				{title && (
+					<div className="block-product-carousel__title-wrap">
+						<RichText
+							tagName="h2"
+							className="block-product-carousel__title"
+							style={{ color: titleColor }}
+							value={title}
+							onChange={(value) => setAttributes({ title: value })}
+							placeholder={__("Our Product", "flip-blocks")}
+							allowedFormats={[]}
+						/>
+					</div>
+				)}
 				<div className="image-container">
 					<div className="fade-image type01"></div>
 					<div className="fade-image type02"></div>

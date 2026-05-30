@@ -684,6 +684,17 @@ html :where(.wp-block) {
  * Can include things like variables and mixins
  * that are used across the project.
 */
+.flip-content-media h3.block-title,
+.flip-content-media p.left-text {
+  margin-top: 0;
+}
+.flip-content-media .block-editor-rich-text__editable {
+  padding: 0;
+}
+.flip-content-media .right {
+  min-height: 200px;
+}
+
 .block-editor-block-inspector .item-icon-content-media {
   display: flex;
   align-items: center;

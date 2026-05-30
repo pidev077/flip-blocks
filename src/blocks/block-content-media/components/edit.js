@@ -13,7 +13,7 @@ export default function Edit({ attributes, setAttributes, className }) {
 	const activeItem = items[active];
 
 	const blockProps = useBlockProps({
-		className: ["flip-content-media", className].join(" "),
+		className: ["flip-content-media", className].filter(Boolean).join(" "),
 	});
 
 	return (
@@ -34,6 +34,8 @@ export default function Edit({ attributes, setAttributes, className }) {
 					{/* LEFT */}
 					<div className="left">
 						<div className="thumb-list">
+							<div className="active-indicator"></div>
+
 							{items.map((item, i) => (
 								<div
 									key={item.id}

@@ -1,4 +1,4 @@
-import { useBlockProps } from "@wordpress/block-editor";
+import { useBlockProps, RichText } from "@wordpress/block-editor";
 
 const Save = (props) => {
 	const { attributes, className } = props;
@@ -10,10 +10,14 @@ const Save = (props) => {
 		loop,
 		autoplay,
 		autoplayDelay,
+		title,
+		titleColor,
+		backgroundColor,
 	} = attributes;
 
 	const blockProps = useBlockProps.save({
 		className: ["block-product-carousel", className].join(" "),
+		style: { backgroundColor },
 	});
 
 	const carouselData = JSON.stringify({
@@ -67,6 +71,16 @@ const Save = (props) => {
 
 	return (
 		<div {...blockProps}>
+			{title && (
+				<div className="block-product-carousel__title-wrap">
+					<RichText.Content
+						tagName="h2"
+						className="block-product-carousel__title"
+						style={{ color: titleColor }}
+						value={title}
+					/>
+				</div>
+			)}
 			<div className="image-container">
 				<div className="fade-image type01"></div>
 				<div className="fade-image type02"></div>

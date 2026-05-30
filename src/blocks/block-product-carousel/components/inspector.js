@@ -13,6 +13,7 @@ import {
 	RangeControl,
 	BaseControl,
 	CheckboxControl,
+	ColorPalette,
 } from "@wordpress/components";
 import { DndContext, closestCenter } from "@dnd-kit/core";
 import {
@@ -244,6 +245,23 @@ const SortableProductItem = ({ item, id, onEdit, onRemove }) => {
 	);
 };
 
+const TITLE_COLOR_PALETTE = [
+	{ name: "Light Green", color: "#b5ceae" },
+	{ name: "Sage", color: "#8aab82" },
+	{ name: "Dark Green", color: "#4a7a42" },
+	{ name: "Light Gray", color: "#c8c8c0" },
+	{ name: "Dark", color: "#2a2a2a" },
+	{ name: "White", color: "#ffffff" },
+];
+
+const BG_COLOR_PALETTE = [
+	{ name: "Cream", color: "#eeeee6" },
+	{ name: "Light Gray", color: "#f5f5f5" },
+	{ name: "White", color: "#ffffff" },
+	{ name: "Light Green", color: "#e8f0e5" },
+	{ name: "Beige", color: "#f0ede5" },
+];
+
 const Inspector = ({ attributes, setAttributes }) => {
 	const {
 		items = [],
@@ -253,6 +271,9 @@ const Inspector = ({ attributes, setAttributes }) => {
 		loop,
 		autoplay,
 		autoplayDelay,
+		title,
+		titleColor,
+		backgroundColor,
 	} = attributes;
 
 	const [newItem, setNewItem] = useState({ ...DEFAULT_ITEM });
@@ -413,6 +434,32 @@ const Inspector = ({ attributes, setAttributes }) => {
 						max={10000}
 					/>
 				)}
+			</PanelBody>
+
+			<PanelBody
+				title={__("Title & Colors", "flip-blocks")}
+				initialOpen={false}
+			>
+				<TextControl
+					label={__("Tiêu đề", "flip-blocks")}
+					value={title}
+					onChange={(value) => setAttributes({ title: value })}
+					placeholder="Our Product"
+				/>
+				<BaseControl label={__("Màu tiêu đề", "flip-blocks")}>
+					<ColorPalette
+						colors={TITLE_COLOR_PALETTE}
+						value={titleColor}
+						onChange={(value) => setAttributes({ titleColor: value })}
+					/>
+				</BaseControl>
+				<BaseControl label={__("Màu nền", "flip-blocks")}>
+					<ColorPalette
+						colors={BG_COLOR_PALETTE}
+						value={backgroundColor}
+						onChange={(value) => setAttributes({ backgroundColor: value })}
+					/>
+				</BaseControl>
 			</PanelBody>
 		</InspectorControls>
 	);

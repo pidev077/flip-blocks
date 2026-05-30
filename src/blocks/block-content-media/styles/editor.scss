@@ -1,3 +1,22 @@
+// Editor preview overrides — keep layout matching frontend
+.flip-content-media {
+	// Gutenberg adds margin to block wrapper; neutralize on children
+	h3.block-title,
+	p.left-text {
+		margin-top: 0;
+	}
+
+	// RichText placeholder sits inside the flow — ensure no extra padding
+	.block-editor-rich-text__editable {
+		padding: 0;
+	}
+
+	// Ensure right panel is visible in editor (relies on flex-stretch from left)
+	.right {
+		min-height: 200px;
+	}
+}
+
 .block-editor-block-inspector {
 	.item-icon-content-media {
 		display: flex;

@@ -3736,6 +3736,25 @@ body.logged-in .team-popup-inner {
 .block-product-carousel {
   position: relative;
   overflow: hidden;
+  padding-top: 90px;
+}
+.block-product-carousel .block-product-carousel__title-wrap {
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+}
+.block-product-carousel .block-product-carousel__title {
+  font-size: clamp(70px, 12vw, 186px);
+  font-weight: 700;
+  line-height: 1;
+  margin: 0;
+  text-align: center;
+  color: #D5E3C3;
+  white-space: nowrap;
+  font-family: "be-vietnam-pro", sans-serif;
+  line-height: 100%;
+  letter-spacing: -5%;
+  padding-bottom: 50px;
 }
 .block-product-carousel .image-container {
   position: absolute;
@@ -3758,11 +3777,11 @@ body.logged-in .team-popup-inner {
 }
 .block-product-carousel .fade-image.type01 {
   animation: productCarouselSlideDownFade 6s ease-in-out infinite;
-  background: url("data:image/svg+xml,%3csvg%20fill=%27none%27%20height=%27480%27%20viewBox=%270%200%202524%20480%27%20width=%272524%27%20xmlns=%27http://www.w3.org/2000/svg%27%20xmlns:xlink=%27http://www.w3.org/1999/xlink%27%3e%3cclipPath%20id=%27a%27%3e%3cpath%20d=%27m0%200h3000v480h-3000z%27/%3e%3c/clipPath%3e%3cg%20clip-path=%27url%28%23a%29%27%3e%3cpath%20d=%27m-38%20264.256c329.614-93.565%20645.455%20357.162%201823.8%200%20942.68-285.7288%201168.2-181.4307%201252.2-112.431%27%20stroke=%27%23A8D7CC%27/%3e%3cpath%20d=%27m-95%200c588.5%2032.5%20558.748%20496.726%201779.5%20336%20957-126%201204.5%200%201409.5%20144%27%20stroke=%27%23BFC6C2%27/%3e%3c/g%3e%3c/svg%3e") no-repeat 50% 50%/cover;
+  background: url("data:image/svg+xml,%3csvg%20fill=%27none%27%20height=%27480%27%20viewBox=%270%200%202524%20480%27%20width=%272524%27%20xmlns=%27http://www.w3.org/2000/svg%27%20xmlns:xlink=%27http://www.w3.org/1999/xlink%27%3e%3cclipPath%20id=%27a%27%3e%3cpath%20d=%27m0%200h3000v480h-3000z%27/%3e%3c/clipPath%3e%3cg%20clip-path=%27url%28%23a%29%27%3e%3cpath%20d=%27m-38%20264.256c329.614-93.565%20645.455%20357.162%201823.8%200%20942.68-285.7288%201168.2-181.4307%201252.2-112.431%27%20stroke=%27%23799852%27/%3e%3cpath%20d=%27m-95%200c588.5%2032.5%20558.748%20496.726%201779.5%20336%20957-126%201204.5%200%201409.5%20144%27%20stroke=%27%23799852%27/%3e%3c/g%3e%3c/svg%3e") no-repeat 50% 50%/cover;
 }
 .block-product-carousel .fade-image.type02 {
   animation: productCarouselSlideUpFade 6s ease-in-out infinite;
-  background: url("data:image/svg+xml,%3csvg%20fill=%27none%27%20height=%27480%27%20viewBox=%270%200%202524%20480%27%20width=%272524%27%20xmlns=%27http://www.w3.org/2000/svg%27%20xmlns:xlink=%27http://www.w3.org/1999/xlink%27%3e%3cclipPath%20id=%27a%27%3e%3cpath%20d=%27m0%200h3000v480h-3000z%27/%3e%3c/clipPath%3e%3cg%20clip-path=%27url%28%23a%29%27%3e%3cpath%20d=%27m-312%20366c424.426-161.203%20958.454-237.367%201625.48-86.984%201164.47%20262.533%201368.33-252.6438%201997.52-150.383%27%20stroke=%27%23CCE8E2%27/%3e%3cpath%20d=%27m-308%20104c308.5%20122.627%201420%20437.882%202340%20159.365%20595.42-180.2546%201192.31-38.134%201275%2055.604%27%20stroke=%27%23E7EFEB%27/%3e%3c/g%3e%3c/svg%3e") no-repeat 50% 50%/cover;
+  background: url("data:image/svg+xml,%3csvg%20fill=%27none%27%20height=%27480%27%20viewBox=%270%200%202524%20480%27%20width=%272524%27%20xmlns=%27http://www.w3.org/2000/svg%27%20xmlns:xlink=%27http://www.w3.org/1999/xlink%27%3e%3cclipPath%20id=%27a%27%3e%3cpath%20d=%27m0%200h3000v480h-3000z%27/%3e%3c/clipPath%3e%3cg%20clip-path=%27url%28%23a%29%27%3e%3cpath%20d=%27m-312%20366c424.426-161.203%20958.454-237.367%201625.48-86.984%201164.47%20262.533%201368.33-252.6438%201997.52-150.383%27%20stroke=%27%23799852%27/%3e%3cpath%20d=%27m-308%20104c308.5%20122.627%201420%20437.882%202340%20159.365%20595.42-180.2546%201192.31-38.134%201275%2055.604%27%20stroke=%27%23799852%27/%3e%3c/g%3e%3c/svg%3e") no-repeat 50% 50%/cover;
 }
 .block-product-carousel .container {
   position: relative;
@@ -3779,9 +3798,8 @@ body.logged-in .team-popup-inner {
   outline: none;
 }
 .block-product-carousel .block-product-carousel__img-wrap {
-  aspect-ratio: 3/4;
+  aspect-ratio: 1/1;
   overflow: hidden;
-  border-radius: 10px;
   position: relative;
 }
 .block-product-carousel .block-product-carousel__img-wrap img {

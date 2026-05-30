@@ -6,7 +6,7 @@ export default function Save({ attributes, className }) {
 	if (!items?.length) return null;
 
 	const blockProps = useBlockProps.save({
-		className: ["flip-content-media", className].join(" "),
+		className: ["flip-content-media", className].filter(Boolean).join(" "),
 	});
 
 	return (
