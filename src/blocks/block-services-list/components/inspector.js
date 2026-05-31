@@ -90,6 +90,8 @@ const Inspector = ({ attributes, setAttributes }) => {
 	const {
 		selectedIds = [],
 		columns = 1,
+		columnsTablet = 1,
+		columnsMobile = 1,
 		gap = 16,
 		cardHeight = 420,
 		textPosition = "bottom-left",
@@ -332,11 +334,25 @@ const Inspector = ({ attributes, setAttributes }) => {
 			{/* ── Layout grid ─────────────────────────── */}
 			<PanelBody title={__("Layout grid", "flip-blocks")} initialOpen={false}>
 				<RangeControl
-					label={__("Số cột (desktop)", "flip-blocks")}
+					label={__("Số cột — Desktop (> 1024px)", "flip-blocks")}
 					value={columns}
 					onChange={(v) => setAttributes({ columns: v })}
 					min={1}
 					max={4}
+				/>
+				<RangeControl
+					label={__("Số cột — Tablet (768 – 1024px)", "flip-blocks")}
+					value={columnsTablet}
+					onChange={(v) => setAttributes({ columnsTablet: v })}
+					min={1}
+					max={3}
+				/>
+				<RangeControl
+					label={__("Số cột — Mobile (< 768px)", "flip-blocks")}
+					value={columnsMobile}
+					onChange={(v) => setAttributes({ columnsMobile: v })}
+					min={1}
+					max={2}
 				/>
 				<RangeControl
 					label={__("Khoảng cách (gap)", "flip-blocks")}

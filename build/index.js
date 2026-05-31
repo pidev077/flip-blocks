@@ -12395,6 +12395,10 @@ var Edit = function Edit(props) {
     selectedIds = _attributes$selectedI === void 0 ? [] : _attributes$selectedI,
     _attributes$columns = attributes.columns,
     columns = _attributes$columns === void 0 ? 1 : _attributes$columns,
+    _attributes$columnsTa = attributes.columnsTablet,
+    columnsTablet = _attributes$columnsTa === void 0 ? 1 : _attributes$columnsTa,
+    _attributes$columnsMo = attributes.columnsMobile,
+    columnsMobile = _attributes$columnsMo === void 0 ? 1 : _attributes$columnsMo,
     _attributes$gap = attributes.gap,
     gap = _attributes$gap === void 0 ? 16 : _attributes$gap,
     _attributes$cardHeigh = attributes.cardHeight,
@@ -12404,7 +12408,9 @@ var Edit = function Edit(props) {
     _attributes$textColor = attributes.textColor,
     textColor = _attributes$textColor === void 0 ? "#ffffff" : _attributes$textColor,
     _attributes$titleFont = attributes.titleFontSize,
-    titleFontSize = _attributes$titleFont === void 0 ? 24 : _attributes$titleFont;
+    titleFontSize = _attributes$titleFont === void 0 ? 24 : _attributes$titleFont,
+    _attributes$titleText = attributes.titleTextTransform,
+    titleTextTransform = _attributes$titleText === void 0 ? "none" : _attributes$titleText;
   var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)({}),
     _useState2 = _slicedToArray(_useState, 2),
     postsMap = _useState2[0],
@@ -12418,6 +12424,8 @@ var Edit = function Edit(props) {
     "data-text-pos": textPosition,
     style: {
       "--service-cols": columns,
+      "--service-cols-tablet": columnsTablet,
+      "--service-cols-mobile": columnsMobile,
       "--service-gap": "".concat(gap, "px"),
       "--card-height": "".concat(cardHeight, "px")
     }
@@ -12446,7 +12454,8 @@ var Edit = function Edit(props) {
   // Inline styles applied directly so color/size/font work without CSS variable cascading issues in the editor
   var titleStyle = {
     color: textColor,
-    fontSize: titleFontSize + "px"
+    fontSize: titleFontSize + "px",
+    textTransform: titleTextTransform !== "none" ? titleTextTransform : undefined
   };
   var labelStyle = {
     color: textColor
@@ -12693,6 +12702,10 @@ var Inspector = function Inspector(_ref2) {
     selectedIds = _attributes$selectedI === void 0 ? [] : _attributes$selectedI,
     _attributes$columns = attributes.columns,
     columns = _attributes$columns === void 0 ? 1 : _attributes$columns,
+    _attributes$columnsTa = attributes.columnsTablet,
+    columnsTablet = _attributes$columnsTa === void 0 ? 1 : _attributes$columnsTa,
+    _attributes$columnsMo = attributes.columnsMobile,
+    columnsMobile = _attributes$columnsMo === void 0 ? 1 : _attributes$columnsMo,
     _attributes$gap = attributes.gap,
     gap = _attributes$gap === void 0 ? 16 : _attributes$gap,
     _attributes$cardHeigh = attributes.cardHeight,
@@ -12702,7 +12715,9 @@ var Inspector = function Inspector(_ref2) {
     _attributes$textColor = attributes.textColor,
     textColor = _attributes$textColor === void 0 ? "#ffffff" : _attributes$textColor,
     _attributes$titleFont = attributes.titleFontSize,
-    titleFontSize = _attributes$titleFont === void 0 ? 24 : _attributes$titleFont;
+    titleFontSize = _attributes$titleFont === void 0 ? 24 : _attributes$titleFont,
+    _attributes$titleText = attributes.titleTextTransform,
+    titleTextTransform = _attributes$titleText === void 0 ? "none" : _attributes$titleText;
   var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)(null),
     _useState2 = _slicedToArray(_useState, 2),
     allPosts = _useState2[0],
@@ -12981,11 +12996,64 @@ var Inspector = function Inspector(_ref2) {
     style: {
       marginTop: 4
     }
-  })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
+  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.BaseControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Kiểu chữ tiêu đề", "flip-blocks"),
+    __nextHasNoMarginBottom: true,
+    style: {
+      marginTop: 8
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      gap: 4,
+      marginTop: 6
+    }
+  }, [{
+    value: "none",
+    label: "Aa",
+    title: "Bình thường"
+  }, {
+    value: "uppercase",
+    label: "AA",
+    title: "Chữ hoa"
+  }, {
+    value: "lowercase",
+    label: "aa",
+    title: "Chữ thường"
+  }, {
+    value: "capitalize",
+    label: "Aa·",
+    title: "Hoa đầu chữ"
+  }].map(function (_ref5) {
+    var value = _ref5.value,
+      label = _ref5.label,
+      title = _ref5.title;
+    return /*#__PURE__*/React.createElement("button", {
+      key: value,
+      title: title,
+      onClick: function onClick() {
+        return setAttributes({
+          titleTextTransform: value
+        });
+      },
+      style: {
+        flex: 1,
+        height: 34,
+        border: titleTextTransform === value ? "2px solid #007cba" : "1px solid #ccc",
+        borderRadius: 4,
+        background: titleTextTransform === value ? "#e8f0fe" : "#fff",
+        cursor: "pointer",
+        fontSize: 12,
+        fontWeight: titleTextTransform === value ? "bold" : "normal",
+        color: titleTextTransform === value ? "#007cba" : "#555",
+        textTransform: value === "none" ? undefined : value
+      }
+    }, label);
+  })))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
     title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Layout grid", "flip-blocks"),
     initialOpen: false
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Số cột (desktop)", "flip-blocks"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Số cột — Desktop (> 1024px)", "flip-blocks"),
     value: columns,
     onChange: function onChange(v) {
       return setAttributes({
@@ -12994,6 +13062,26 @@ var Inspector = function Inspector(_ref2) {
     },
     min: 1,
     max: 4
+  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Số cột — Tablet (768 – 1024px)", "flip-blocks"),
+    value: columnsTablet,
+    onChange: function onChange(v) {
+      return setAttributes({
+        columnsTablet: v
+      });
+    },
+    min: 1,
+    max: 3
+  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Số cột — Mobile (< 768px)", "flip-blocks"),
+    value: columnsMobile,
+    onChange: function onChange(v) {
+      return setAttributes({
+        columnsMobile: v
+      });
+    },
+    min: 1,
+    max: 2
   }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Khoảng cách (gap)", "flip-blocks"),
     value: gap,
@@ -13070,6 +13158,14 @@ __webpack_require__.r(__webpack_exports__);
       type: "number",
       "default": 1
     },
+    columnsTablet: {
+      type: "number",
+      "default": 1
+    },
+    columnsMobile: {
+      type: "number",
+      "default": 1
+    },
     gap: {
       type: "number",
       "default": 16
@@ -13089,6 +13185,10 @@ __webpack_require__.r(__webpack_exports__);
     titleFontSize: {
       type: "number",
       "default": 24
+    },
+    titleTextTransform: {
+      type: "string",
+      "default": "none"
     },
     anchor: {
       type: "string",

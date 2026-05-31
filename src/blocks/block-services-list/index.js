@@ -24,6 +24,14 @@ registerBlockType("flip-blocks/block-services-list", {
 			type: "number",
 			default: 1,
 		},
+		columnsTablet: {
+			type: "number",
+			default: 1,
+		},
+		columnsMobile: {
+			type: "number",
+			default: 1,
+		},
 		gap: {
 			type: "number",
 			default: 16,

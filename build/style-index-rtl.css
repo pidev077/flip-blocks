@@ -3947,6 +3947,16 @@ body.logged-in .team-popup-inner {
   grid-template-columns: repeat(var(--service-cols, 1), 1fr);
   gap: var(--service-gap, 16px);
 }
+@media (max-width: 1024px) {
+  .block-services-list__grid {
+    grid-template-columns: repeat(var(--service-cols-tablet, var(--service-cols, 1)), 1fr);
+  }
+}
+@media (max-width: 767px) {
+  .block-services-list__grid {
+    grid-template-columns: repeat(var(--service-cols-mobile, 1), 1fr);
+  }
+}
 
 .service-card {
   position: relative;

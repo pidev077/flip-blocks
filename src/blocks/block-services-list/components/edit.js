@@ -10,6 +10,8 @@ const Edit = (props) => {
 	const {
 		selectedIds = [],
 		columns = 1,
+		columnsTablet = 1,
+		columnsMobile = 1,
 		gap = 16,
 		cardHeight = 420,
 		textPosition = "bottom-left",
@@ -26,6 +28,8 @@ const Edit = (props) => {
 		"data-text-pos": textPosition,
 		style: {
 			"--service-cols": columns,
+			"--service-cols-tablet": columnsTablet,
+			"--service-cols-mobile": columnsMobile,
 			"--service-gap": `${gap}px`,
 			"--card-height": `${cardHeight}px`,
 		},

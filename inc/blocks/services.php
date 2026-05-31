@@ -7,6 +7,8 @@ function flip_services_list_render($atts)
     $atts = shortcode_atts([
         'selectedIds'   => [],
         'columns'       => 1,
+        'columnsTablet' => 1,
+        'columnsMobile' => 1,
         'gap'           => 16,
         'cardHeight'    => 420,
         'textPosition'  => 'bottom-left',
@@ -19,6 +21,8 @@ function flip_services_list_render($atts)
 
     $selected_ids  = array_filter(array_map('intval', (array) $atts['selectedIds']));
     $cols           = max(1, min(4, (int) $atts['columns']));
+    $cols_tablet    = max(1, min(3, (int) $atts['columnsTablet']));
+    $cols_mobile    = max(1, min(2, (int) $atts['columnsMobile']));
     $gap            = max(0, min(60, (int) $atts['gap']));
     $card_height    = max(150, min(800, (int) $atts['cardHeight']));
     $text_position  = sanitize_text_field($atts['textPosition']);
@@ -70,7 +74,7 @@ function flip_services_list_render($atts)
 <div<?= $anchor_attr ?>
     class="block-services-list <?= esc_attr($atts['className']); ?>"
     data-text-pos="<?= esc_attr($text_position) ?>"
-    style="--service-cols:<?= $cols ?>; --service-gap:<?= $gap ?>px; --card-height:<?= $card_height ?>px; --card-text-color:<?= esc_attr($text_color) ?>;">
+    style="--service-cols:<?= $cols ?>; --service-cols-tablet:<?= $cols_tablet ?>; --service-cols-mobile:<?= $cols_mobile ?>; --service-gap:<?= $gap ?>px; --card-height:<?= $card_height ?>px; --card-text-color:<?= esc_attr($text_color) ?>;">
 
     <?php /* ── CARDS GRID ──────────────────────────────── */ ?>
     <div class="block-services-list__grid">
