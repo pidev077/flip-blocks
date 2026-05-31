@@ -50,14 +50,17 @@ function flip_services_list_render($atts)
         <?php while ($query->have_posts()):
             $query->the_post();
             $id        = get_the_ID();
-            $thumb_url = get_the_post_thumbnail_url($id, 'large') ?: '';
+            $thumb_id  = get_post_thumbnail_id($id);
             $label     = get_field('service_card_label', $id);
             ?>
             <div class="service-card" data-service-id="<?= $id ?>" role="button" tabindex="0"
                 aria-haspopup="dialog" aria-label="<?= esc_attr(get_the_title()) ?>">
-                <?php if ($thumb_url): ?>
-                    <img class="service-card__image" src="<?= esc_url($thumb_url) ?>"
-                        alt="<?= esc_attr(get_the_title()) ?>" loading="lazy" />
+                <?php if ($thumb_id): ?>
+                    <?= wp_get_attachment_image($thumb_id, 'large', false, [
+                        'class'   => 'service-card__image',
+                        'loading' => 'lazy',
+                        'decoding' => 'async',
+                    ]) ?>
                 <?php endif; ?>
                 <div class="service-card__overlay"></div>
                 <div class="service-card__content">

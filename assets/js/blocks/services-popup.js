@@ -5,6 +5,10 @@ export default {
 
 		if (!cards.length || !popups.length) return;
 
+		// Move popups to <body> so they escape any intermediate stacking context
+		// (caused by AOS transforms, parent z-index, etc.) and sit above the fixed header
+		popups.forEach((popup) => document.body.appendChild(popup));
+
 		/* ── Open ────────────────────────────────────── */
 		cards.forEach((card) => {
 			card.addEventListener("click", () => openPopup(card.dataset.serviceId));
