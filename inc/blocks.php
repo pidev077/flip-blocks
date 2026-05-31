@@ -187,6 +187,10 @@ if (!function_exists('flip_init_register_block')) {
 					'type'    => 'number',
 					'default' => 3,
 				),
+				'gap' => array(
+					'type'    => 'number',
+					'default' => 24,
+				),
 				'className' => array(
 					'type' => 'string',
 				),

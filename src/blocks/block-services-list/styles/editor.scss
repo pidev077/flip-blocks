@@ -10,3 +10,24 @@
 	color: #888;
 	font-size: 14px;
 }
+
+/* Grid preview in editor */
+.block-services-list {
+	&__grid {
+		display: grid;
+		grid-template-columns: repeat(var(--service-cols, 3), 1fr);
+		gap: var(--service-gap, 24px);
+	}
+}
+
+/* Ensure card image is fully visible in editor (no pointer-events disabled opacity) */
+.service-card__image {
+	position: absolute !important;
+	inset: 0 !important;
+	width: 100% !important;
+	height: 100% !important;
+	max-width: none !important;
+	object-fit: cover !important;
+	opacity: 1 !important;
+	display: block;
+}

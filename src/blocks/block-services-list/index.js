@@ -24,6 +24,10 @@ registerBlockType("flip-blocks/block-services-list", {
 			type: "number",
 			default: 3,
 		},
+		gap: {
+			type: "number",
+			default: 24,
+		},
 		anchor: {
 			type: "string",
 			default: "",

@@ -7,6 +7,7 @@ function flip_services_list_render($atts)
     $atts = shortcode_atts([
         'selectedIds' => [],
         'columns'     => 3,
+        'gap'         => 24,
         'anchor'      => '',
         'className'   => '',
     ], $atts);
@@ -39,11 +40,12 @@ function flip_services_list_render($atts)
 
     $anchor_attr = !empty($atts['anchor']) ? ' id="' . esc_attr($atts['anchor']) . '"' : '';
     $cols        = max(1, min(4, (int) $atts['columns']));
+    $gap         = max(0, min(60, (int) $atts['gap']));
 
     ob_start();
     ?>
 <div<?= $anchor_attr ?> class="block-services-list <?= esc_attr($atts['className']); ?>"
-    style="--service-cols: <?= $cols ?>;">
+    style="--service-cols: <?= $cols ?>; --service-gap: <?= $gap ?>px;">
 
     <?php /* ── GRID CARDS ─────────────────────────────── */ ?>
     <div class="block-services-list__grid">

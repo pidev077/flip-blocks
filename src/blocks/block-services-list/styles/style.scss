@@ -2,11 +2,10 @@
 	&__grid {
 		display: grid;
 		grid-template-columns: repeat(var(--service-cols, 3), 1fr);
-		gap: 24px;
+		gap: var(--service-gap, 24px);
 
 		@media (max-width: 768px) {
 			grid-template-columns: 1fr;
-			gap: 16px;
 		}
 	}
 }

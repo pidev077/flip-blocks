@@ -7,14 +7,17 @@ import Inspector from "./inspector";
 
 const Edit = (props) => {
 	const { attributes } = props;
-	const { selectedIds = [], columns } = attributes;
+	const { selectedIds = [], columns, gap = 24 } = attributes;
 
 	const [postsMap, setPostsMap] = useState({});
 	const [loading, setLoading]   = useState(true);
 
 	const blockProps = useBlockProps({
 		className: "block-services-list",
-		style: { "--service-cols": columns },
+		style: {
+			"--service-cols": columns,
+			"--service-gap": `${gap}px`,
+		},
 	});
 
 	/* fetch all posts once */
@@ -30,6 +33,8 @@ const Edit = (props) => {
 	}, []);
 
 	const getThumb = (post) =>
+		post?._embedded?.["wp:featuredmedia"]?.[0]?.media_details?.sizes?.large
+			?.source_url ||
 		post?._embedded?.["wp:featuredmedia"]?.[0]?.media_details?.sizes?.medium
 			?.source_url ||
 		post?._embedded?.["wp:featuredmedia"]?.[0]?.source_url ||

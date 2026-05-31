@@ -79,7 +79,7 @@ const SortableServiceItem = ({ post, id, onRemove }) => {
 
 /* ── Main Inspector ─────────────────────────────────────────── */
 const Inspector = ({ attributes, setAttributes }) => {
-	const { selectedIds = [], columns } = attributes;
+	const { selectedIds = [], columns, gap = 24 } = attributes;
 	const [allPosts, setAllPosts]   = useState(null);
 	const [search, setSearch]       = useState("");
 
@@ -233,6 +233,14 @@ const Inspector = ({ attributes, setAttributes }) => {
 					onChange={(v) => setAttributes({ columns: v })}
 					min={1}
 					max={4}
+				/>
+				<RangeControl
+					label={__("Khoảng cách (gap)", "flip-blocks")}
+					value={gap}
+					onChange={(v) => setAttributes({ gap: v })}
+					min={0}
+					max={60}
+					step={4}
 				/>
 			</PanelBody>
 
