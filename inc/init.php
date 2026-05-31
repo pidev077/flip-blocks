@@ -53,6 +53,14 @@ function flip_colour_palette_default()
 
 add_action('after_setup_theme', 'flip_colour_palette_default');
 
+// Expose service_card_label ACF field via REST API for block editor preview
+add_action('rest_api_init', function () {
+    register_rest_field('dichvu', 'service_card_label', [
+        'get_callback' => fn($post_arr) => get_field('service_card_label', $post_arr['id']) ?: '',
+        'schema'       => ['type' => 'string', 'description' => 'Card label/subtitle'],
+    ]);
+});
+
 function flip_require_render_block()
 {
     foreach (glob(__DIR__ . '/blocks/*.php') as $file) {

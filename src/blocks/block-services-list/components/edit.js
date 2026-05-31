@@ -7,20 +7,29 @@ import Inspector from "./inspector";
 
 const Edit = (props) => {
 	const { attributes } = props;
-	const { selectedIds = [], columns, gap = 24 } = attributes;
+	const {
+		selectedIds = [],
+		columns = 1,
+		gap = 16,
+		cardHeight = 420,
+		textPosition = "bottom-left",
+		textColor = "#ffffff",
+		titleFontSize = 24,
+	} = attributes;
 
 	const [postsMap, setPostsMap] = useState({});
 	const [loading, setLoading]   = useState(true);
 
 	const blockProps = useBlockProps({
 		className: "block-services-list",
+		"data-text-pos": textPosition,
 		style: {
 			"--service-cols": columns,
 			"--service-gap": `${gap}px`,
+			"--card-height": `${cardHeight}px`,
 		},
 	});
 
-	/* fetch all posts once */
 	useEffect(() => {
 		apiFetch({ path: "/wp/v2/dichvu?per_page=-1&status=publish&_embed=true" })
 			.then((posts) => {
@@ -33,15 +42,16 @@ const Edit = (props) => {
 	}, []);
 
 	const getThumb = (post) =>
-		post?._embedded?.["wp:featuredmedia"]?.[0]?.media_details?.sizes?.large
-			?.source_url ||
-		post?._embedded?.["wp:featuredmedia"]?.[0]?.media_details?.sizes?.medium
-			?.source_url ||
+		post?._embedded?.["wp:featuredmedia"]?.[0]?.media_details?.sizes?.large?.source_url ||
+		post?._embedded?.["wp:featuredmedia"]?.[0]?.media_details?.sizes?.medium?.source_url ||
 		post?._embedded?.["wp:featuredmedia"]?.[0]?.source_url ||
 		"";
 
-	/* posts in the selected order */
 	const selectedPosts = selectedIds.map((id) => postsMap[id]).filter(Boolean);
+
+	// Inline styles applied directly so color/size/font work without CSS variable cascading issues in the editor
+	const titleStyle = { color: textColor, fontSize: titleFontSize + "px" };
+	const labelStyle = { color: textColor };
 
 	return (
 		<div {...blockProps}>
@@ -73,6 +83,7 @@ const Edit = (props) => {
 				<div className="block-services-list__grid">
 					{selectedPosts.map((post) => {
 						const thumb = getThumb(post);
+						const cardLabel = post.service_card_label || "";
 						return (
 							<div
 								key={post.id}
@@ -88,8 +99,8 @@ const Edit = (props) => {
 								) : (
 									<div
 										style={{
-											width: "100%",
-											height: "100%",
+											position: "absolute",
+											inset: 0,
 											background: "#2a2018",
 											display: "flex",
 											alignItems: "center",
@@ -105,8 +116,14 @@ const Edit = (props) => {
 								<div className="service-card__content">
 									<h3
 										className="service-card__title"
+										style={titleStyle}
 										dangerouslySetInnerHTML={{ __html: post.title?.rendered || "" }}
 									/>
+									{cardLabel && (
+										<span className="service-card__label" style={labelStyle}>
+											{cardLabel}
+										</span>
+									)}
 								</div>
 							</div>
 						);

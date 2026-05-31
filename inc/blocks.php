@@ -185,9 +185,25 @@ if (!function_exists('flip_init_register_block')) {
 				),
 				'columns' => array(
 					'type'    => 'number',
-					'default' => 3,
+					'default' => 1,
 				),
 				'gap' => array(
+					'type'    => 'number',
+					'default' => 16,
+				),
+				'cardHeight' => array(
+					'type'    => 'number',
+					'default' => 420,
+				),
+				'textPosition' => array(
+					'type'    => 'string',
+					'default' => 'bottom-left',
+				),
+				'textColor' => array(
+					'type'    => 'string',
+					'default' => '#ffffff',
+				),
+				'titleFontSize' => array(
 					'type'    => 'number',
 					'default' => 24,
 				),

@@ -1,26 +1,20 @@
+// ── Grid wrapper ────────────────────────────────────
 .block-services-list {
 	&__grid {
 		display: grid;
-		grid-template-columns: repeat(var(--service-cols, 3), 1fr);
-		gap: var(--service-gap, 24px);
-
-		@media (max-width: 768px) {
-			grid-template-columns: 1fr;
-		}
+		grid-template-columns: repeat(var(--service-cols, 1), 1fr);
+		gap: var(--service-gap, 16px);
 	}
 }
 
+// ── Card base ────────────────────────────────────────
 .service-card {
 	position: relative;
 	overflow: hidden;
-	border-radius: 12px;
+	border-radius: 8px;
 	cursor: pointer;
-	height: 470px;
+	height: var(--card-height, 420px);
 	background: #120a00;
-
-	@media (max-width: 768px) {
-		height: 300px;
-	}
 
 	&__image {
 		position: absolute !important;
@@ -30,49 +24,120 @@
 		max-width: none !important;
 		object-fit: cover;
 		display: block;
-		transition: transform 0.5s ease;
+		transition: transform 0.6s ease;
 	}
 
-	&__overlay {
-		position: absolute;
-		inset: 0;
-		background: linear-gradient(
-			to top,
-			rgba(18, 10, 0, 0.75) 0%,
-			rgba(18, 10, 0, 0.1) 60%,
-			transparent 100%
-		);
-	}
+	// &__overlay {
+	// 	position: absolute;
+	// 	inset: 0;
+	// 	// default: gradient from bottom — overridden per text position below
+	// 	background: linear-gradient(
+	// 		to top,
+	// 		rgba(0, 0, 0, 0.82) 0%,
+	// 		rgba(0, 0, 0, 0.2) 55%,
+	// 		transparent 100%
+	// 	);
+	// }
 
 	&__content {
 		position: absolute;
-		bottom: 0;
-		left: 0;
-		right: 0;
-		padding: 24px 28px;
-		color: #fff;
-		display: none;
+		inset: 0;
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-end;   // default: bottom
+		align-items: flex-start;     // default: left
+		text-align: left;
+		padding: 28px 32px;
+		color: var(--card-text-color, #fff);
+
+		@media (max-width: 600px) {
+			padding: 18px 20px;
+		}
 	}
 
 	&__label {
-		display: block;
-		font-size: 12px;
-		letter-spacing: 0.08em;
-		text-transform: uppercase;
-		opacity: 0.75;
-		margin-bottom: 6px;
+		font-size: 18px;
+		letter-spacing: 0.12em;
+		margin-top: 6px;
+		margin-bottom: 0;
 		font-family: inherit;
+		color: #9FB877 !important;
+		font-weight: 700;
 	}
 
 	&__title {
-		font-size: clamp(18px, 2.5vw, 26px);
-		font-weight: 600;
+		font-size: clamp(26px, 4.2vw, 48px);
+		font-weight: 400;
 		line-height: 1.2;
 		margin: 0;
-		color: #fff;
+		text-transform: uppercase;
+		letter-spacing: 0.04em;
+		color: inherit;
+		font-family: $font-second;
 	}
 
 	&:hover &__image {
 		transform: scale(1.04);
+	}
+}
+
+// ── Text position variants ────────────────────────────
+// Applied via data-text-pos on the .block-services-list wrapper.
+// Each variant changes: content alignment + overlay gradient direction.
+
+.block-services-list[data-text-pos="bottom-left"] {
+	.service-card__content {
+		justify-content: flex-end;
+		align-items: flex-start;
+		text-align: left;
+	}
+	.service-card__overlay {
+		background: linear-gradient(to top, rgba(0,0,0,.82) 0%, rgba(0,0,0,.2) 55%, transparent 100%);
+	}
+}
+
+.block-services-list[data-text-pos="bottom-center"] {
+	.service-card__content {
+		justify-content: flex-end;
+		align-items: center;
+		text-align: center;
+	}
+	.service-card__overlay {
+		background: linear-gradient(to top, rgba(0,0,0,.82) 0%, rgba(0,0,0,.2) 55%, transparent 100%);
+	}
+}
+
+.block-services-list[data-text-pos="bottom-right"] {
+	.service-card__content {
+		justify-content: flex-end;
+		align-items: flex-end;
+		text-align: right;
+	}
+	.service-card__overlay {
+		background: linear-gradient(to top, rgba(0,0,0,.82) 0%, rgba(0,0,0,.2) 55%, transparent 100%);
+	}
+}
+
+.block-services-list[data-text-pos="center-left"] {
+	.service-card__content {
+		justify-content: center;
+		align-items: flex-start;
+		text-align: left;
+		padding-right: 55%;    // keep text in left half
+	}
+	.service-card__overlay {
+		background: linear-gradient(to right, rgba(0,0,0,.88) 0%, rgba(0,0,0,.35) 50%, transparent 100%);
+	}
+}
+
+.block-services-list[data-text-pos="center-right"] {
+	.service-card__content {
+		justify-content: center;
+		align-items: flex-end;
+		text-align: right;
+		padding-left: 55%;     // keep text in right half
+	}
+	.service-card__overlay {
+		background: linear-gradient(to left, rgba(0,0,0,.88) 0%, rgba(0,0,0,.35) 50%, transparent 100%);
 	}
 }

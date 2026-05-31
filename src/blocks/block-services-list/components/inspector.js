@@ -1,7 +1,13 @@
 import { __ } from "@wordpress/i18n";
 import { useState, useEffect } from "@wordpress/element";
 import { InspectorControls } from "@wordpress/block-editor";
-import { PanelBody, RangeControl, Spinner, TextControl } from "@wordpress/components";
+import {
+	PanelBody,
+	RangeControl,
+	Spinner,
+	TextControl,
+	BaseControl,
+} from "@wordpress/components";
 import apiFetch from "@wordpress/api-fetch";
 import { DndContext, closestCenter } from "@dnd-kit/core";
 import {
@@ -12,14 +18,26 @@ import {
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 
+/* ── Text position options ──────────────────────────────────── */
+const POSITIONS = [
+	{ value: "bottom-left",   label: "↙",  title: "Dưới · Trái"  },
+	{ value: "bottom-center", label: "↓",  title: "Dưới · Giữa"  },
+	{ value: "bottom-right",  label: "↘",  title: "Dưới · Phải"  },
+	{ value: "center-left",   label: "←",  title: "Giữa · Trái"  },
+	{ value: "center-right",  label: "→",  title: "Giữa · Phải"  },
+];
+
+/* ── Preset text colors ─────────────────────────────────────── */
+const COLOR_PRESETS = ["#ffffff", "#f5ede3", "#d4c5a9", "#1a1a1a", "#000000"];
+
+
 /* ── Sortable selected item ─────────────────────────────────── */
 const SortableServiceItem = ({ post, id, onRemove }) => {
 	const { attributes, listeners, setNodeRef, transform, transition } =
 		useSortable({ id });
 
 	const thumbUrl =
-		post._embedded?.["wp:featuredmedia"]?.[0]?.media_details?.sizes?.thumbnail
-			?.source_url ||
+		post._embedded?.["wp:featuredmedia"]?.[0]?.media_details?.sizes?.thumbnail?.source_url ||
 		post._embedded?.["wp:featuredmedia"]?.[0]?.source_url ||
 		"";
 
@@ -40,11 +58,7 @@ const SortableServiceItem = ({ post, id, onRemove }) => {
 			}}
 		>
 			{thumbUrl && (
-				<img
-					src={thumbUrl}
-					alt=""
-					style={{ width: 44, height: 44, objectFit: "cover", borderRadius: 4, flexShrink: 0 }}
-				/>
+				<img src={thumbUrl} alt="" style={{ width: 44, height: 44, objectFit: "cover", borderRadius: 4, flexShrink: 0 }} />
 			)}
 			<span style={{ flex: 1, fontSize: 12, fontWeight: 600, color: "#1e1e1e", lineHeight: 1.4 }}>
 				{post.title?.rendered || "—"}
@@ -52,16 +66,7 @@ const SortableServiceItem = ({ post, id, onRemove }) => {
 			<button
 				onClick={() => onRemove(post.id)}
 				title={__("Bỏ chọn", "flip-blocks")}
-				style={{
-					background: "none",
-					border: "none",
-					cursor: "pointer",
-					color: "#cc1818",
-					fontSize: 16,
-					lineHeight: 1,
-					padding: "0 4px",
-					flexShrink: 0,
-				}}
+				style={{ background: "none", border: "none", cursor: "pointer", color: "#cc1818", fontSize: 16, lineHeight: 1, padding: "0 4px", flexShrink: 0 }}
 			>
 				×
 			</button>
@@ -79,27 +84,30 @@ const SortableServiceItem = ({ post, id, onRemove }) => {
 
 /* ── Main Inspector ─────────────────────────────────────────── */
 const Inspector = ({ attributes, setAttributes }) => {
-	const { selectedIds = [], columns, gap = 24 } = attributes;
-	const [allPosts, setAllPosts]   = useState(null);
-	const [search, setSearch]       = useState("");
+	const {
+		selectedIds = [],
+		columns = 1,
+		gap = 16,
+		cardHeight = 420,
+		textPosition = "bottom-left",
+		textColor = "#ffffff",
+		titleFontSize = 24,
+	} = attributes;
 
-	/* fetch all dichvu posts once */
+	const [allPosts, setAllPosts] = useState(null);
+	const [search, setSearch]     = useState("");
+
 	useEffect(() => {
 		apiFetch({ path: "/wp/v2/dichvu?per_page=-1&status=publish&_embed=true" })
 			.then((posts) => setAllPosts(posts))
 			.catch(() => setAllPosts([]));
 	}, []);
 
-	/* helpers */
-	const getPost   = (id) => allPosts?.find((p) => p.id === id);
-	const selectedPosts = selectedIds.map(getPost).filter(Boolean);
-	const unselectedPosts = (allPosts || []).filter(
-		(p) => !selectedIds.includes(p.id)
-	);
-	const filteredUnselected = search.trim()
-		? unselectedPosts.filter((p) =>
-				p.title?.rendered?.toLowerCase().includes(search.toLowerCase())
-		  )
+	const getPost             = (id) => allPosts?.find((p) => p.id === id);
+	const selectedPosts       = selectedIds.map(getPost).filter(Boolean);
+	const unselectedPosts     = (allPosts || []).filter((p) => !selectedIds.includes(p.id));
+	const filteredUnselected  = search.trim()
+		? unselectedPosts.filter((p) => p.title?.rendered?.toLowerCase().includes(search.toLowerCase()))
 		: unselectedPosts;
 
 	const addService    = (id) => setAttributes({ selectedIds: [...selectedIds, id] });
@@ -114,8 +122,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 	};
 
 	const getThumbnail = (post) =>
-		post._embedded?.["wp:featuredmedia"]?.[0]?.media_details?.sizes?.thumbnail
-			?.source_url ||
+		post._embedded?.["wp:featuredmedia"]?.[0]?.media_details?.sizes?.thumbnail?.source_url ||
 		post._embedded?.["wp:featuredmedia"]?.[0]?.source_url ||
 		"";
 
@@ -138,14 +145,8 @@ const Inspector = ({ attributes, setAttributes }) => {
 						<p style={{ fontSize: 11, color: "#888", marginBottom: 8 }}>
 							{__("Kéo ⠿ để sắp xếp lại.", "flip-blocks")}
 						</p>
-						<DndContext
-							collisionDetection={closestCenter}
-							onDragEnd={handleDragEnd}
-						>
-							<SortableContext
-								items={selectedIds.map(String)}
-								strategy={verticalListSortingStrategy}
-							>
+						<DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+							<SortableContext items={selectedIds.map(String)} strategy={verticalListSortingStrategy}>
 								{selectedPosts.map((post) => (
 									<SortableServiceItem
 										key={post.id}
@@ -183,20 +184,10 @@ const Inspector = ({ attributes, setAttributes }) => {
 								return (
 									<div
 										key={post.id}
-										style={{
-											display: "flex",
-											alignItems: "center",
-											gap: 8,
-											padding: "8px 0",
-											borderBottom: "1px solid #f0f0f0",
-										}}
+										style={{ display: "flex", alignItems: "center", gap: 8, padding: "8px 0", borderBottom: "1px solid #f0f0f0" }}
 									>
 										{thumb && (
-											<img
-												src={thumb}
-												alt=""
-												style={{ width: 40, height: 40, objectFit: "cover", borderRadius: 4, flexShrink: 0 }}
-											/>
+											<img src={thumb} alt="" style={{ width: 40, height: 40, objectFit: "cover", borderRadius: 4, flexShrink: 0 }} />
 										)}
 										<span style={{ flex: 1, fontSize: 12, color: "#1e1e1e" }}>
 											{post.title?.rendered || "—"}
@@ -204,16 +195,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 										<button
 											onClick={() => addService(post.id)}
 											title={__("Thêm", "flip-blocks")}
-											style={{
-												background: "#0073aa",
-												color: "#fff",
-												border: "none",
-												borderRadius: 4,
-												padding: "4px 10px",
-												cursor: "pointer",
-												fontSize: 12,
-												flexShrink: 0,
-											}}
+											style={{ background: "#0073aa", color: "#fff", border: "none", borderRadius: 4, padding: "4px 10px", cursor: "pointer", fontSize: 12, flexShrink: 0 }}
 										>
 											+
 										</button>
@@ -225,8 +207,95 @@ const Inspector = ({ attributes, setAttributes }) => {
 				)}
 			</PanelBody>
 
-			{/* ── Cài đặt ─────────────────────────────── */}
-			<PanelBody title={__("Cài đặt hiển thị", "flip-blocks")} initialOpen={false}>
+			{/* ── Thiết kế card ───────────────────────── */}
+			<PanelBody title={__("Thiết kế card", "flip-blocks")} initialOpen={true}>
+
+				{/* Text position */}
+				<BaseControl label={__("Vị trí chữ", "flip-blocks")} __nextHasNoMarginBottom>
+					<div style={{ display: "flex", gap: 4, marginTop: 6 }}>
+						{POSITIONS.map(({ value, label, title }) => (
+							<button
+								key={value}
+								title={title}
+								onClick={() => setAttributes({ textPosition: value })}
+								style={{
+									flex: 1,
+									height: 36,
+									border: textPosition === value ? "2px solid #007cba" : "1px solid #ccc",
+									borderRadius: 4,
+									background: textPosition === value ? "#e8f0fe" : "#fff",
+									cursor: "pointer",
+									fontSize: 18,
+									lineHeight: 1,
+									color: textPosition === value ? "#007cba" : "#555",
+									fontWeight: textPosition === value ? "bold" : "normal",
+								}}
+							>
+								{label}
+							</button>
+						))}
+					</div>
+					<p style={{ fontSize: 11, color: "#888", margin: "4px 0 0" }}>
+						{POSITIONS.find((p) => p.value === textPosition)?.title}
+					</p>
+				</BaseControl>
+
+				{/* Text color */}
+				<BaseControl label={__("Màu chữ", "flip-blocks")} __nextHasNoMarginBottom style={{ marginTop: 12 }}>
+					<div style={{ display: "flex", gap: 6, marginTop: 6, alignItems: "center" }}>
+						{COLOR_PRESETS.map((c) => (
+							<button
+								key={c}
+								title={c}
+								onClick={() => setAttributes({ textColor: c })}
+								style={{
+									width: 28,
+									height: 28,
+									borderRadius: "50%",
+									border: textColor === c ? "3px solid #007cba" : "2px solid #ccc",
+									background: c,
+									cursor: "pointer",
+									padding: 0,
+									flexShrink: 0,
+								}}
+							/>
+						))}
+						<input
+							type="color"
+							value={textColor}
+							onChange={(e) => setAttributes({ textColor: e.target.value })}
+							title={__("Màu tùy chỉnh", "flip-blocks")}
+							style={{ width: 28, height: 28, border: "2px solid #ccc", borderRadius: "50%", padding: 0, cursor: "pointer", flexShrink: 0 }}
+						/>
+					</div>
+				</BaseControl>
+
+				{/* Card height */}
+				<RangeControl
+					label={__("Chiều cao card (px)", "flip-blocks")}
+					value={cardHeight}
+					onChange={(v) => setAttributes({ cardHeight: v })}
+					min={150}
+					max={700}
+					step={10}
+					style={{ marginTop: 12 }}
+				/>
+
+				{/* Title font size */}
+				<RangeControl
+					label={__("Cỡ chữ tiêu đề (px)", "flip-blocks")}
+					value={titleFontSize}
+					onChange={(v) => setAttributes({ titleFontSize: v })}
+					min={10}
+					max={80}
+					step={1}
+					style={{ marginTop: 4 }}
+				/>
+
+			</PanelBody>
+
+			{/* ── Layout grid ─────────────────────────── */}
+			<PanelBody title={__("Layout grid", "flip-blocks")} initialOpen={false}>
 				<RangeControl
 					label={__("Số cột (desktop)", "flip-blocks")}
 					value={columns}

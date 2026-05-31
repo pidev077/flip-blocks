@@ -22,9 +22,25 @@ registerBlockType("flip-blocks/block-services-list", {
 		},
 		columns: {
 			type: "number",
-			default: 3,
+			default: 1,
 		},
 		gap: {
+			type: "number",
+			default: 16,
+		},
+		cardHeight: {
+			type: "number",
+			default: 420,
+		},
+		textPosition: {
+			type: "string",
+			default: "bottom-left",
+		},
+		textColor: {
+			type: "string",
+			default: "#ffffff",
+		},
+		titleFontSize: {
 			type: "number",
 			default: 24,
 		},

@@ -97,6 +97,9 @@ const withAdvancedControls = createHigherOrderComponent(
 	"withAdvancedControls"
 );
 
+const getFontClass = (fontFamily) =>
+	fontFamily ? `has-${fontFamily}-font-family` : "";
+
 const applyExtraClass = (
 	extraProps,
 	blockType,
@@ -108,7 +111,7 @@ const applyExtraClass = (
 
 	extraProps.className = classnames(
 		extraProps.className,
-		fontFamily ? "font-" + fontFamily : "",
+		getFontClass(fontFamily),
 		enableAnimation ? `wp-block-heading-${typeAnimation}` : ""
 	);
 
@@ -122,6 +125,33 @@ const applyExtraClass = (
 	return extraProps;
 };
 
+const withEditorClass = createHigherOrderComponent(
+	(BlockListBlock) => (props) => {
+		if (!allowedBlocks.includes(props.name)) {
+			return <BlockListBlock {...props} />;
+		}
+
+		const { fontFamily, enableAnimation, typeAnimation, marginBottom } =
+			props.attributes;
+
+		const wrapperProps = {
+			...props.wrapperProps,
+			className: classnames(
+				props.wrapperProps?.className,
+				getFontClass(fontFamily),
+				enableAnimation ? `wp-block-heading-${typeAnimation}` : ""
+			),
+			style: {
+				...props.wrapperProps?.style,
+				...(marginBottom ? { marginBottom } : {}),
+			},
+		};
+
+		return <BlockListBlock {...props} wrapperProps={wrapperProps} />;
+	},
+	"withEditorClass"
+);
+
 // Add filters
 addFilter(
 	"blocks.registerBlockType",
@@ -132,6 +162,11 @@ addFilter(
 	"editor.BlockEdit",
 	"editorskit/custom-advanced-control",
 	withAdvancedControls
+);
+addFilter(
+	"editor.BlockListBlock",
+	"editorskit/with-editor-class",
+	withEditorClass
 );
 addFilter(
 	"blocks.getSaveContent.extraProps",

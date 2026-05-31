@@ -5,14 +5,33 @@
 function flip_services_list_render($atts)
 {
     $atts = shortcode_atts([
-        'selectedIds' => [],
-        'columns'     => 3,
-        'gap'         => 24,
-        'anchor'      => '',
-        'className'   => '',
+        'selectedIds'   => [],
+        'columns'       => 1,
+        'gap'           => 16,
+        'cardHeight'    => 420,
+        'textPosition'  => 'bottom-left',
+        'textColor'     => '#ffffff',
+        'titleFontSize' => 24,
+        'anchor'        => '',
+        'className'     => '',
     ], $atts);
 
-    $selected_ids = array_filter(array_map('intval', (array) $atts['selectedIds']));
+    $selected_ids  = array_filter(array_map('intval', (array) $atts['selectedIds']));
+    $cols           = max(1, min(4, (int) $atts['columns']));
+    $gap            = max(0, min(60, (int) $atts['gap']));
+    $card_height    = max(150, min(800, (int) $atts['cardHeight']));
+    $text_position  = sanitize_text_field($atts['textPosition']);
+    $text_color     = sanitize_hex_color($atts['textColor']) ?: '#ffffff';
+    $title_font_size = max(10, min(120, (int) $atts['titleFontSize']));
+    $anchor_attr    = !empty($atts['anchor']) ? ' id="' . esc_attr($atts['anchor']) . '"' : '';
+
+    $title_style = 'font-size:' . $title_font_size . 'px; color:' . esc_attr($text_color) . ';';
+    $label_style = 'color:' . esc_attr($text_color) . ';';
+
+    $allowed_positions = ['bottom-left', 'bottom-center', 'bottom-right', 'center-left', 'center-right'];
+    if (!in_array($text_position, $allowed_positions, true)) {
+        $text_position = 'bottom-left';
+    }
 
     if (!empty($selected_ids)) {
         $query_args = [
@@ -38,48 +57,49 @@ function flip_services_list_render($atts)
         return '<p class="block-services-list__empty">Chưa có dịch vụ nào.</p>';
     }
 
-    $anchor_attr = !empty($atts['anchor']) ? ' id="' . esc_attr($atts['anchor']) . '"' : '';
-    $cols        = max(1, min(4, (int) $atts['columns']));
-    $gap         = max(0, min(60, (int) $atts['gap']));
+    $all_posts = $query->posts;
 
     ob_start();
     ?>
-<div<?= $anchor_attr ?> class="block-services-list <?= esc_attr($atts['className']); ?>"
-    style="--service-cols: <?= $cols ?>; --service-gap: <?= $gap ?>px;">
+<div<?= $anchor_attr ?>
+    class="block-services-list <?= esc_attr($atts['className']); ?>"
+    data-text-pos="<?= esc_attr($text_position) ?>"
+    style="--service-cols:<?= $cols ?>; --service-gap:<?= $gap ?>px; --card-height:<?= $card_height ?>px; --card-text-color:<?= esc_attr($text_color) ?>;">
 
-    <?php /* ── GRID CARDS ─────────────────────────────── */ ?>
+    <?php /* ── CARDS GRID ──────────────────────────────── */ ?>
     <div class="block-services-list__grid">
-        <?php while ($query->have_posts()):
-            $query->the_post();
-            $id        = get_the_ID();
-            $thumb_id  = get_post_thumbnail_id($id);
-            $label     = get_field('service_card_label', $id);
+        <?php foreach ($all_posts as $post):
+            setup_postdata($GLOBALS['post'] = $post);
+            $id       = get_the_ID();
+            $thumb_id = get_post_thumbnail_id($id);
+            $label    = get_field('service_card_label', $id);
             ?>
-            <div class="service-card" data-service-id="<?= $id ?>" role="button" tabindex="0"
-                aria-haspopup="dialog" aria-label="<?= esc_attr(get_the_title()) ?>">
+            <div class="service-card"
+                data-service-id="<?= $id ?>"
+                role="button" tabindex="0"
+                aria-haspopup="dialog"
+                aria-label="<?= esc_attr(get_the_title()) ?>">
                 <?php if ($thumb_id): ?>
                     <?= wp_get_attachment_image($thumb_id, 'large', false, [
-                        'class'   => 'service-card__image',
-                        'loading' => 'lazy',
+                        'class'    => 'service-card__image',
+                        'loading'  => 'lazy',
                         'decoding' => 'async',
                     ]) ?>
                 <?php endif; ?>
                 <div class="service-card__overlay"></div>
                 <div class="service-card__content">
+                    <h3 class="service-card__title" style="<?= esc_attr($title_style) ?>"><?php the_title(); ?></h3>
                     <?php if ($label): ?>
-                        <span class="service-card__label"><?= esc_html($label) ?></span>
+                        <span class="service-card__label" style="<?= esc_attr($label_style) ?>"><?= esc_html($label) ?></span>
                     <?php endif; ?>
-                    <h3 class="service-card__title"><?php the_title(); ?></h3>
                 </div>
             </div>
-        <?php endwhile; wp_reset_postdata(); ?>
+        <?php endforeach; wp_reset_postdata(); ?>
     </div>
 
     <?php /* ── POPUP OVERLAYS ──────────────────────────── */ ?>
-    <?php
-    $query->rewind_posts();
-    while ($query->have_posts()):
-        $query->the_post();
+    <?php foreach ($all_posts as $post):
+        setup_postdata($GLOBALS['post'] = $post);
         $id = get_the_ID();
 
         $popup_subtitle  = get_field('service_popup_subtitle', $id) ?: 'Dịch vụ chuyên khoa da liễu';
@@ -107,9 +127,7 @@ function flip_services_list_render($atts)
 
             <div class="service-popup__panel" data-lenis-prevent>
 
-                <?php /* ── LEFT ─────────────────────────────── */ ?>
                 <div class="service-popup__left">
-
                     <div class="service-popup__header">
                         <span class="service-popup__label"><?= esc_html($popup_subtitle) ?></span>
                         <h2 class="service-popup__title"><?php the_title(); ?></h2>
@@ -121,7 +139,6 @@ function flip_services_list_render($atts)
                         <?php endif; ?>
                     </div>
 
-                    <?php /* Overview stats */ ?>
                     <?php if ($overview): ?>
                     <div class="service-popup__section">
                         <h4 class="service-popup__section-title">Tổng quan &amp; chỉ số trải nghiệm</h4>
@@ -145,7 +162,6 @@ function flip_services_list_render($atts)
                     </div>
                     <?php endif; ?>
 
-                    <?php /* Journey steps — with background wrap */ ?>
                     <?php if ($journey): ?>
                     <div class="service-popup__section">
                         <h4 class="service-popup__section-title">Hành trình chữa lành</h4>
@@ -172,13 +188,11 @@ function flip_services_list_render($atts)
                     </div>
                     <?php endif; ?>
 
-                    <?php /* Pricing — flexible layout */ ?>
                     <?php if ($has_pricing): ?>
                     <div class="service-popup__section">
                         <h4 class="service-popup__section-title">Bảng giá</h4>
 
                         <?php if ($pricing_type === 'rows' && $pricing): ?>
-                            <?php /* Dạng hàng */ ?>
                             <div class="service-popup__pricing service-popup__pricing--rows">
                                 <?php foreach ($pricing as $row): ?>
                                 <div class="pricing-row">
@@ -190,9 +204,7 @@ function flip_services_list_render($atts)
                                 </div>
                                 <?php endforeach; ?>
                             </div>
-
                         <?php elseif ($pricing_type === 'columns' && $pricing_cols): ?>
-                            <?php /* Dạng cột */ ?>
                             <div class="service-popup__pricing service-popup__pricing--columns"
                                  style="--pricing-cols: <?= count($pricing_cols) ?>;">
                                 <?php foreach ($pricing_cols as $col): ?>
@@ -225,7 +237,6 @@ function flip_services_list_render($atts)
                         <p class="service-popup__footer-text"><?= nl2br(esc_html($footer_text)) ?></p>
                     <?php endif; ?>
 
-                    <?php /* CTA — mobile only (desktop: right panel) */ ?>
                     <a href="<?= esc_url($cta_url) ?>" class="service-popup__cta service-popup__cta--mobile"
                         target="_blank" rel="noopener noreferrer">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
@@ -233,17 +244,15 @@ function flip_services_list_render($atts)
                         </svg>
                         Tư vấn ngay
                     </a>
-
                 </div>
 
-                <?php /* ── RIGHT: sticky — ảnh + features + CTA ── */ ?>
                 <div class="service-popup__right">
                     <div class="service-popup__image-wrap">
                         <button class="service-popup__close" aria-label="Đóng">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                        </svg>
-                    </button>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </button>
                         <?php
                         $right_img = $popup_image;
                         if (empty($right_img['url'])) {
@@ -289,7 +298,7 @@ function flip_services_list_render($atts)
 
             </div>
         </div>
-    <?php endwhile; wp_reset_postdata(); ?>
+    <?php endforeach; wp_reset_postdata(); ?>
 
 </div>
     <?php

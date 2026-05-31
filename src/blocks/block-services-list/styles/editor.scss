@@ -15,12 +15,12 @@
 .block-services-list {
 	&__grid {
 		display: grid;
-		grid-template-columns: repeat(var(--service-cols, 3), 1fr);
-		gap: var(--service-gap, 24px);
+		grid-template-columns: repeat(var(--service-cols, 1), 1fr);
+		gap: var(--service-gap, 16px);
 	}
 }
 
-/* Ensure card image is fully visible in editor (no pointer-events disabled opacity) */
+/* Ensure card image is fully visible in editor */
 .service-card__image {
 	position: absolute !important;
 	inset: 0 !important;
