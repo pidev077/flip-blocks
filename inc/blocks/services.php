@@ -28,7 +28,7 @@ function flip_services_list_render($atts)
     $title_style = 'font-size:' . $title_font_size . 'px; color:' . esc_attr($text_color) . ';';
     $label_style = 'color:' . esc_attr($text_color) . ';';
 
-    $allowed_positions = ['bottom-left', 'bottom-center', 'bottom-right', 'center-left', 'center-right'];
+    $allowed_positions = ['top-left', 'top-center', 'top-right', 'center-left', 'center-right', 'bottom-left', 'bottom-center', 'bottom-right'];
     if (!in_array($text_position, $allowed_positions, true)) {
         $text_position = 'bottom-left';
     }
@@ -108,6 +108,7 @@ function flip_services_list_render($atts)
         $popup_image     = get_field('service_popup_image', $id);
         $overview        = get_field('service_overview', $id);
         $journey         = get_field('service_journey', $id);
+        $journey_label   = get_field('service_journey_label', $id) ?: 'healing';
         $pricing_type    = get_field('service_pricing_type', $id) ?: 'rows';
         $pricing         = get_field('service_pricing', $id);
         $pricing_cols    = get_field('service_pricing_columns', $id);
@@ -164,7 +165,7 @@ function flip_services_list_render($atts)
 
                     <?php if ($journey): ?>
                     <div class="service-popup__section">
-                        <h4 class="service-popup__section-title">Hành trình chữa lành</h4>
+                        <h4 class="service-popup__section-title"><?= $journey_label === 'mini' ? 'Quy trình mini' : 'Hành trình chữa lành' ?></h4>
                         <div class="service-popup__journey-wrap">
                             <div class="service-popup__journey" style="--journey-cols: <?= count($journey) ?>">
                                 <?php foreach ($journey as $step_index => $step): ?>
