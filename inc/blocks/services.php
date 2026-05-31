@@ -11,8 +11,9 @@ function flip_services_list_render($atts)
         'cardHeight'    => 420,
         'textPosition'  => 'bottom-left',
         'textColor'     => '#ffffff',
-        'titleFontSize' => 24,
-        'anchor'        => '',
+        'titleFontSize'      => 24,
+        'titleTextTransform' => 'none',
+        'anchor'             => '',
         'className'     => '',
     ], $atts);
 
@@ -23,9 +24,14 @@ function flip_services_list_render($atts)
     $text_position  = sanitize_text_field($atts['textPosition']);
     $text_color     = sanitize_hex_color($atts['textColor']) ?: '#ffffff';
     $title_font_size = max(10, min(120, (int) $atts['titleFontSize']));
+    $allowed_transforms = ['none', 'uppercase', 'lowercase', 'capitalize'];
+    $title_text_transform = in_array($atts['titleTextTransform'], $allowed_transforms, true) ? $atts['titleTextTransform'] : 'none';
     $anchor_attr    = !empty($atts['anchor']) ? ' id="' . esc_attr($atts['anchor']) . '"' : '';
 
     $title_style = 'font-size:' . $title_font_size . 'px; color:' . esc_attr($text_color) . ';';
+    if ($title_text_transform !== 'none') {
+        $title_style .= ' text-transform:' . $title_text_transform . ';';
+    }
     $label_style = 'color:' . esc_attr($text_color) . ';';
 
     $allowed_positions = ['top-left', 'top-center', 'top-right', 'center-left', 'center-right', 'bottom-left', 'bottom-center', 'bottom-right'];

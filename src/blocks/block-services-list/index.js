@@ -44,6 +44,10 @@ registerBlockType("flip-blocks/block-services-list", {
 			type: "number",
 			default: 24,
 		},
+		titleTextTransform: {
+			type: "string",
+			default: "none",
+		},
 		anchor: {
 			type: "string",
 			default: "",

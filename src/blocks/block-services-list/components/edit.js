@@ -15,6 +15,7 @@ const Edit = (props) => {
 		textPosition = "bottom-left",
 		textColor = "#ffffff",
 		titleFontSize = 24,
+		titleTextTransform = "none",
 	} = attributes;
 
 	const [postsMap, setPostsMap] = useState({});
@@ -50,7 +51,7 @@ const Edit = (props) => {
 	const selectedPosts = selectedIds.map((id) => postsMap[id]).filter(Boolean);
 
 	// Inline styles applied directly so color/size/font work without CSS variable cascading issues in the editor
-	const titleStyle = { color: textColor, fontSize: titleFontSize + "px" };
+	const titleStyle = { color: textColor, fontSize: titleFontSize + "px", textTransform: titleTextTransform !== "none" ? titleTextTransform : undefined };
 	const labelStyle = { color: textColor };
 
 	return (

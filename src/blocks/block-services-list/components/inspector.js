@@ -95,6 +95,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 		textPosition = "bottom-left",
 		textColor = "#ffffff",
 		titleFontSize = 24,
+		titleTextTransform = "none",
 	} = attributes;
 
 	const [allPosts, setAllPosts] = useState(null);
@@ -293,6 +294,38 @@ const Inspector = ({ attributes, setAttributes }) => {
 					step={1}
 					style={{ marginTop: 4 }}
 				/>
+
+				{/* Title text transform */}
+				<BaseControl label={__("Kiểu chữ tiêu đề", "flip-blocks")} __nextHasNoMarginBottom style={{ marginTop: 8 }}>
+					<div style={{ display: "flex", gap: 4, marginTop: 6 }}>
+						{[
+							{ value: "none",       label: "Aa",  title: "Bình thường" },
+							{ value: "uppercase",  label: "AA",  title: "Chữ hoa" },
+							{ value: "lowercase",  label: "aa",  title: "Chữ thường" },
+							{ value: "capitalize", label: "Aa·", title: "Hoa đầu chữ" },
+						].map(({ value, label, title }) => (
+							<button
+								key={value}
+								title={title}
+								onClick={() => setAttributes({ titleTextTransform: value })}
+								style={{
+									flex: 1,
+									height: 34,
+									border: titleTextTransform === value ? "2px solid #007cba" : "1px solid #ccc",
+									borderRadius: 4,
+									background: titleTextTransform === value ? "#e8f0fe" : "#fff",
+									cursor: "pointer",
+									fontSize: 12,
+									fontWeight: titleTextTransform === value ? "bold" : "normal",
+									color: titleTextTransform === value ? "#007cba" : "#555",
+									textTransform: value === "none" ? undefined : value,
+								}}
+							>
+								{label}
+							</button>
+						))}
+					</div>
+				</BaseControl>
 
 			</PanelBody>
 
