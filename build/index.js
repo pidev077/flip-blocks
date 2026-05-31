@@ -12575,6 +12575,26 @@ function _extends() { return _extends = Object.assign ? Object.assign.bind() : f
 
 /* ── Text position options ──────────────────────────────────── */
 var POSITIONS = [{
+  value: "top-left",
+  label: "↖",
+  title: "Trên · Trái"
+}, {
+  value: "top-center",
+  label: "↑",
+  title: "Trên · Giữa"
+}, {
+  value: "top-right",
+  label: "↗",
+  title: "Trên · Phải"
+}, {
+  value: "center-left",
+  label: "←",
+  title: "Giữa · Trái"
+}, {
+  value: "center-right",
+  label: "→",
+  title: "Giữa · Phải"
+}, {
   value: "bottom-left",
   label: "↙",
   title: "Dưới · Trái"
@@ -12586,14 +12606,6 @@ var POSITIONS = [{
   value: "bottom-right",
   label: "↘",
   title: "Dưới · Phải"
-}, {
-  value: "center-left",
-  label: "←",
-  title: "Giữa · Trái"
-}, {
-  value: "center-right",
-  label: "→",
-  title: "Giữa · Phải"
 }];
 
 /* ── Preset text colors ─────────────────────────────────────── */
@@ -12853,7 +12865,8 @@ var Inspector = function Inspector(_ref2) {
     __nextHasNoMarginBottom: true
   }, /*#__PURE__*/React.createElement("div", {
     style: {
-      display: "flex",
+      display: "grid",
+      gridTemplateColumns: "repeat(4, 1fr)",
       gap: 4,
       marginTop: 6
     }
@@ -12870,13 +12883,12 @@ var Inspector = function Inspector(_ref2) {
         });
       },
       style: {
-        flex: 1,
-        height: 36,
+        height: 34,
         border: textPosition === value ? "2px solid #007cba" : "1px solid #ccc",
         borderRadius: 4,
         background: textPosition === value ? "#e8f0fe" : "#fff",
         cursor: "pointer",
-        fontSize: 18,
+        fontSize: 16,
         lineHeight: 1,
         color: textPosition === value ? "#007cba" : "#555",
         fontWeight: textPosition === value ? "bold" : "normal"

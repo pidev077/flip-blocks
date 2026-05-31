@@ -47,7 +47,7 @@
 		justify-content: flex-end;   // default: bottom
 		align-items: flex-start;     // default: left
 		text-align: left;
-		padding: 28px 32px;
+		padding: 28px 70px;
 		color: var(--card-text-color, #fff);
 
 		@media (max-width: 600px) {
@@ -73,7 +73,7 @@
 		text-transform: uppercase;
 		letter-spacing: 0.04em;
 		color: inherit;
-		font-family: $font-second;
+		font-family: $font-second !important;
 	}
 
 	&:hover &__image {
@@ -139,5 +139,38 @@
 	}
 	.service-card__overlay {
 		background: linear-gradient(to left, rgba(0,0,0,.88) 0%, rgba(0,0,0,.35) 50%, transparent 100%);
+	}
+}
+
+.block-services-list[data-text-pos="top-left"] {
+	.service-card__content {
+		justify-content: flex-start;
+		align-items: flex-start;
+		text-align: left;
+	}
+	.service-card__overlay {
+		background: linear-gradient(to bottom, rgba(0,0,0,.82) 0%, rgba(0,0,0,.2) 55%, transparent 100%);
+	}
+}
+
+.block-services-list[data-text-pos="top-center"] {
+	.service-card__content {
+		justify-content: flex-start;
+		align-items: center;
+		text-align: center;
+	}
+	.service-card__overlay {
+		background: linear-gradient(to bottom, rgba(0,0,0,.82) 0%, rgba(0,0,0,.2) 55%, transparent 100%);
+	}
+}
+
+.block-services-list[data-text-pos="top-right"] {
+	.service-card__content {
+		justify-content: flex-start;
+		align-items: flex-end;
+		text-align: right;
+	}
+	.service-card__overlay {
+		background: linear-gradient(to bottom, rgba(0,0,0,.82) 0%, rgba(0,0,0,.2) 55%, transparent 100%);
 	}
 }

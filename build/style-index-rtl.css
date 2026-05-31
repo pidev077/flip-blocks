@@ -3974,7 +3974,7 @@ body.logged-in .team-popup-inner {
   justify-content: flex-end;
   align-items: flex-start;
   text-align: right;
-  padding: 28px 32px;
+  padding: 28px 70px;
   color: var(--card-text-color, #fff);
 }
 @media (max-width: 600px) {
@@ -3999,7 +3999,7 @@ body.logged-in .team-popup-inner {
   text-transform: uppercase;
   letter-spacing: 0.04em;
   color: inherit;
-  font-family: "be-vietnam-pro", sans-serif;
+  font-family: "be-vietnam-pro", sans-serif !important;
 }
 .service-card:hover .service-card__image {
   transform: scale(1.04);
@@ -4050,6 +4050,33 @@ body.logged-in .team-popup-inner {
 }
 .block-services-list[data-text-pos=center-right] .service-card__overlay {
   background: linear-gradient(to right, rgba(0, 0, 0, 0.88) 0%, rgba(0, 0, 0, 0.35) 50%, transparent 100%);
+}
+
+.block-services-list[data-text-pos=top-left] .service-card__content {
+  justify-content: flex-start;
+  align-items: flex-start;
+  text-align: right;
+}
+.block-services-list[data-text-pos=top-left] .service-card__overlay {
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.82) 0%, rgba(0, 0, 0, 0.2) 55%, transparent 100%);
+}
+
+.block-services-list[data-text-pos=top-center] .service-card__content {
+  justify-content: flex-start;
+  align-items: center;
+  text-align: center;
+}
+.block-services-list[data-text-pos=top-center] .service-card__overlay {
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.82) 0%, rgba(0, 0, 0, 0.2) 55%, transparent 100%);
+}
+
+.block-services-list[data-text-pos=top-right] .service-card__content {
+  justify-content: flex-start;
+  align-items: flex-end;
+  text-align: left;
+}
+.block-services-list[data-text-pos=top-right] .service-card__overlay {
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.82) 0%, rgba(0, 0, 0, 0.2) 55%, transparent 100%);
 }
 /*!***********************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].use[2]!./src/blocks/block-products-list/styles/style.scss ***!

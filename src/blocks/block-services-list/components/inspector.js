@@ -20,11 +20,14 @@ import { CSS } from "@dnd-kit/utilities";
 
 /* ── Text position options ──────────────────────────────────── */
 const POSITIONS = [
+	{ value: "top-left",      label: "↖",  title: "Trên · Trái"  },
+	{ value: "top-center",    label: "↑",  title: "Trên · Giữa"  },
+	{ value: "top-right",     label: "↗",  title: "Trên · Phải"  },
+	{ value: "center-left",   label: "←",  title: "Giữa · Trái"  },
+	{ value: "center-right",  label: "→",  title: "Giữa · Phải"  },
 	{ value: "bottom-left",   label: "↙",  title: "Dưới · Trái"  },
 	{ value: "bottom-center", label: "↓",  title: "Dưới · Giữa"  },
 	{ value: "bottom-right",  label: "↘",  title: "Dưới · Phải"  },
-	{ value: "center-left",   label: "←",  title: "Giữa · Trái"  },
-	{ value: "center-right",  label: "→",  title: "Giữa · Phải"  },
 ];
 
 /* ── Preset text colors ─────────────────────────────────────── */
@@ -212,20 +215,19 @@ const Inspector = ({ attributes, setAttributes }) => {
 
 				{/* Text position */}
 				<BaseControl label={__("Vị trí chữ", "flip-blocks")} __nextHasNoMarginBottom>
-					<div style={{ display: "flex", gap: 4, marginTop: 6 }}>
+					<div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 4, marginTop: 6 }}>
 						{POSITIONS.map(({ value, label, title }) => (
 							<button
 								key={value}
 								title={title}
 								onClick={() => setAttributes({ textPosition: value })}
 								style={{
-									flex: 1,
-									height: 36,
+									height: 34,
 									border: textPosition === value ? "2px solid #007cba" : "1px solid #ccc",
 									borderRadius: 4,
 									background: textPosition === value ? "#e8f0fe" : "#fff",
 									cursor: "pointer",
-									fontSize: 18,
+									fontSize: 16,
 									lineHeight: 1,
 									color: textPosition === value ? "#007cba" : "#555",
 									fontWeight: textPosition === value ? "bold" : "normal",
