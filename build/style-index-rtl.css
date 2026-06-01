@@ -4199,6 +4199,10 @@ body.logged-in .team-popup-inner {
  * Can include things like variables and mixins
  * that are used across the project.
 */
+.about-tamya-block {
+  padding-top: 80px;
+  padding-bottom: 50px;
+}
 .about-tamya-block .at-upper-section {
   position: relative;
   overflow: visible;
@@ -4208,7 +4212,7 @@ body.logged-in .team-popup-inner {
   z-index: 2;
 }
 .about-tamya-block .at-title-wrap {
-  margin-bottom: 50x;
+  margin-bottom: 50px;
 }
 .about-tamya-block .at-title-wrap .at-title-img {
   display: block;

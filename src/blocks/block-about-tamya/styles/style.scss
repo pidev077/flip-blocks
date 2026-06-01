@@ -1,5 +1,6 @@
 .about-tamya-block {
-
+padding-top: 80px;
+padding-bottom: 50px;
 	// ── UPPER SECTION (title + text + watermark) ──────────────────────────
 	.at-upper-section {
 		position: relative;     // stacking context cho watermark
@@ -14,7 +15,7 @@
 
 	// ── TITLE IMAGE ────────────────────────────────────────────────────────
 	.at-title-wrap {
-		margin-bottom: 50x;
+		margin-bottom: 50px;
 
 		.at-title-img {
 			display: block;
