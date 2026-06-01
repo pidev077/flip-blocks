@@ -1,9 +1,7 @@
 import { RichText, useBlockProps } from "@wordpress/block-editor";
 
 export default function Save({ attributes, className }) {
-	const { items, contentTitle, contentText } = attributes;
-
-	if (!items?.length) return null;
+	const { items, titleImageUrl, contentText } = attributes;
 
 	const blockProps = useBlockProps.save({
 		className: ["flip-content-media", className].filter(Boolean).join(" "),
@@ -11,19 +9,19 @@ export default function Save({ attributes, className }) {
 
 	return (
 		<div {...blockProps}>
-			{/* TITLE */}
-			<RichText.Content
-				tagName="h3"
-				className="block-title"
-				value={contentTitle}
-			/>
+			{/* TITLE IMAGE */}
+			{titleImageUrl && (
+				<div className="block-title-wrap">
+					<img src={titleImageUrl} className="block-title-img" alt="" />
+				</div>
+			)}
 
 			<div className="inner-wrap">
 				<div className="left">
 					<div className="thumb-list">
 						<div className="active-indicator"></div>
 
-						{items.map((item, index) => (
+						{items?.map((item, index) => (
 							<div
 								key={index}
 								className={`content-item ${
@@ -48,7 +46,7 @@ export default function Save({ attributes, className }) {
 				</div>
 
 				<div className="right">
-					{items[0]?.mediaUrl && (
+					{items?.[0]?.mediaUrl && (
 						<img src={items[0].mediaUrl} className="main-image" alt="" />
 					)}
 				</div>

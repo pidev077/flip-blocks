@@ -34,3 +34,5 @@ import "./blocks/block-gallery-carousel";
 import "./blocks/block-product-carousel";
 import "./blocks/block-services-list";
 import "./blocks/block-products-list";
+import "./blocks/block-popup-button";
+import "./blocks/block-about-tamya";

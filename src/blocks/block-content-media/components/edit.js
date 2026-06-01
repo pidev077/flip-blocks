@@ -1,9 +1,15 @@
 import { useState, useEffect } from "@wordpress/element";
-import { RichText, useBlockProps } from "@wordpress/block-editor";
+import {
+	RichText,
+	useBlockProps,
+	MediaUpload,
+	MediaUploadCheck,
+} from "@wordpress/block-editor";
+import { Button } from "@wordpress/components";
 import Inspector from "./inspector";
 
 export default function Edit({ attributes, setAttributes, className }) {
-	const { items = [], contentTitle, contentText } = attributes;
+	const { items = [], titleImageUrl, contentText } = attributes;
 	const [active, setActive] = useState(0);
 
 	useEffect(() => {
@@ -21,14 +27,36 @@ export default function Edit({ attributes, setAttributes, className }) {
 			<Inspector items={items} setAttributes={setAttributes} />
 
 			<div {...blockProps}>
-				{/* TITLE TRÊN CÙNG */}
-				<RichText
-					tagName="h3"
-					className="block-title"
-					value={contentTitle}
-					onChange={(v) => setAttributes({ contentTitle: v })}
-					placeholder="Title..."
-				/>
+				{/* TITLE IMAGE */}
+				<div className="block-title-wrap">
+					<MediaUploadCheck>
+						<MediaUpload
+							allowedTypes={["image"]}
+							value={titleImageUrl}
+							onSelect={(media) =>
+								setAttributes({ titleImageUrl: media.url })
+							}
+							render={({ open }) =>
+								titleImageUrl ? (
+									<img
+										src={titleImageUrl}
+										className="block-title-img"
+										onClick={open}
+										alt=""
+									/>
+								) : (
+									<Button
+										variant="secondary"
+										onClick={open}
+										className="block-title-upload-btn"
+									>
+										+ Upload title image
+									</Button>
+								)
+							}
+						/>
+					</MediaUploadCheck>
+				</div>
 
 				<div className="inner-wrap">
 					{/* LEFT */}

@@ -7,24 +7,24 @@ import { __ } from "@wordpress/i18n";
 import Edit from "./components/edit";
 import Save from "./components/save";
 
-registerBlockType("flip-blocks/content-media", {
+registerBlockType("flip-blocks/about-tamya", {
 	apiVersion: 3,
-	title: __("Content Media"),
-	icon: "images-alt2",
+	title: __("About Tamya"),
+	icon: "building",
 	category: "flip-blocks",
 
 	attributes: {
-		items: {
-			type: "array",
-			default: [],
-		},
 		titleImageUrl: {
 			type: "string",
 			default: "",
 		},
-		contentText: {
+		watermarkImageUrl: {
 			type: "string",
-			default: "Nội dung mô tả ở đây...",
+			default: "",
+		},
+		heroImageUrl: {
+			type: "string",
+			default: "",
 		},
 	},
 

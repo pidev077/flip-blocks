@@ -1,0 +1,45 @@
+// ── Editor styles for Popup Button Block ────────────────────────────────────
+
+.wp-block[data-type="flip-blocks/popup-button"] {
+	.popup-btn-block {
+		display: flex;
+		flex-direction: column;
+		gap: 14px;
+	}
+
+	.popup-trigger-btn {
+		cursor: text;
+		user-select: text;
+	}
+
+	.popup-btn-block__img-picker {
+		margin-top: 4px;
+	}
+
+	.popup-btn-block__upload-btn {
+		width: 100%;
+		justify-content: center;
+		padding: 20px !important;
+		border: 2px dashed #ccc !important;
+		background: #fafafa !important;
+	}
+
+	.popup-btn-block__preview {
+		position: relative;
+		display: inline-block;
+
+		img {
+			display: block;
+			max-width: 100%;
+			max-height: 300px;
+			border-radius: 4px;
+			border: 1px solid #ddd;
+		}
+	}
+
+	.popup-btn-block__preview-actions {
+		display: flex;
+		gap: 10px;
+		margin-top: 8px;
+	}
+}

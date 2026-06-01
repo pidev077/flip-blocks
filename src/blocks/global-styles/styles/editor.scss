@@ -7,11 +7,19 @@ Editor style
 }
 
 .has-svn-ogg-font-family {
-	font-family: $font-primary;
+	font-family: $font-primary !important;
+
+	h1, h2, h3, h4, h5, h6, p, li {
+		font-family: $font-primary !important;
+	}
 }
 
 .has-be-vietnam-pro-font-family {
-	font-family: $font-second;
+	font-family: $font-second !important;
+
+	h1, h2, h3, h4, h5, h6, p, li {
+		font-family: $font-second !important;
+	}
 }
 
 .editor-styles-wrapper {

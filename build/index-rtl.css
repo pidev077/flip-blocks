@@ -15,11 +15,17 @@ Editor style
 }
 
 .has-svn-ogg-font-family {
-  font-family: "SVN-Ogg", sans-serif;
+  font-family: "SVN-Ogg", sans-serif !important;
+}
+.has-svn-ogg-font-family h1, .has-svn-ogg-font-family h2, .has-svn-ogg-font-family h3, .has-svn-ogg-font-family h4, .has-svn-ogg-font-family h5, .has-svn-ogg-font-family h6, .has-svn-ogg-font-family p, .has-svn-ogg-font-family li {
+  font-family: "SVN-Ogg", sans-serif !important;
 }
 
 .has-be-vietnam-pro-font-family {
-  font-family: "be-vietnam-pro", sans-serif;
+  font-family: "be-vietnam-pro", sans-serif !important;
+}
+.has-be-vietnam-pro-font-family h1, .has-be-vietnam-pro-font-family h2, .has-be-vietnam-pro-font-family h3, .has-be-vietnam-pro-font-family h4, .has-be-vietnam-pro-font-family h5, .has-be-vietnam-pro-font-family h6, .has-be-vietnam-pro-font-family p, .has-be-vietnam-pro-font-family li {
+  font-family: "be-vietnam-pro", sans-serif !important;
 }
 
 .editor-styles-wrapper .editor-visual-editor__post-title-wrapper h1 {
@@ -692,15 +698,61 @@ html :where(.wp-block) {
  * Can include things like variables and mixins
  * that are used across the project.
 */
-.flip-content-media h3.block-title,
 .flip-content-media p.left-text {
   margin-top: 0;
+}
+.flip-content-media .block-title-wrap img.block-title-img {
+  cursor: pointer;
+}
+.flip-content-media .block-title-wrap .block-title-upload-btn {
+  margin-right: 15%;
 }
 .flip-content-media .block-editor-rich-text__editable {
   padding: 0;
 }
-.flip-content-media .right {
+.flip-content-media .inner-wrap {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: stretch !important;
+  gap: 47px !important;
   min-height: 200px;
+}
+.flip-content-media .left {
+  width: 41% !important;
+  display: flex !important;
+  flex-direction: row !important;
+  border-right: 2px solid rgba(159, 184, 119, 0.6) !important;
+}
+.flip-content-media .left .thumb-list {
+  width: 33% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 15px !important;
+}
+.flip-content-media .left .thumb-list img {
+  width: 100%;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  border-radius: 15px;
+}
+.flip-content-media .left p.left-text {
+  width: 67% !important;
+}
+.flip-content-media .left .active-indicator {
+  display: block !important;
+}
+.flip-content-media .right {
+  width: 59% !important;
+  position: relative !important;
+  overflow: hidden !important;
+  border-radius: 20px !important;
+}
+.flip-content-media .right img {
+  position: absolute !important;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .block-editor-block-inspector .item-icon-content-media {
@@ -1029,4 +1081,83 @@ html :where(.wp-block) {
   margin: 0;
   font-style: italic;
   line-height: 1.4;
+}
+/*!***********************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].use[2]!./src/blocks/block-popup-button/styles/editor.scss ***!
+  \***********************************************************************************************************************************************************************/
+/**
+ * #.# Common SCSS
+ *
+ * Can include things like variables and mixins
+ * that are used across the project.
+*/
+.wp-block[data-type="flip-blocks/popup-button"] .popup-btn-block {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.wp-block[data-type="flip-blocks/popup-button"] .popup-trigger-btn {
+  cursor: text;
+  user-select: text;
+}
+.wp-block[data-type="flip-blocks/popup-button"] .popup-btn-block__img-picker {
+  margin-top: 4px;
+}
+.wp-block[data-type="flip-blocks/popup-button"] .popup-btn-block__upload-btn {
+  width: 100%;
+  justify-content: center;
+  padding: 20px !important;
+  border: 2px dashed #ccc !important;
+  background: #fafafa !important;
+}
+.wp-block[data-type="flip-blocks/popup-button"] .popup-btn-block__preview {
+  position: relative;
+  display: inline-block;
+}
+.wp-block[data-type="flip-blocks/popup-button"] .popup-btn-block__preview img {
+  display: block;
+  max-width: 100%;
+  max-height: 300px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+}
+.wp-block[data-type="flip-blocks/popup-button"] .popup-btn-block__preview-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 8px;
+}
+/*!**********************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].use[2]!./src/blocks/block-about-tamya/styles/editor.scss ***!
+  \**********************************************************************************************************************************************************************/
+/**
+ * #.# Common SCSS
+ *
+ * Can include things like variables and mixins
+ * that are used across the project.
+*/
+.about-tamya-block .at-placeholder {
+  padding: 14px;
+  border: 2px dashed #ccc;
+  border-radius: 4px;
+  text-align: center;
+  color: #999;
+  font-size: 12px;
+  margin-bottom: 8px;
+}
+.about-tamya-block .at-watermark-placeholder {
+  position: absolute;
+  bottom: 10px;
+  right: 50%;
+  transform: translateX(50%);
+  width: 70%;
+  z-index: 1;
+}
+.about-tamya-block .at-hero-placeholder {
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.about-tamya-block .at-watermark-wrap .at-watermark-img {
+  opacity: 0.25 !important;
 }

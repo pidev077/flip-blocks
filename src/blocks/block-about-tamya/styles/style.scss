@@ -1,0 +1,106 @@
+.about-tamya-block {
+
+	// ── UPPER SECTION (title + text + watermark) ──────────────────────────
+	.at-upper-section {
+		position: relative;     // stacking context cho watermark
+		overflow: visible;      // cho watermark tràn xuống hero
+
+		// .container bên trong: z-index cao hơn watermark → text luôn ở trên
+		.container {
+			position: relative;
+			z-index: 2;
+		}
+	}
+
+	// ── TITLE IMAGE ────────────────────────────────────────────────────────
+	.at-title-wrap {
+		margin-bottom: 50x;
+
+		.at-title-img {
+			display: block;
+			max-width: 100%;
+			height: auto;
+		}
+	}
+
+	// ── INNERBLOCKS (2 cột text) ───────────────────────────────────────────
+	.at-innerblocks-wrap {
+		.wp-block-columns {
+			gap: 40px;
+
+			@include media-breakpoint-down(md) {
+				flex-direction: column;
+				gap: 20px;
+			}
+
+			// Override inline style flex-basis từ WordPress core/column
+			.at-col-left.wp-block-column {
+				flex-basis: 65% !important;
+			}
+			.at-col-right.wp-block-column {
+				flex-basis: 35% !important;
+			}
+		}
+
+		.at-left-heading {
+			font-size: 14px;
+			font-weight: 400;
+			line-height: 1.6;
+			letter-spacing: 0.02em;
+			margin: 0 0 12px;
+		}
+
+		.at-left-subtext {
+			font-size: 22px;
+			font-weight: 700;
+			line-height: 1.35;
+			margin: 0;
+		}
+
+		.at-right-text {
+			font-size: 14px;
+			font-weight: 400;
+			line-height: 1.7;
+			margin: 0;
+		}
+	}
+
+	// ── WATERMARK ─────────────────────────────────────────────────────────
+	// Nằm trong .at-upper-section (absolute),
+	// z-index 1 = trên hero (z-index 0), dưới text (z-index 2)
+	// bottom âm → phần dưới tràn đè lên hero image
+	.at-watermark-wrap {
+		position: absolute;
+		bottom: -70px;          // đoạn này đè lên hero image
+		left: 50%;
+		transform: translateX(-50%);
+		z-index: 1;
+		pointer-events: none;
+
+		@include media-breakpoint-down(md) {
+			bottom: -50px;
+		}
+
+		.at-watermark-img {
+			display: block;
+			width: 100%;
+			height: auto;
+		}
+	}
+
+	// ── HERO IMAGE ────────────────────────────────────────────────────────
+	// z-index 0 → dưới watermark (z-index 1)
+	.at-hero-wrap {
+		position: relative;
+		z-index: 0;
+		width: 100%;
+		overflow: hidden;
+
+		.at-hero-img {
+			display: block;
+			width: 100%;
+			height: auto;
+			object-fit: cover;
+		}
+	}
+}

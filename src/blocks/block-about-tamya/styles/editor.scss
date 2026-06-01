@@ -1,0 +1,32 @@
+.about-tamya-block {
+	.at-placeholder {
+		padding: 14px;
+		border: 2px dashed #ccc;
+		border-radius: 4px;
+		text-align: center;
+		color: #999;
+		font-size: 12px;
+		margin-bottom: 8px;
+	}
+
+	.at-watermark-placeholder {
+		position: absolute;
+		bottom: 10px;
+		left: 50%;
+		transform: translateX(-50%);
+		width: 70%;
+		z-index: 1;
+	}
+
+	.at-hero-placeholder {
+		height: 200px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	// Editor: tăng opacity watermark một chút để thấy rõ
+	.at-watermark-wrap .at-watermark-img {
+		opacity: 0.25 !important;
+	}
+}
