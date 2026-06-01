@@ -9,7 +9,9 @@
 	padding: 5px 20px;
     border-radius: 15px;
 	transition: opacity 0.2s;
-
+	@include media-breakpoint-down(md) {
+		font-size: 16px;
+	}
 	&:hover { opacity: 0.85; }
 }
 

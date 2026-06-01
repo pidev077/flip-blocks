@@ -152,9 +152,9 @@ function productCarousel() {
 				? { delay: data.autoplayDelay || 3000, disableOnInteraction: false }
 				: false,
 			breakpoints: {
-				0:    { slidesPerView: 1.2, spaceBetween: 16 },
-				640:  { slidesPerView: 2,   spaceBetween: 20 },
-				1024: { slidesPerView: slidesPerView, spaceBetween: data.spaceBetween || 30 },
+				0:    { slidesPerView: 1, spaceBetween: 0, centeredSlides: true },
+				640:  { slidesPerView: 2, spaceBetween: 20, centeredSlides: false },
+				1024: { slidesPerView: slidesPerView, spaceBetween: data.spaceBetween || 30, centeredSlides: false },
 			},
 		});
 	});

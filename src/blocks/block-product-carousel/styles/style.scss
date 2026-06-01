@@ -16,7 +16,7 @@ $pc-info-h: 90px;
 	}
 
 	.block-product-carousel__title {
-		font-size: clamp(70px, 12vw, 186px);
+		font-size: clamp(50px, 11vw, 186px);
 		font-weight: 700;
 		line-height: 1;
 		margin: 0;
@@ -190,6 +190,18 @@ $pc-info-h: 90px;
 		-webkit-line-clamp: 2;
 		-webkit-box-orient: vertical;
 		overflow: hidden;
+	}
+}
+
+@media (max-width: 639px) {
+	.block-product-carousel {
+		.swiper-pagination {
+			display: none !important;
+		}
+
+		.block-product-carousel__img-wrap {
+			width: 100%;
+		}
 	}
 }
 

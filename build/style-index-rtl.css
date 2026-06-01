@@ -3748,7 +3748,7 @@ body.logged-in .team-popup-inner {
   overflow: hidden;
 }
 .block-product-carousel .block-product-carousel__title {
-  font-size: clamp(70px, 12vw, 186px);
+  font-size: clamp(50px, 11vw, 186px);
   font-weight: 700;
   line-height: 1;
   margin: 0;
@@ -3897,6 +3897,14 @@ body.logged-in .team-popup-inner {
   overflow: hidden;
 }
 
+@media (max-width: 639px) {
+  .block-product-carousel .swiper-pagination {
+    display: none !important;
+  }
+  .block-product-carousel .block-product-carousel__img-wrap {
+    width: 100%;
+  }
+}
 @keyframes productCarouselSlideDownFade {
   0% {
     opacity: 1;
@@ -4118,6 +4126,11 @@ body.logged-in .team-popup-inner {
   padding: 5px 20px;
   border-radius: 15px;
   transition: opacity 0.2s;
+}
+@media (max-width: 767.98px) {
+  .popup-trigger-btn {
+    font-size: 16px;
+  }
 }
 .popup-trigger-btn:hover {
   opacity: 0.85;
