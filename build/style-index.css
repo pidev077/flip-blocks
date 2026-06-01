@@ -4129,7 +4129,7 @@ body.logged-in .team-popup-inner {
 }
 @media (max-width: 767.98px) {
   .popup-trigger-btn {
-    font-size: 16px;
+    font-size: 16px !important;
   }
 }
 .popup-trigger-btn:hover {
