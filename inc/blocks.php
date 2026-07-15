@@ -160,6 +160,32 @@ if (!function_exists('flip_init_register_block')) {
 		));
 
 
+		register_block_type('flip-blocks/block-team-experts', array(
+			'render_callback' => 'flip_team_experts_render',
+			'attributes' => array(
+				'postsPerCategory' => array(
+					'type' => 'number',
+					'default' => 8,
+				),
+				'viewAllLink' => array(
+					'type' => 'string',
+					'default' => '',
+				),
+				'viewAllText' => array(
+					'type' => 'string',
+					'default' => 'Xem tất cả',
+				),
+				'className' => array(
+					'type' => 'string',
+				),
+				'anchor' => array(
+					'type' => 'string',
+					'default' => '',
+				)
+			),
+		));
+
+
 		register_block_type('flip-blocks/client-block', array(
 			'render_callback' => 'flip_client_block',
 			'attributes' => array(

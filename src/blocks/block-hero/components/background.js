@@ -1,5 +1,4 @@
-const Background = (props) => {
-	const { attributes } = props;
+const Background = ({ slide = {} }) => {
 	const {
 		imgUrl,
 		imgAlt,
@@ -8,7 +7,7 @@ const Background = (props) => {
 		focalPoint,
 		videoFormat,
 		posterUrl,
-	} = attributes;
+	} = slide;
 
 	const objectPosition = focalPoint
 		? `${focalPoint.x * 100}% ${focalPoint.y * 100}%`
@@ -16,7 +15,7 @@ const Background = (props) => {
 
 	return (
 		<div className="hero-block__bg">
-			{typeHero == "image" && imgUrl?.length > 0 && (
+			{typeHero === "image" && imgUrl?.length > 0 && (
 				<img
 					src={imgUrl}
 					alt={imgAlt}

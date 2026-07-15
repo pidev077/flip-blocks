@@ -4,6 +4,7 @@ import Counters from "./blocks/counter";
 import CarouselSlider from "./blocks/carousel-slider";
 import Insight from "./blocks/insights";
 import Team from "./blocks/team";
+import TeamExperts from "./blocks/team-experts";
 import Sectors from "./blocks/sectors";
 import ContentMedia from "./blocks/content-media";
 import ServicesPopup from "./blocks/services-popup";
@@ -16,6 +17,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 	CarouselSlider.init();
 	Insight.init();
 	Team.init();
+	TeamExperts.init();
 	Sectors.init();
 	ContentMedia.init();
 	ServicesPopup.init();

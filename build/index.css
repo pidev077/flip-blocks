@@ -15,10 +15,10 @@ Editor style
 }
 
 .has-svn-ogg-font-family {
-  font-family: "SVN-Ogg", sans-serif !important;
+  font-family: "Playfair Display", serif !important;
 }
 .has-svn-ogg-font-family h1, .has-svn-ogg-font-family h2, .has-svn-ogg-font-family h3, .has-svn-ogg-font-family h4, .has-svn-ogg-font-family h5, .has-svn-ogg-font-family h6, .has-svn-ogg-font-family p, .has-svn-ogg-font-family li {
-  font-family: "SVN-Ogg", sans-serif !important;
+  font-family: "Playfair Display", serif !important;
 }
 
 .has-be-vietnam-pro-font-family {
@@ -30,7 +30,7 @@ Editor style
 
 .editor-styles-wrapper .editor-visual-editor__post-title-wrapper h1 {
   font-size: 56px;
-  font-family: "SVN-Ogg", sans-serif;
+  font-family: "Playfair Display", serif;
   font-weight: 400;
   line-height: 100%;
   color: #120a00;
@@ -684,7 +684,6 @@ html :where(.wp-block) {
 .is-root-container .hero-block-content h1 {
   margin-left: 0;
   margin-right: 0;
-  letter-spacing: -2.03px;
 }
 .is-root-container .hero-block .container {
   margin: 0 auto;
@@ -864,7 +863,7 @@ html :where(.wp-block) {
   font-size: 20px !important;
   font-weight: 700;
   color: #efffb3 !important;
-  font-family: "SVN-Ogg", sans-serif !important;
+  font-family: "Playfair Display", serif !important;
 }
 /*!*******************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].use[2]!./src/blocks/block-insights/styles/editor.scss ***!
@@ -886,6 +885,18 @@ html :where(.wp-block) {
 */
 .is-root-container .block-teams-list .team-item-media {
   display: none;
+}
+/*!***********************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].use[2]!./src/blocks/block-team-experts/styles/editor.scss ***!
+  \***********************************************************************************************************************************************************************/
+/**
+ * #.# Common SCSS
+ *
+ * Can include things like variables and mixins
+ * that are used across the project.
+*/
+.is-root-container .block-team-experts .block-team-experts__swiper {
+  overflow: visible;
 }
 /*!***********************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].use[2]!./src/blocks/block-related-list/styles/editor.scss ***!
@@ -979,6 +990,72 @@ html :where(.wp-block) {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+/*!********************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].use[2]!./src/blocks/block-before-after-carousel/styles/editor.scss ***!
+  \********************************************************************************************************************************************************************************/
+/**
+ * #.# Common SCSS
+ *
+ * Can include things like variables and mixins
+ * that are used across the project.
+*/
+.block-before-after-carousel .block-before-after-carousel__empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px;
+  background: #f8f8f8;
+  border: 2px dashed #ccc;
+  border-radius: 4px;
+  text-align: center;
+}
+.block-before-after-carousel .block-before-after-carousel__empty .dashicons {
+  font-size: 36px;
+  width: 36px;
+  height: 36px;
+  color: #aaa;
+  margin-bottom: 12px;
+}
+.block-before-after-carousel .block-before-after-carousel__empty p {
+  color: #777;
+  margin: 0;
+}
+
+.media-upload-field {
+  margin-bottom: 16px;
+}
+.media-upload-field .media-upload-placeholder {
+  border: 2px dashed #ccc;
+  border-radius: 4px;
+  padding: 16px;
+  text-align: center;
+  cursor: pointer;
+}
+.media-upload-field .media-upload-placeholder .dashicons {
+  font-size: 24px;
+  width: 24px;
+  height: 24px;
+  color: #999;
+}
+.media-upload-field .media-upload-placeholder .media-upload-text {
+  display: block;
+  font-size: 12px;
+  color: #666;
+  margin-top: 4px;
+}
+.media-upload-field .media-preview-image {
+  width: 100%;
+  max-height: 120px;
+  object-fit: cover;
+  border-radius: 4px;
+  display: block;
+}
+.media-upload-field .media-preview-actions {
+  display: flex;
+  gap: 6px;
+  margin-top: 6px;
 }
 /*!************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].use[2]!./src/blocks/block-services-list/styles/editor.scss ***!

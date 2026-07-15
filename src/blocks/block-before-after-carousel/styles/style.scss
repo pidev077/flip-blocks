@@ -1,0 +1,171 @@
+/* ── Before / After Carousel Block ──────────────────────────── */
+
+$baac-radius: 20px;
+$baac-inner-gap: 4px;
+
+.block-before-after-carousel {
+	// ── Layout: prev arrow | swiper | next arrow ──────────────────
+	.block-before-after-carousel__wrap {
+		display: flex;
+		align-items: center;
+		gap: 20px;
+	}
+
+	.block-before-after-carousel__inner {
+		flex: 1;
+		min-width: 0;
+		overflow: hidden;
+	}
+
+	// ── Nav arrows ─────────────────────────────────────────────────
+	.block-before-after-carousel__nav {
+		flex: 0 0 auto;
+		width: 44px;
+		height: 44px;
+		border-radius: 50%;
+		border: 1px solid rgba(0, 0, 0, 0.15);
+		background: #fff;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		cursor: pointer;
+		padding: 0;
+		transition: $transition-base;
+
+		&::before {
+			content: "";
+			width: 9px;
+			height: 9px;
+			border-top: 1.5px solid #1a1a1a;
+			border-right: 1.5px solid #1a1a1a;
+		}
+
+		&--prev::before {
+			transform: rotate(-135deg);
+			margin-left: 3px;
+		}
+
+		&--next::before {
+			transform: rotate(45deg);
+			margin-right: 3px;
+		}
+
+		&:hover {
+			background: #1a1a1a;
+			border-color: #1a1a1a;
+
+			&::before {
+				border-color: #fff;
+			}
+		}
+
+		&.swiper-button-disabled {
+			opacity: 0.35;
+			pointer-events: none;
+		}
+	}
+
+	// ── Slide: a card stacking up to 2 before/after pairs ─────────
+	.block-before-after-carousel__card {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.block-before-after-carousel__pair {
+		display: flex;
+		gap: $baac-inner-gap;
+		background: #fff;
+		padding: $baac-inner-gap;
+		border-radius: $baac-radius;
+		box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+		overflow: hidden;
+	}
+
+	.block-before-after-carousel__tile {
+		position: relative;
+		flex: 1;
+		min-width: 0;
+		aspect-ratio: 6 / 5;
+		overflow: hidden;
+
+		&:first-child {
+			border-top-left-radius: $baac-radius - $baac-inner-gap;
+			border-bottom-left-radius: $baac-radius - $baac-inner-gap;
+		}
+
+		&:last-child {
+			border-top-right-radius: $baac-radius - $baac-inner-gap;
+			border-bottom-right-radius: $baac-radius - $baac-inner-gap;
+		}
+
+		img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			display: block;
+		}
+	}
+
+	// ── Badge ──────────────────────────────────────────────────────
+	.block-before-after-carousel__badge {
+		position: absolute;
+		top: 10px;
+		left: 10px;
+		z-index: 2;
+		padding: 4px 12px;
+		border-radius: 999px;
+		font-size: 11px;
+		font-weight: 700;
+		letter-spacing: 0.04em;
+		text-transform: uppercase;
+		line-height: 1.6;
+		background: rgba(255, 255, 255, 0.92);
+		color: #1a1a1a;
+	}
+
+	.block-before-after-carousel__tile:last-child .block-before-after-carousel__badge {
+		background: #406028;
+		color: #fff;
+	}
+
+	// ── Empty state (editor placeholder shows via .dashicons already) ─
+	.block-before-after-carousel__placeholder {
+		width: 100%;
+		height: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background: #f0f0f0;
+
+		.dashicons {
+			color: #bbb;
+			font-size: 28px;
+			width: 28px;
+			height: 28px;
+		}
+	}
+}
+
+@media (max-width: 639px) {
+	.block-before-after-carousel {
+		.block-before-after-carousel__wrap {
+			gap: 10px;
+		}
+
+		.block-before-after-carousel__nav {
+			width: 34px;
+			height: 34px;
+		}
+
+		.block-before-after-carousel__pair {
+			border-radius: 14px;
+		}
+
+		.block-before-after-carousel__tile {
+			&:first-child,
+			&:last-child {
+				border-radius: 12px;
+			}
+		}
+	}
+}

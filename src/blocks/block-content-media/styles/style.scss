@@ -45,7 +45,7 @@
 		display: flex;
 		gap: 30px;
 		.thumb-list {
-			width: 33%;
+			width: 25%;
 			display: flex;
 			flex-direction: column;
 			gap: 15px;
@@ -56,7 +56,7 @@
 			}
 		}
 		p.left-text {
-			width: 67%;
+			width: 75%;
 			margin-bottom: 0;
 		}
 		.active-indicator {

@@ -1,0 +1,12 @@
+<wpml-config>
+	<gutenberg-blocks>
+		<gutenberg-block type="flip-blocks/hero">
+			<xpath field-type="Hero - Slide Label" editor_type="line">slides[*].label</xpath>
+			<xpath field-type="Hero - Slide Title" editor_type="line">slides[*].title</xpath>
+			<xpath field-type="Hero - Slide Description" editor_type="area">slides[*].description</xpath>
+			<xpath field-type="Hero - Slide Button Text" editor_type="line">slides[*].buttonText</xpath>
+			<xpath field-type="Hero - Slide Button URL" editor_type="line">slides[*].buttonLink.url</xpath>
+			<xpath field-type="Hero - Slide Image Alt" editor_type="line">slides[*].imgAlt</xpath>
+		</gutenberg-block>
+	</gutenberg-blocks>
+</wpml-config>

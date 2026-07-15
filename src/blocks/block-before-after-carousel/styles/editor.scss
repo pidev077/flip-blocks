@@ -1,0 +1,67 @@
+.block-before-after-carousel {
+	.block-before-after-carousel__empty {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		padding: 48px 24px;
+		background: #f8f8f8;
+		border: 2px dashed #ccc;
+		border-radius: 4px;
+		text-align: center;
+
+		.dashicons {
+			font-size: 36px;
+			width: 36px;
+			height: 36px;
+			color: #aaa;
+			margin-bottom: 12px;
+		}
+
+		p {
+			color: #777;
+			margin: 0;
+		}
+	}
+}
+
+// media-upload-field styles reused across carousel-style inspectors
+.media-upload-field {
+	margin-bottom: 16px;
+
+	.media-upload-placeholder {
+		border: 2px dashed #ccc;
+		border-radius: 4px;
+		padding: 16px;
+		text-align: center;
+		cursor: pointer;
+
+		.dashicons {
+			font-size: 24px;
+			width: 24px;
+			height: 24px;
+			color: #999;
+		}
+
+		.media-upload-text {
+			display: block;
+			font-size: 12px;
+			color: #666;
+			margin-top: 4px;
+		}
+	}
+
+	.media-preview-image {
+		width: 100%;
+		max-height: 120px;
+		object-fit: cover;
+		border-radius: 4px;
+		display: block;
+	}
+
+	.media-preview-actions {
+		display: flex;
+		gap: 6px;
+		margin-top: 6px;
+	}
+}

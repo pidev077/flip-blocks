@@ -9,9 +9,9 @@ function flip_teams_list_render($atts)
         'className' => '',
     ], $atts);
 
-    // Get first location term
+    // Get first category term
     $first_location = get_terms([
-        'taxonomy' => 'team-location',
+        'taxonomy' => 'team-category',
         'hide_empty' => true,
         'number' => 1,
     ]);
@@ -29,7 +29,7 @@ function flip_teams_list_render($atts)
     if (!empty($first_location) && !is_wp_error($first_location)) {
         $query['tax_query'] = [
             [
-                'taxonomy' => 'team-location',
+                'taxonomy' => 'team-category',
                 'field' => 'slug',
                 'terms' => $first_location[0]->slug,
             ]
@@ -53,7 +53,7 @@ function flip_teams_list_render($atts)
                 <?php
                 // Get taxonomy filter
                 $locations = get_terms([
-                    'taxonomy' => 'team-location',
+                    'taxonomy' => 'team-category',
                     'hide_empty' => true,
                 ]);
                 ?>

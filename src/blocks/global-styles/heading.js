@@ -47,7 +47,7 @@ const withAdvancedControls = createHigherOrderComponent(
 								value={fontFamily}
 								options={[
 									{ label: "--Select--", value: "" },
-									{ label: "SVN-Ogg", value: "svn-ogg" },
+									{ label: "Playfair Display", value: "svn-ogg" },
 									{ label: "be-vietnam-pro", value: "be-vietnam-pro" },
 								]}
 								onChange={(vl) => setAttributes({ fontFamily: vl })}

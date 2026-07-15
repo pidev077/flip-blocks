@@ -128,7 +128,7 @@ function ajax_filter_teams()
     if (!empty($cat_slug)) {
         $query['tax_query'] = [
             [
-                'taxonomy' => 'team-location',
+                'taxonomy' => 'team-category',
                 'field' => 'term_id',
                 'terms' => intval($cat_slug),
             ]
