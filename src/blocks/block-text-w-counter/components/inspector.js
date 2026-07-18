@@ -102,7 +102,14 @@ const SortableCountersItem = ({ heading, id, onEdit, onRemove }) => {
 };
 
 const Inspector = ({ attributes, setAttributes }) => {
-	const { counters = [], bgColor, countersColor } = attributes;
+	const {
+		counters = [],
+		bgColor,
+		countersColor,
+		labelColor,
+		numberFontSize,
+		labelFontSize,
+	} = attributes;
 
 	const [newTestimonial, setNewTestimonial] = useState({
 		heading: "",
@@ -233,11 +240,36 @@ const Inspector = ({ attributes, setAttributes }) => {
 						},
 						{
 							colorValue: countersColor,
-							label: __("Counters Color"),
+							label: __("Number Color"),
 							onColorChange: (newValue) =>
 								setAttributes({ countersColor: newValue }),
 						},
+						{
+							colorValue: labelColor,
+							label: __("Label Color"),
+							onColorChange: (newValue) =>
+								setAttributes({ labelColor: newValue }),
+						},
 					]}
+				/>
+			</PanelBody>
+
+			<PanelBody title="Typography" initialOpen={false}>
+				<TextControl
+					type="number"
+					label={__("Number Font Size (px)")}
+					value={numberFontSize}
+					onChange={(value) =>
+						setAttributes({ numberFontSize: Number(value) || 0 })
+					}
+				/>
+				<TextControl
+					type="number"
+					label={__("Label Font Size (px)")}
+					value={labelFontSize}
+					onChange={(value) =>
+						setAttributes({ labelFontSize: Number(value) || 0 })
+					}
 				/>
 			</PanelBody>
 		</InspectorControls>

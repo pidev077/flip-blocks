@@ -24,7 +24,11 @@ export default function Edit({ attributes, setAttributes, className }) {
 
 	return (
 		<>
-			<Inspector items={items} setAttributes={setAttributes} />
+			<Inspector
+				items={items}
+				titleImageUrl={titleImageUrl}
+				setAttributes={setAttributes}
+			/>
 
 			<div {...blockProps}>
 				{/* TITLE IMAGE */}

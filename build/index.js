@@ -5288,6 +5288,98 @@ function findFirstFocusableNode(element) {
 
 /***/ },
 
+/***/ "./shared/team-experts-carousel.js"
+/*!*****************************************!*\
+  !*** ./shared/team-experts-carousel.js ***!
+  \*****************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
+/* harmony export */   initTeamExpertsBlock: () => (/* binding */ initTeamExpertsBlock)
+/* harmony export */ });
+/* harmony import */ var swiper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! swiper */ "./node_modules/swiper/swiper.mjs");
+/* harmony import */ var swiper_modules__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! swiper/modules */ "./node_modules/swiper/modules/index.mjs");
+
+
+
+/**
+ * Wires up the category tabs + Swiper carousel for a single
+ * ".block-team-experts" root element. Shared between the frontend
+ * bundle (assets/js/blocks/team-experts.js) and the block editor
+ * preview (src/blocks/block-team-experts/components/edit.js) so the
+ * two stay in sync.
+ */
+function initTeamExpertsBlock(block) {
+  // Guard against re-running on the same DOM node: Swiper's own loop mode
+  // clones slides into the wrapper, which can retrigger a MutationObserver
+  // (used to catch the block editor's ServerSideRender preview mounting).
+  // Without this, re-init would double-bind tab click handlers and try to
+  // re-create an already-initialized Swiper instance.
+  if (block.dataset.teamExpertsInit === "true") return;
+  block.dataset.teamExpertsInit = "true";
+  var tabs = block.querySelectorAll(".block-team-experts__tab");
+  var panels = block.querySelectorAll(".block-team-experts__panel");
+  function initPanelSwiper(panel) {
+    var swiperEl = panel.querySelector(".block-team-experts__swiper");
+    if (!swiperEl || swiperEl.swiper) return;
+    var nextEl = panel.querySelector(".block-team-experts__next");
+    var slidesCount = swiperEl.querySelectorAll(".swiper-slide").length;
+    new swiper__WEBPACK_IMPORTED_MODULE_0__["default"](swiperEl, {
+      modules: [swiper_modules__WEBPACK_IMPORTED_MODULE_1__.Navigation],
+      slidesPerView: 1.15,
+      spaceBetween: 20,
+      loop: slidesCount > 2,
+      navigation: nextEl ? {
+        nextEl: nextEl
+      } : false,
+      breakpoints: {
+        576: {
+          slidesPerView: 2,
+          spaceBetween: 20
+        }
+      }
+    });
+  }
+  function showPanel(panel) {
+    var _panel$querySelector;
+    panels.forEach(function (p) {
+      return p.classList.remove("is-active");
+    });
+    panel.classList.add("is-active");
+    initPanelSwiper(panel);
+    (_panel$querySelector = panel.querySelector(".block-team-experts__swiper")) === null || _panel$querySelector === void 0 || (_panel$querySelector = _panel$querySelector.swiper) === null || _panel$querySelector === void 0 || _panel$querySelector.update();
+  }
+  var activePanel = block.querySelector(".block-team-experts__panel.is-active");
+  if (activePanel) initPanelSwiper(activePanel);
+  tabs.forEach(function (tab) {
+    tab.addEventListener("click", function () {
+      var targetPanel = block.querySelector("#".concat(tab.dataset.target));
+      if (!targetPanel) return;
+      tabs.forEach(function (t) {
+        t.classList.remove("is-active");
+        t.setAttribute("aria-selected", "false");
+      });
+      tab.classList.add("is-active");
+      tab.setAttribute("aria-selected", "true");
+      showPanel(targetPanel);
+    });
+  });
+}
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  init: function init() {
+    var blocks = document.querySelectorAll(".block-team-experts");
+    if (!blocks.length) return;
+    blocks.forEach(function (block) {
+      return initTeamExpertsBlock(block);
+    });
+  }
+});
+
+/***/ },
+
 /***/ "./src/blocks/block-about-tamya/components/edit.js"
 /*!*********************************************************!*\
   !*** ./src/blocks/block-about-tamya/components/edit.js ***!
@@ -9851,6 +9943,7 @@ function Edit(_ref) {
   });
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_inspector__WEBPACK_IMPORTED_MODULE_3__["default"], {
     items: items,
+    titleImageUrl: titleImageUrl,
     setAttributes: setAttributes
   }), /*#__PURE__*/React.createElement("div", blockProps, /*#__PURE__*/React.createElement("div", {
     className: "block-title-wrap"
@@ -9952,6 +10045,7 @@ function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 
 function Inspector(_ref) {
   var items = _ref.items,
+    titleImageUrl = _ref.titleImageUrl,
     setAttributes = _ref.setAttributes;
   var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
     _useState2 = _slicedToArray(_useState, 2),
@@ -9992,6 +10086,41 @@ function Inspector(_ref) {
     });
   };
   return /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+    title: "Title Image",
+    initialOpen: true
+  }, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.MediaUploadCheck, null, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.MediaUpload, {
+    allowedTypes: ["image"],
+    value: titleImageUrl,
+    onSelect: function onSelect(media) {
+      return setAttributes({
+        titleImageUrl: media.url
+      });
+    },
+    render: function render(_ref2) {
+      var open = _ref2.open;
+      return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+        variant: "secondary",
+        onClick: open
+      }, titleImageUrl ? "Change image" : "Select image");
+    }
+  })), titleImageUrl && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("img", {
+    src: titleImageUrl,
+    style: {
+      width: "100%",
+      marginTop: 10
+    }
+  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+    variant: "link",
+    isDestructive: true,
+    onClick: function onClick() {
+      return setAttributes({
+        titleImageUrl: ""
+      });
+    },
+    style: {
+      marginTop: 8
+    }
+  }, "Remove image"))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
     title: "Content items",
     initialOpen: true
   }, items.map(function (item, index) {
@@ -10018,8 +10147,8 @@ function Inspector(_ref) {
           mediaUrl: media.url
         }));
       },
-      render: function render(_ref2) {
-        var open = _ref2.open;
+      render: function render(_ref3) {
+        var open = _ref3.open;
         return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
           variant: "secondary",
           onClick: open
@@ -14979,17 +15108,44 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _inspector__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./inspector */ "./src/blocks/block-team-experts/components/inspector.js");
+/* harmony import */ var _shared_team_experts_carousel__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../shared/team-experts-carousel */ "./shared/team-experts-carousel.js");
+
 
 
 var _wp = wp,
   ServerSideRender = _wp.serverSideRender;
 var Edit = function Edit(props) {
   var attributes = props.attributes;
-  return /*#__PURE__*/React.createElement(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/React.createElement(_inspector__WEBPACK_IMPORTED_MODULE_1__["default"], props), /*#__PURE__*/React.createElement(ServerSideRender, {
+  var previewRef = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useRef)();
+
+  // ServerSideRender only paints markup; it doesn't run the frontend JS
+  // that powers the category tabs + Swiper carousel. Re-run that same
+  // logic here whenever the preview HTML (re)mounts so the editor
+  // preview behaves like the live site.
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    var container = previewRef.current;
+    if (!container) return;
+    var runInit = function runInit() {
+      var block = container.querySelector('.block-team-experts');
+      if (block) (0,_shared_team_experts_carousel__WEBPACK_IMPORTED_MODULE_2__.initTeamExpertsBlock)(block);
+    };
+    runInit();
+    var observer = new MutationObserver(runInit);
+    observer.observe(container, {
+      childList: true,
+      subtree: true
+    });
+    return function () {
+      return observer.disconnect();
+    };
+  }, []);
+  return /*#__PURE__*/React.createElement(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/React.createElement(_inspector__WEBPACK_IMPORTED_MODULE_1__["default"], props), /*#__PURE__*/React.createElement("div", {
+    ref: previewRef
+  }, /*#__PURE__*/React.createElement(ServerSideRender, {
     className: "block-server-render",
     block: "flip-blocks/block-team-experts",
     attributes: attributes
-  }));
+  })));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Edit);
 
@@ -16189,23 +16345,25 @@ __webpack_require__.r(__webpack_exports__);
 var Counters = function Counters(props) {
   var attributes = props.attributes;
   var counters = attributes.counters,
-    countersColor = attributes.countersColor;
+    countersColor = attributes.countersColor,
+    labelColor = attributes.labelColor,
+    numberFontSize = attributes.numberFontSize,
+    labelFontSize = attributes.labelFontSize;
+  var wrapperStyle = {};
+  if (countersColor) wrapperStyle["--counter-number-color"] = countersColor;
+  if (labelColor) wrapperStyle["--counter-label-color"] = labelColor;
+  if (numberFontSize) wrapperStyle["--counter-number-font-size"] = "".concat(numberFontSize, "px");
+  if (labelFontSize) wrapperStyle["--counter-label-font-size"] = "".concat(labelFontSize, "px");
   return /*#__PURE__*/React.createElement("div", {
-    className: "block-text-w-counters__counters"
+    className: "block-text-w-counters__counters",
+    style: wrapperStyle
   }, counters.map(function (counter, index) {
     return /*#__PURE__*/React.createElement("div", {
       className: "counter-item",
       key: index
     }, /*#__PURE__*/React.createElement("h3", {
-      style: {
-        color: countersColor
-      },
       className: "counter-number"
-    }, counter.number), /*#__PURE__*/React.createElement("p", {
-      style: {
-        color: countersColor
-      }
-    }, counter.heading));
+    }, counter.number), /*#__PURE__*/React.createElement("p", null, counter.heading));
   }));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Counters);
@@ -16411,7 +16569,10 @@ var Inspector = function Inspector(_ref3) {
   var _attributes$counters = attributes.counters,
     counters = _attributes$counters === void 0 ? [] : _attributes$counters,
     bgColor = attributes.bgColor,
-    countersColor = attributes.countersColor;
+    countersColor = attributes.countersColor,
+    labelColor = attributes.labelColor,
+    numberFontSize = attributes.numberFontSize,
+    labelFontSize = attributes.labelFontSize;
   var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)({
       heading: "",
       number: ""
@@ -16546,13 +16707,42 @@ var Inspector = function Inspector(_ref3) {
       }
     }, {
       colorValue: countersColor,
-      label: __("Counters Color"),
+      label: __("Number Color"),
       onColorChange: function onColorChange(newValue) {
         return setAttributes({
           countersColor: newValue
         });
       }
+    }, {
+      colorValue: labelColor,
+      label: __("Label Color"),
+      onColorChange: function onColorChange(newValue) {
+        return setAttributes({
+          labelColor: newValue
+        });
+      }
     }]
+  })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+    title: "Typography",
+    initialOpen: false
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
+    type: "number",
+    label: __("Number Font Size (px)"),
+    value: numberFontSize,
+    onChange: function onChange(value) {
+      return setAttributes({
+        numberFontSize: Number(value) || 0
+      });
+    }
+  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
+    type: "number",
+    label: __("Label Font Size (px)"),
+    value: labelFontSize,
+    onChange: function onChange(value) {
+      return setAttributes({
+        labelFontSize: Number(value) || 0
+      });
+    }
   })));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Inspector);
@@ -16635,6 +16825,18 @@ var attr = {
   countersColor: {
     type: "string",
     "default": "#120A00"
+  },
+  labelColor: {
+    type: "string",
+    "default": ""
+  },
+  numberFontSize: {
+    type: "number",
+    "default": 66
+  },
+  labelFontSize: {
+    type: "number",
+    "default": 20
   },
   bgColor: {
     type: "string",
@@ -35472,6 +35674,36 @@ const SwiperSlide = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.forwardRe
   })));
 });
 SwiperSlide.displayName = 'SwiperSlide';
+
+
+
+
+/***/ },
+
+/***/ "./node_modules/swiper/swiper.mjs"
+/*!****************************************!*\
+  !*** ./node_modules/swiper/swiper.mjs ***!
+  \****************************************/
+(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Swiper: () => (/* reexport safe */ _shared_swiper_core_mjs__WEBPACK_IMPORTED_MODULE_0__.S),
+/* harmony export */   "default": () => (/* reexport safe */ _shared_swiper_core_mjs__WEBPACK_IMPORTED_MODULE_0__.S)
+/* harmony export */ });
+/* harmony import */ var _shared_swiper_core_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./shared/swiper-core.mjs */ "./node_modules/swiper/shared/swiper-core.mjs");
+/**
+ * Swiper 11.2.10
+ * Most modern mobile touch slider and framework with hardware accelerated transitions
+ * https://swiperjs.com
+ *
+ * Copyright 2014-2025 Vladimir Kharlampidi
+ *
+ * Released under the MIT License
+ *
+ * Released on: June 28, 2025
+ */
 
 
 

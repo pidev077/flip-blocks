@@ -28,6 +28,18 @@ const attr = {
 		type: "string",
 		default: "#120A00",
 	},
+	labelColor: {
+		type: "string",
+		default: "",
+	},
+	numberFontSize: {
+		type: "number",
+		default: 66,
+	},
+	labelFontSize: {
+		type: "number",
+		default: 20,
+	},
 	bgColor: {
 		type: "string",
 		default: "#97ECFF",

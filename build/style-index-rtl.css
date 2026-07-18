@@ -2374,29 +2374,31 @@ figure.wp-block-video video {
 }
 .block-text-w-counters__counters .counter-item h3 {
   margin: 0;
-  font-size: 66px;
+  font-size: min(var(--counter-number-font-size, 66px), 66px);
   line-height: 100%;
   font-family: "be-vietnam-pro", sans-serif;
   font-weight: 700;
   margin-bottom: 15px;
+  color: var(--counter-number-color, #120a00);
 }
 @media (max-width: 1023.98px) {
   .block-text-w-counters__counters .counter-item h3 {
-    font-size: 50px;
+    font-size: min(var(--counter-number-font-size, 66px), 50px);
   }
 }
 @media (max-width: 767.98px) {
   .block-text-w-counters__counters .counter-item h3 {
-    font-size: 40px;
+    font-size: min(var(--counter-number-font-size, 66px), 40px);
   }
 }
 .block-text-w-counters__counters .counter-item p {
-  font-size: 20px;
+  font-size: min(var(--counter-label-font-size, 20px), 20px);
   margin-bottom: 0;
+  color: var(--counter-label-color, #120a00);
 }
 @media (max-width: 575.98px) {
   .block-text-w-counters__counters .counter-item p {
-    font-size: 16px;
+    font-size: min(var(--counter-label-font-size, 20px), 16px);
   }
 }
 /*!**********************************************************************************************************************************************************************!*\
@@ -3870,10 +3872,10 @@ body.logged-in .team-popup-inner {
   padding: 15px 0;
 }
 .team-expert-card__name {
-  font-size: 20px;
+  font-size: 20px !important;
   font-family: "be-vietnam-pro";
-  color: #406028;
-  font-weight: 600;
+  color: #406028 !important;
+  font-weight: 600 !important;
   margin: 0 0 12px 0;
 }
 @media (max-width: 1023.98px) {
@@ -3882,9 +3884,9 @@ body.logged-in .team-popup-inner {
   }
 }
 .team-expert-card__position {
-  color: #789850;
+  color: #789850 !important;
   margin: 0 0 8px 0;
-  font-size: 18px;
+  font-size: 18px !important;
   font-family: "be-vietnam-pro";
 }
 @media (max-width: 1023.98px) {

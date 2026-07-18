@@ -38,25 +38,27 @@
 
             h3{
                 margin: 0;
-                font-size: 66px;
+                font-size: min(var(--counter-number-font-size, 66px), 66px);
                 line-height: 100%;
                 font-family: $font-second;
                 font-weight: 700;
                 margin-bottom: 15px;
+                color: var(--counter-number-color, $color-brown);
                 @include media-breakpoint-down(lg){
-                    font-size: 50px;
+                    font-size: min(var(--counter-number-font-size, 66px), 50px);
                 }
 
                 @include media-breakpoint-down(md){
-                    font-size: 40px;
+                    font-size: min(var(--counter-number-font-size, 66px), 40px);
                 }
             }
 
             p{
-                font-size: 20px;
+                font-size: min(var(--counter-label-font-size, 20px), 20px);
                 margin-bottom: 0;
+                color: var(--counter-label-color, $color-brown);
                 @include media-breakpoint-down(sm){
-                    font-size: 16px;
+                    font-size: min(var(--counter-label-font-size, 20px), 16px);
                 }
             }
             

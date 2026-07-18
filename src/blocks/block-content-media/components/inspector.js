@@ -7,7 +7,7 @@ import {
 
 import { PanelBody, Button } from "@wordpress/components";
 
-export default function Inspector({ items, setAttributes }) {
+export default function Inspector({ items, titleImageUrl, setAttributes }) {
 	const [dragIndex, setDragIndex] = useState(null);
 
 	const updateItem = (index, value) => {
@@ -45,6 +45,40 @@ export default function Inspector({ items, setAttributes }) {
 
 	return (
 		<InspectorControls>
+			<PanelBody title="Title Image" initialOpen={true}>
+				<MediaUploadCheck>
+					<MediaUpload
+						allowedTypes={["image"]}
+						value={titleImageUrl}
+						onSelect={(media) =>
+							setAttributes({ titleImageUrl: media.url })
+						}
+						render={({ open }) => (
+							<Button variant="secondary" onClick={open}>
+								{titleImageUrl ? "Change image" : "Select image"}
+							</Button>
+						)}
+					/>
+				</MediaUploadCheck>
+
+				{titleImageUrl && (
+					<>
+						<img
+							src={titleImageUrl}
+							style={{ width: "100%", marginTop: 10 }}
+						/>
+						<Button
+							variant="link"
+							isDestructive
+							onClick={() => setAttributes({ titleImageUrl: "" })}
+							style={{ marginTop: 8 }}
+						>
+							Remove image
+						</Button>
+					</>
+				)}
+			</PanelBody>
+
 			<PanelBody title="Content items" initialOpen={true}>
 				{items.map((item, index) => (
 					<div

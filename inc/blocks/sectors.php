@@ -20,13 +20,20 @@
         "orderby" => $atts["orderBy"],
     ];
     $the_query = new WP_Query($query);
+    $first_img_url = "";
+    if (!empty($the_query->posts)) {
+        $first_img_url = get_the_post_thumbnail_url(
+            $the_query->posts[0]->ID,
+            "full"
+        );
+    }
     ob_start();
     ?>
 <div <?php if ($atts["anchor"]) {
     echo 'id="' . $atts["anchor"] . '"';
 } ?> class="block-sectors-list">
    <div class="sector-floating-media">
-      <img src="" alt="">
+      <img src="<?= esc_url($first_img_url); ?>" alt="">
    </div>
    <?php if (
        $the_query->have_posts()
