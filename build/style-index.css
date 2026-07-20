@@ -4115,7 +4115,7 @@ body.logged-in .team-popup-inner {
   color: #D5E3C3;
   white-space: nowrap;
   font-family: "be-vietnam-pro", sans-serif;
-  line-height: 100%;
+  line-height: 1.3;
   letter-spacing: -5%;
   padding-bottom: 50px;
 }
