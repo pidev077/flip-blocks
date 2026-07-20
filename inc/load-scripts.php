@@ -32,7 +32,7 @@ function flip_frontend_assets()
 		'flip-block-style',
 		plugins_url('build/style-index.css', dirname(__FILE__)),
 		array(),
-		'1.0.1',
+		filemtime(plugin_dir_path(__DIR__) . 'build/style-index.css'),
 	);
 }
 add_action('enqueue_block_assets', 'flip_frontend_assets');
@@ -45,7 +45,7 @@ function flip_editor_assets()
 		'flip-block-script',
 		plugins_url('/build/index.js', dirname(__FILE__)),
 		array('wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor', 'wp-edit-post'),
-		'1.0.1',
+		filemtime(plugin_dir_path(__DIR__) . 'build/index.js'),
 		true
 	);
 
@@ -53,7 +53,7 @@ function flip_editor_assets()
 		'flip-style-editor',
 		plugins_url('build/index.css', dirname(__FILE__)),
 		array('wp-edit-blocks'),
-		'1.0.1',
+		filemtime(plugin_dir_path(__DIR__) . 'build/index.css'),
 	);
 
 	// Localize

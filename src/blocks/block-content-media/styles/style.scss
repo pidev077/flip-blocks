@@ -63,9 +63,17 @@
 				object-fit: cover;
 			}
 		}
-		p.left-text {
+		.left-text-wrap {
 			width: 75%;
-			margin-bottom: 0;
+			display: flex;
+			flex-direction: column;
+			gap: 16px;
+		}
+		p.left-text {
+			margin: 0;
+		}
+		.left-text-1 {
+			font-weight: 700;
 		}
 		.active-indicator {
 			position: absolute;
@@ -112,22 +120,27 @@
 				margin-bottom: 0;
 			}
 		}
-
-		.media-mobi {
-			display: none;
-		}
 	}
 
 	@include media-breakpoint-down(lg) {
 		gap: 40px;
 
-		// Flatten .left so left-text, .right (big photo) and thumb-list
-		// can be reordered together as siblings inside .inner-wrap
+		// Flatten .left (and .left-text-wrap inside it) so left-text-1,
+		// .right (big photo), left-text-2 and thumb-list can be reordered
+		// together as siblings inside .inner-wrap
 		.left {
 			display: contents;
+
+			// Nested under .left to match the specificity of the base
+			// ".left .left-text-wrap" rule (display:flex) — a flatter
+			// selector here would lose that specificity fight and this
+			// override would silently never apply.
+			.left-text-wrap {
+				display: contents;
+			}
 		}
 
-		.left-text {
+		.left-text-1 {
 			order: 1;
 			width: 100% !important;
 		}
@@ -138,8 +151,13 @@
 			height: 300px;
 		}
 
-		.thumb-list {
+		.left-text-2 {
 			order: 3;
+			width: 100% !important;
+		}
+
+		.thumb-list {
+			order: 4;
 			display: flex !important;
 			flex-direction: row !important;
 			width: 100% !important;

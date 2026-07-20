@@ -22,7 +22,11 @@ registerBlockType("flip-blocks/content-media", {
 			type: "string",
 			default: "",
 		},
-		contentText: {
+		contentText1: {
+			type: "string",
+			default: "Nội dung in đậm ở đây...",
+		},
+		contentText2: {
 			type: "string",
 			default: "Nội dung mô tả ở đây...",
 		},

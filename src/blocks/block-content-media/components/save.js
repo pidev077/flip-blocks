@@ -1,7 +1,7 @@
-import { RichText, useBlockProps } from "@wordpress/block-editor";
+import { useBlockProps } from "@wordpress/block-editor";
 
 export default function Save({ attributes, className }) {
-	const { items, titleImageUrl, contentText } = attributes;
+	const { items, titleImageUrl, contentText1, contentText2 } = attributes;
 
 	const blockProps = useBlockProps.save({
 		className: ["flip-content-media", className].filter(Boolean).join(" "),
@@ -38,11 +38,10 @@ export default function Save({ attributes, className }) {
 						))}
 					</div>
 
-					<RichText.Content
-						tagName="p"
-						className="left-text"
-						value={contentText}
-					/>
+					<div className="left-text-wrap">
+						<p className="left-text left-text-1">{contentText1}</p>
+						<p className="left-text left-text-2">{contentText2}</p>
+					</div>
 				</div>
 
 				<div className="right">

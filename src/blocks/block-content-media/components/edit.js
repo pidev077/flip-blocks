@@ -1,6 +1,5 @@
 import { useState, useEffect } from "@wordpress/element";
 import {
-	RichText,
 	useBlockProps,
 	MediaUpload,
 	MediaUploadCheck,
@@ -9,7 +8,8 @@ import { Button } from "@wordpress/components";
 import Inspector from "./inspector";
 
 export default function Edit({ attributes, setAttributes, className }) {
-	const { items = [], titleImageUrl, contentText } = attributes;
+	const { items = [], titleImageUrl, contentText1, contentText2 } =
+		attributes;
 	const [active, setActive] = useState(0);
 
 	useEffect(() => {
@@ -27,6 +27,8 @@ export default function Edit({ attributes, setAttributes, className }) {
 			<Inspector
 				items={items}
 				titleImageUrl={titleImageUrl}
+				contentText1={contentText1}
+				contentText2={contentText2}
 				setAttributes={setAttributes}
 			/>
 
@@ -87,13 +89,22 @@ export default function Edit({ attributes, setAttributes, className }) {
 								</div>
 							))}
 						</div>
-						<RichText
-							tagName="p"
-							className="left-text"
-							value={contentText}
-							onChange={(v) => setAttributes({ contentText: v })}
-							placeholder="Description..."
-						/>
+						<div className="left-text-wrap">
+							<p className="left-text left-text-1">
+								{contentText1 || (
+									<em className="left-text-placeholder">
+										Nhập đoạn 1 (in đậm) ở sidebar →
+									</em>
+								)}
+							</p>
+							<p className="left-text left-text-2">
+								{contentText2 || (
+									<em className="left-text-placeholder">
+										Nhập đoạn 2 ở sidebar →
+									</em>
+								)}
+							</p>
+						</div>
 					</div>
 
 					{/* RIGHT */}

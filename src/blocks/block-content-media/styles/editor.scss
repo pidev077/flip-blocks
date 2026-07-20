@@ -6,6 +6,11 @@
 		margin-top: 0;
 	}
 
+	.left-text-placeholder {
+		color: #999;
+		font-style: italic;
+	}
+
 	.block-title-wrap {
 		// Forced to match this file's own .left split (41% / 33% thumb-list),
 		// same formula as style.scss but with the editor's ratios: border(2px) + 33%*41% + gap(30px)
@@ -55,8 +60,19 @@
 			}
 		}
 
-		p.left-text {
+		.left-text-wrap {
 			width: 67% !important;
+			display: flex !important;
+			flex-direction: column !important;
+			gap: 16px !important;
+		}
+
+		p.left-text {
+			margin: 0 !important;
+		}
+
+		.left-text-1 {
+			font-weight: 700;
 		}
 
 		.active-indicator {

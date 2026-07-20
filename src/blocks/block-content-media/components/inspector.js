@@ -5,9 +5,15 @@ import {
 	MediaUploadCheck,
 } from "@wordpress/block-editor";
 
-import { PanelBody, Button } from "@wordpress/components";
+import { PanelBody, Button, TextareaControl } from "@wordpress/components";
 
-export default function Inspector({ items, titleImageUrl, setAttributes }) {
+export default function Inspector({
+	items,
+	titleImageUrl,
+	contentText1,
+	contentText2,
+	setAttributes,
+}) {
 	const [dragIndex, setDragIndex] = useState(null);
 
 	const updateItem = (index, value) => {
@@ -77,6 +83,21 @@ export default function Inspector({ items, titleImageUrl, setAttributes }) {
 						</Button>
 					</>
 				)}
+			</PanelBody>
+
+			<PanelBody title="Content Text" initialOpen={true}>
+				<TextareaControl
+					label="Đoạn 1 (in đậm)"
+					value={contentText1}
+					onChange={(v) => setAttributes({ contentText1: v })}
+					rows={4}
+				/>
+				<TextareaControl
+					label="Đoạn 2"
+					value={contentText2}
+					onChange={(v) => setAttributes({ contentText2: v })}
+					rows={6}
+				/>
 			</PanelBody>
 
 			<PanelBody title="Content items" initialOpen={true}>
