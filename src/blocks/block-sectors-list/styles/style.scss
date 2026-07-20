@@ -97,6 +97,7 @@
 				font-weight: 500;
 				line-height: 30px;
 				transition: color 0.35s ease;
+				color: #24341E;
 				@include media-breakpoint-down(lg) {
 					font-size: 20px;
 				}
@@ -121,12 +122,12 @@
 
 		&__number {
 			font-family: $font-second;
-			font-size: 18px;
-			font-weight: 300;
+			font-size: 20px;
+			font-weight: 400;
 			line-height: 100%;
 			min-width: 80px;
 			flex-shrink: 0;
-			color: #a6a6a6;
+			color: #A6A6A6;
 		}
 
 		&-content {

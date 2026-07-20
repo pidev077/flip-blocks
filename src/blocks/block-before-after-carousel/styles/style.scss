@@ -149,12 +149,30 @@ $baac-inner-gap: 4px;
 @media (max-width: 639px) {
 	.block-before-after-carousel {
 		.block-before-after-carousel__wrap {
-			gap: 10px;
+			position: relative;
+			gap: 0;
+		}
+
+		.block-before-after-carousel__inner {
+			flex: 0 0 100%;
+			width: 100%;
 		}
 
 		.block-before-after-carousel__nav {
+			position: absolute;
+			top: 50%;
+			z-index: 3;
 			width: 34px;
 			height: 34px;
+			transform: translateY(-50%);
+
+			&--prev {
+				left: 10px;
+			}
+
+			&--next {
+				right: 10px;
+			}
 		}
 
 		.block-before-after-carousel__pair {

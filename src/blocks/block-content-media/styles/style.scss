@@ -4,8 +4,12 @@
 	gap: 50px;
 	flex-direction: column;
 	.block-title-wrap {
-		margin-left: 15%;
-		@include media-breakpoint-down(md) {
+		// Left edge kept in sync with p.left-text's left edge:
+		// .left border-left (2px) + .thumb-list width (25% of .left's 41%) + gap (30px)
+		margin-left: calc(10.25% + 32px);
+		@include media-breakpoint-down(lg) {
+			// .left's contents reflow into a stacked column here, so left-text
+			// (and this title) start flush left
 			margin-left: 0;
 		}
 		img.block-title-img {
@@ -19,7 +23,9 @@
 		justify-content: space-between;
 		gap: 47px;
 		@include media-breakpoint-down(lg) {
-			flex-direction: column-reverse;
+			// order below (.left-text / .right / .thumb-list) drives the
+			// stacked mobile sequence: text -> big photo -> thumbnail strip
+			flex-direction: column;
 			gap: 20px;
 		}
 	}
@@ -46,10 +52,12 @@
 		gap: 30px;
 		.thumb-list {
 			width: 25%;
+			flex-shrink: 0; // keep width exact so left-text's left edge (and block-title-wrap alignment) stays predictable
 			display: flex;
 			flex-direction: column;
 			gap: 15px;
 			img {
+				width: 100%;
 				aspect-ratio: 1/1;
 				border-radius: 15px;
 				object-fit: cover;
@@ -112,54 +120,45 @@
 
 	@include media-breakpoint-down(lg) {
 		gap: 40px;
+
+		// Flatten .left so left-text, .right (big photo) and thumb-list
+		// can be reordered together as siblings inside .inner-wrap
 		.left {
-			width: 100%;
-			display: flex;
-			border: none;
-			.active-indicator {
-				display: none;
-			}
-			.thumb-list {
-				grid-gap: 15px;
-				grid-template-columns: repeat(3, 1fr);
-				display: grid;
-				width: 50%;
-				.content-item {
-					opacity: 1 !important;
-				}
-			}
-			.left-text {
-				width: 50% !important;
-			}
+			display: contents;
 		}
+
+		.left-text {
+			order: 1;
+			width: 100% !important;
+		}
+
 		.right {
+			order: 2;
 			width: 100%;
 			height: 300px;
 		}
-	}
-	@include media-breakpoint-down(md) {
-		gap: 20px;
-		.left {
-			width: 100%;
-			display: flex;
-			border: none;
-			flex-direction: column;
-			.active-indicator {
-				display: none;
-			}
-			.thumb-list {
-				grid-gap: 15px;
-				grid-template-columns: repeat(3, 1fr);
-				display: grid;
-				width: 100%;
-				.content-item {
-					opacity: 1 !important;
-				}
-			}
-			.left-text {
-				width: 100% !important;
+
+		.thumb-list {
+			order: 3;
+			display: flex !important;
+			flex-direction: row !important;
+			width: 100% !important;
+			gap: 15px;
+
+			.content-item {
+				flex: 1;
+				padding: 0;
+				opacity: 1 !important;
 			}
 		}
+
+		.active-indicator {
+			display: none;
+		}
+	}
+
+	@include media-breakpoint-down(md) {
+		gap: 20px;
 		.right {
 			height: 250px;
 		}

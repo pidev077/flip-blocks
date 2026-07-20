@@ -700,11 +700,14 @@ html :where(.wp-block) {
 .flip-content-media p.left-text {
   margin-top: 0;
 }
+.flip-content-media .block-title-wrap {
+  margin-right: calc(13.53% + 32px) !important;
+}
 .flip-content-media .block-title-wrap img.block-title-img {
   cursor: pointer;
 }
 .flip-content-media .block-title-wrap .block-title-upload-btn {
-  margin-right: 15%;
+  margin-right: 0;
 }
 .flip-content-media .block-editor-rich-text__editable {
   padding: 0;
@@ -724,6 +727,7 @@ html :where(.wp-block) {
 }
 .flip-content-media .left .thumb-list {
   width: 33% !important;
+  flex-shrink: 0 !important;
   display: flex !important;
   flex-direction: column !important;
   gap: 15px !important;

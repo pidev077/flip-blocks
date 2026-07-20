@@ -7,11 +7,14 @@
 	}
 
 	.block-title-wrap {
+		// Forced to match this file's own .left split (41% / 33% thumb-list),
+		// same formula as style.scss but with the editor's ratios: border(2px) + 33%*41% + gap(30px)
+		margin-left: calc(13.53% + 32px) !important;
 		img.block-title-img {
 			cursor: pointer;
 		}
 		.block-title-upload-btn {
-			margin-left: 15%;
+			margin-left: 0;
 		}
 	}
 
@@ -39,6 +42,7 @@
 
 		.thumb-list {
 			width: 33% !important;
+			flex-shrink: 0 !important;
 			display: flex !important;
 			flex-direction: column !important;
 			gap: 15px !important;

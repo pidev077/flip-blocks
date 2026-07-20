@@ -18,7 +18,6 @@ function flip_team_experts_render($atts)
     $anchor_html = !empty($bl_attr['anchor']) ? 'id="' . esc_attr($bl_attr['anchor']) . '"' : '';
     ?>
     <div <?= $anchor_html ?> class="block-team-experts <?= esc_attr($bl_attr['className']); ?>">
-        <div class="container">
 
         <?php if (!empty($categories) && !is_wp_error($categories)): ?>
 
@@ -107,8 +106,6 @@ function flip_team_experts_render($atts)
             <a class="block-team-experts__view-all" href="<?= esc_url($bl_attr['viewAllLink'] ?: '#'); ?>">
                 <?= esc_html($bl_attr['viewAllText']); ?>
             </a>
-        </div>
-
         </div>
     </div>
     <?php
