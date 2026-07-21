@@ -167,6 +167,26 @@ html :where(.wp-block) {
 .block-editor-link-control .block-editor-link-control__field {
   margin: 0 0 8px 0;
 }
+
+.flip-image-hidden-preview {
+  position: relative;
+  opacity: 0.5;
+  outline: 1px dashed #007cba;
+  outline-offset: 2px;
+}
+.flip-image-hidden-preview::after {
+  content: "Hidden on: " attr(data-flip-hidden-devices);
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1;
+  background: #007cba;
+  color: #fff;
+  font-size: 11px;
+  line-height: 1;
+  padding: 4px 6px;
+  pointer-events: none;
+}
 /*!******************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].use[2]!./src/blocks/global-styles/button/editor.scss ***!
   \******************************************************************************************************************************************************************/

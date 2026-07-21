@@ -17293,6 +17293,149 @@ var withEditorClass = (0,_wordpress_compose__WEBPACK_IMPORTED_MODULE_4__.createH
 
 /***/ },
 
+/***/ "./src/blocks/global-styles/image-visibility.js"
+/*!******************************************************!*\
+  !*** ./src/blocks/global-styles/image-visibility.js ***!
+  \******************************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_hooks__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/hooks */ "@wordpress/hooks");
+/* harmony import */ var _wordpress_hooks__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _wordpress_compose__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/compose */ "@wordpress/compose");
+/* harmony import */ var _wordpress_compose__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_compose__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_5__);
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+
+
+
+
+
+
+var VISIBILITY_ATTRIBUTES = {
+  hideOnDesktop: {
+    type: 'boolean',
+    "default": false
+  },
+  hideOnTablet: {
+    type: 'boolean',
+    "default": false
+  },
+  hideOnMobile: {
+    type: 'boolean',
+    "default": false
+  }
+};
+var addImageVisibilityAttributes = function addImageVisibilityAttributes(settings) {
+  if (settings.name !== 'core/image') {
+    return settings;
+  }
+  return _objectSpread(_objectSpread({}, settings), {}, {
+    attributes: _objectSpread(_objectSpread({}, settings.attributes), VISIBILITY_ATTRIBUTES)
+  });
+};
+(0,_wordpress_hooks__WEBPACK_IMPORTED_MODULE_1__.addFilter)('blocks.registerBlockType', 'flip-blocks/add-image-visibility-attributes', addImageVisibilityAttributes);
+var withImageVisibilityControls = (0,_wordpress_compose__WEBPACK_IMPORTED_MODULE_4__.createHigherOrderComponent)(function (BlockEdit) {
+  return function (props) {
+    if (props.name !== 'core/image') {
+      return /*#__PURE__*/React.createElement(BlockEdit, props);
+    }
+    var attributes = props.attributes,
+      setAttributes = props.setAttributes;
+    var hideOnDesktop = attributes.hideOnDesktop,
+      hideOnTablet = attributes.hideOnTablet,
+      hideOnMobile = attributes.hideOnMobile;
+    return /*#__PURE__*/React.createElement(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.Fragment, null, /*#__PURE__*/React.createElement(BlockEdit, props), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_5__.InspectorControls, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
+      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Responsive Visibility', 'flip-blocks'),
+      initialOpen: false
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToggleControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Hide on Desktop', 'flip-blocks'),
+      checked: !!hideOnDesktop,
+      onChange: function onChange(value) {
+        return setAttributes({
+          hideOnDesktop: value
+        });
+      },
+      __nextHasNoMarginBottom: true
+    }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToggleControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Hide on Tablet', 'flip-blocks'),
+      checked: !!hideOnTablet,
+      onChange: function onChange(value) {
+        return setAttributes({
+          hideOnTablet: value
+        });
+      },
+      __nextHasNoMarginBottom: true
+    }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToggleControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Hide on Mobile', 'flip-blocks'),
+      checked: !!hideOnMobile,
+      onChange: function onChange(value) {
+        return setAttributes({
+          hideOnMobile: value
+        });
+      },
+      __nextHasNoMarginBottom: true
+    }))));
+  };
+}, 'withImageVisibilityControls');
+(0,_wordpress_hooks__WEBPACK_IMPORTED_MODULE_1__.addFilter)('editor.BlockEdit', 'flip-blocks/add-image-visibility-controls', withImageVisibilityControls);
+
+// Visually flag hidden-on-X images in the editor without touching the block's own markup.
+var withImageVisibilityIndicator = (0,_wordpress_compose__WEBPACK_IMPORTED_MODULE_4__.createHigherOrderComponent)(function (BlockListBlock) {
+  return function (props) {
+    var _props$wrapperProps;
+    if (props.name !== 'core/image') {
+      return /*#__PURE__*/React.createElement(BlockListBlock, props);
+    }
+    var _props$attributes = props.attributes,
+      hideOnDesktop = _props$attributes.hideOnDesktop,
+      hideOnTablet = _props$attributes.hideOnTablet,
+      hideOnMobile = _props$attributes.hideOnMobile;
+    var hiddenDevices = [hideOnDesktop && (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Desktop', 'flip-blocks'), hideOnTablet && (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Tablet', 'flip-blocks'), hideOnMobile && (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Mobile', 'flip-blocks')].filter(Boolean);
+    if (!hiddenDevices.length) {
+      return /*#__PURE__*/React.createElement(BlockListBlock, props);
+    }
+    return /*#__PURE__*/React.createElement(BlockListBlock, _extends({}, props, {
+      wrapperProps: _objectSpread(_objectSpread({}, props.wrapperProps), {}, {
+        className: "".concat(((_props$wrapperProps = props.wrapperProps) === null || _props$wrapperProps === void 0 ? void 0 : _props$wrapperProps.className) || '', " flip-image-hidden-preview").trim(),
+        'data-flip-hidden-devices': hiddenDevices.join(', ')
+      })
+    }));
+  };
+}, 'withImageVisibilityIndicator');
+(0,_wordpress_hooks__WEBPACK_IMPORTED_MODULE_1__.addFilter)('editor.BlockListBlock', 'flip-blocks/add-image-visibility-indicator', withImageVisibilityIndicator);
+var applyImageVisibilityClass = function applyImageVisibilityClass(extraProps, blockType, attributes) {
+  if (blockType.name !== 'core/image') {
+    return extraProps;
+  }
+  var hideOnDesktop = attributes.hideOnDesktop,
+    hideOnTablet = attributes.hideOnTablet,
+    hideOnMobile = attributes.hideOnMobile;
+  var classes = [hideOnDesktop && 'flip-hide-desktop', hideOnTablet && 'flip-hide-tablet', hideOnMobile && 'flip-hide-mobile'].filter(Boolean);
+  if (!classes.length) {
+    return extraProps;
+  }
+  extraProps.className = "".concat(extraProps.className || '', " ").concat(classes.join(' ')).trim();
+  return extraProps;
+};
+(0,_wordpress_hooks__WEBPACK_IMPORTED_MODULE_1__.addFilter)('blocks.getSaveContent.extraProps', 'flip-blocks/apply-image-visibility-class', applyImageVisibilityClass);
+
+/***/ },
+
 /***/ "./src/blocks/global-styles/index.js"
 /*!*******************************************!*\
   !*** ./src/blocks/global-styles/index.js ***!
@@ -17309,11 +17452,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _spacer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./spacer */ "./src/blocks/global-styles/spacer.js");
 /* harmony import */ var _media_text__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./media-text */ "./src/blocks/global-styles/media-text.js");
 /* harmony import */ var _heading__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./heading */ "./src/blocks/global-styles/heading.js");
+/* harmony import */ var _image_visibility__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./image-visibility */ "./src/blocks/global-styles/image-visibility.js");
 /**
  * Import global styles.
  */
 
 //add style global
+
 
 
 

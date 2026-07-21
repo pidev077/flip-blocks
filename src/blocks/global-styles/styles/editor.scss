@@ -181,3 +181,24 @@ html :where(.wp-block) {
 		margin: 0 0 8px 0;
 	}
 }
+
+.flip-image-hidden-preview {
+	position: relative;
+	opacity: 0.5;
+	outline: 1px dashed #007cba;
+	outline-offset: 2px;
+
+	&::after {
+		content: "Hidden on: " attr(data-flip-hidden-devices);
+		position: absolute;
+		top: 0;
+		left: 0;
+		z-index: 1;
+		background: #007cba;
+		color: #fff;
+		font-size: 11px;
+		line-height: 1;
+		padding: 4px 6px;
+		pointer-events: none;
+	}
+}

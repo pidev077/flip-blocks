@@ -173,3 +173,20 @@ figure.wp-block-video {
 		max-width: 220px;
 	}
 }
+
+// Responsive visibility for core/image (matches breakpoints used by responsive-settings)
+@media only screen and (max-width: 767.98px) {
+	.flip-hide-mobile {
+		display: none !important;
+	}
+}
+@media only screen and (min-width: 768px) and (max-width: 1199.98px) {
+	.flip-hide-tablet {
+		display: none !important;
+	}
+}
+@media only screen and (min-width: 1200px) {
+	.flip-hide-desktop {
+		display: none !important;
+	}
+}

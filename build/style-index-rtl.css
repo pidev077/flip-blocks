@@ -1030,6 +1030,21 @@ figure.wp-block-video video {
     max-width: 220px;
   }
 }
+@media only screen and (max-width: 767.98px) {
+  .flip-hide-mobile {
+    display: none !important;
+  }
+}
+@media only screen and (min-width: 768px) and (max-width: 1199.98px) {
+  .flip-hide-tablet {
+    display: none !important;
+  }
+}
+@media only screen and (min-width: 1200px) {
+  .flip-hide-desktop {
+    display: none !important;
+  }
+}
 /*!*****************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].use[2]!./src/blocks/global-styles/button/style.scss ***!
   \*****************************************************************************************************************************************************************/
@@ -2267,13 +2282,18 @@ figure.wp-block-video video {
   font-family: "Playfair Display", serif;
   font-size: 20px;
   font-style: normal;
-  font-weight: 500;
+  font-weight: 400;
   line-height: 130%;
   letter-spacing: -0.4px;
   color: #ffe071;
   margin-top: 0;
   margin-bottom: 0;
   color: #24341E;
+}
+@media (max-width: 767.98px) {
+  .flip-content-media .left .content-item p {
+    font-size: 15px;
+  }
 }
 @media (max-width: 1023.98px) {
   .flip-content-media {

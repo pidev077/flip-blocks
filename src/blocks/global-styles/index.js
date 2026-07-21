@@ -10,6 +10,7 @@ import "./focal-point";
 import "./spacer";
 import "./media-text";
 import "./heading";
+import "./image-visibility";
 
 wp.domReady(function () {
 	//unregister block
