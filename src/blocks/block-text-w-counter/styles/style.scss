@@ -33,6 +33,7 @@
                 padding: 24px 0;
                 text-align: center;
                 flex-direction: column;
+                border-bottom: 1px solid #5B7A41;
             }
 
 
@@ -62,7 +63,9 @@
                 }
             }
             
-
+            &:last-child{
+                border-bottom: none;
+            }
         }
     }
 }

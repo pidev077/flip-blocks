@@ -74,6 +74,8 @@
 		}
 		.left-text-1 {
 			font-weight: 700;
+			font-size: 24px;
+			color: #24341E;
 		}
 		.active-indicator {
 			position: absolute;
@@ -118,6 +120,7 @@
 				color: $color-primary;
 				margin-top: 0;
 				margin-bottom: 0;
+				color: #24341E;
 			}
 		}
 	}
