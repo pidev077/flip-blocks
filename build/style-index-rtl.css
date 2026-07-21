@@ -2243,6 +2243,11 @@ figure.wp-block-video video {
   flex-direction: column;
   gap: 16px;
 }
+@media (max-width: 767.98px) {
+  .flip-content-media .left .left-text-wrap {
+    font-size: 15px;
+  }
+}
 .flip-content-media .left p.left-text {
   margin: 0;
 }
