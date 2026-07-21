@@ -52,6 +52,10 @@ registerBlockType("flip-blocks/flip-columns", {
 			type: "boolean",
 			default: true,
 		},
+		mobileColumns: {
+			type: "number",
+			default: 1,
+		},
 		reverseOnMB: {
 			type: "boolean",
 			default: false,

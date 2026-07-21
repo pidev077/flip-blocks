@@ -77,6 +77,9 @@ const Save = ( props ) => {
 		'flip-layout-column-wrap',
 		'flip-block-layout-column-gap',
 		attributes.responsiveToggle ? 'flip-is-responsive-column' : null,
+		attributes.responsiveToggle && 2 === attributes.mobileColumns
+			? 'flip-mobile-columns-2'
+			: null,
 		attributes.reverseOnMB ? 'reverse-column-mb' : null,
 	] );
 

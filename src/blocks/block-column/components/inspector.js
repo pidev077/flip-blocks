@@ -36,6 +36,7 @@ const Inspector = ( { attributes, setAttributes } ) => {
 		rowGap,
 		columnMaxWidth,
 		responsiveToggle,
+		mobileColumns,
 		reverseOnMB,
 		marginUnit,
 		marginSync,
@@ -207,6 +208,44 @@ const Inspector = ( { attributes, setAttributes } ) => {
 								} )
 							}
 						/>
+
+						{ responsiveToggle && 1 < columns && (
+							<Fragment>
+								<hr />
+								<SelectControl
+									label={ __(
+										'Columns on Mobile',
+										'flip-blocks'
+									) }
+									help={ __(
+										'Choose how many columns to show per row on mobile devices.',
+										'flip-blocks'
+									) }
+									options={ [
+										{
+											value: 1,
+											label: __(
+												'1 Column',
+												'flip-blocks'
+											),
+										},
+										{
+											value: 2,
+											label: __(
+												'2 Columns',
+												'flip-blocks'
+											),
+										},
+									] }
+									value={ mobileColumns }
+									onChange={ ( value ) =>
+										setAttributes( {
+											mobileColumns: parseInt( value ),
+										} )
+									}
+								/>
+							</Fragment>
+						) }
 
 						<hr />
 						<ToggleControl

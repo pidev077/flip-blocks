@@ -283,6 +283,14 @@
 				"col1"
 				"col2";
 		}
+
+		&.flip-mobile-columns-2 {
+			@include media-breakpoint-down(md) {
+				-ms-grid-columns: 1fr 1fr;
+				grid-template-columns: 1fr 1fr;
+				grid-template-areas: "col1 col2";
+			}
+		}
 	}
 }
 
@@ -351,6 +359,16 @@
 				"col1"
 				"col2"
 				"col3";
+		}
+
+		&.flip-mobile-columns-2 {
+			@include media-breakpoint-down(lg) {
+				-ms-grid-columns: 1fr 1fr;
+				grid-template-columns: 1fr 1fr;
+				grid-template-areas:
+					"col1 col2"
+					"col3 col3";
+			}
 		}
 	}
 }
@@ -429,6 +447,16 @@
 				"col3"
 				"col4";
 		}
+
+		&.flip-mobile-columns-2 {
+			@include media-breakpoint-down(md) {
+				-ms-grid-columns: 1fr 1fr;
+				grid-template-columns: 1fr 1fr;
+				grid-template-areas:
+					"col1 col2"
+					"col3 col4";
+			}
+		}
 	}
 }
 
@@ -460,6 +488,17 @@
 				"col4"
 				"col5";
 		}
+
+		&.flip-mobile-columns-2 {
+			@media only screen and (max-width: 1024px) {
+				-ms-grid-columns: 1fr 1fr;
+				grid-template-columns: 1fr 1fr;
+				grid-template-areas:
+					"col1 col2"
+					"col3 col4"
+					"col5 col5";
+			}
+		}
 	}
 }
 
@@ -488,6 +527,17 @@
 				"col4"
 				"col5"
 				"col6";
+		}
+
+		&.flip-mobile-columns-2 {
+			@include media-breakpoint-down(lg) {
+				-ms-grid-columns: 1fr 1fr;
+				grid-template-columns: 1fr 1fr;
+				grid-template-areas:
+					"col1 col2"
+					"col3 col4"
+					"col5 col6";
+			}
 		}
 	}
 }

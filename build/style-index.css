@@ -1487,6 +1487,13 @@ figure.wp-block-video video {
     grid-template-areas: "col1" "col2";
   }
 }
+@media (max-width: 767.98px) {
+  .flip-layout-columns-2 > .flip-layout-column-wrap.flip-is-responsive-column.flip-mobile-columns-2 {
+    -ms-grid-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: "col1 col2";
+  }
+}
 
 .flip-2-col-wideleft > .flip-layout-column-wrap {
   -ms-grid-columns: 1fr 45%;
@@ -1549,6 +1556,13 @@ figure.wp-block-video video {
     -ms-grid-columns: 1fr;
     grid-template-columns: 1fr;
     grid-template-areas: "col1" "col2" "col3";
+  }
+}
+@media (max-width: 1023.98px) {
+  .flip-layout-columns-3 > .flip-layout-column-wrap.flip-is-responsive-column.flip-mobile-columns-2 {
+    -ms-grid-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: "col1 col2" "col3 col3";
   }
 }
 
@@ -1617,6 +1631,13 @@ figure.wp-block-video video {
     grid-template-areas: "col1" "col2" "col3" "col4";
   }
 }
+@media (max-width: 767.98px) {
+  .flip-layout-columns-4 > .flip-layout-column-wrap.flip-is-responsive-column.flip-mobile-columns-2 {
+    -ms-grid-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: "col1 col2" "col3 col4";
+  }
+}
 
 .flip-4-col-wideleft > .flip-layout-column-wrap {
   -ms-grid-columns: 2fr 1fr 1fr 1fr;
@@ -1641,6 +1662,13 @@ figure.wp-block-video video {
     grid-template-areas: "col1" "col2" "col3" "col4" "col5";
   }
 }
+@media only screen and (max-width: 1024px) {
+  .flip-layout-columns-5 > .flip-layout-column-wrap.flip-is-responsive-column.flip-mobile-columns-2 {
+    -ms-grid-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: "col1 col2" "col3 col4" "col5 col5";
+  }
+}
 
 .flip-layout-columns-6 > .flip-layout-column-wrap {
   -ms-grid-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
@@ -1659,6 +1687,13 @@ figure.wp-block-video video {
     -ms-grid-columns: 1fr;
     grid-template-columns: 1fr;
     grid-template-areas: "col1" "col2" "col3" "col4" "col5" "col6";
+  }
+}
+@media (max-width: 1023.98px) {
+  .flip-layout-columns-6 > .flip-layout-column-wrap.flip-is-responsive-column.flip-mobile-columns-2 {
+    -ms-grid-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: "col1 col2" "col3 col4" "col5 col6";
   }
 }
 
@@ -3713,6 +3748,11 @@ body.logged-in .team-popup-inner {
     margin-bottom: 24px;
   }
 }
+@media (max-width: 575.98px) {
+  .block-team-experts__tabs {
+    gap: 8px;
+  }
+}
 .block-team-experts__tab {
   font-family: "be-vietnam-pro", sans-serif;
   font-size: 16px;
@@ -3732,6 +3772,12 @@ body.logged-in .team-popup-inner {
   background: #47622b;
   border-color: #47622b;
   color: #fff;
+}
+@media (max-width: 575.98px) {
+  .block-team-experts__tab {
+    font-size: 13px;
+    padding: 10px 14px;
+  }
 }
 .block-team-experts__panel {
   display: none;
@@ -3787,6 +3833,11 @@ body.logged-in .team-popup-inner {
     gap: 10px;
   }
 }
+@media (max-width: 575.98px) {
+  .block-team-experts__carousel {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
 .block-team-experts__swiper-wrap {
   min-width: 0;
   overflow: hidden;
@@ -3799,6 +3850,11 @@ body.logged-in .team-popup-inner {
 }
 .block-team-experts__nav {
   min-width: 0;
+}
+@media (max-width: 575.98px) {
+  .block-team-experts__nav {
+    display: none;
+  }
 }
 .block-team-experts__next {
   width: 56px;
@@ -3857,6 +3913,12 @@ body.logged-in .team-popup-inner {
     margin-right: 0;
   }
 }
+@media (max-width: 575.98px) {
+  .block-team-experts__footer {
+    margin-top: 16px;
+    padding: 0 16px;
+  }
+}
 .block-team-experts__view-all {
   display: inline-flex;
   align-items: center;
@@ -3876,6 +3938,11 @@ body.logged-in .team-popup-inner {
   border-color: #47622b;
   background: #47622b;
   color: #fff;
+}
+@media (max-width: 575.98px) {
+  .block-team-experts__view-all {
+    width: 100%;
+  }
 }
 
 .team-expert-card {
@@ -3945,6 +4012,11 @@ body.logged-in .team-popup-inner {
 @media (max-width: 1023.98px) {
   .team-expert-card {
     padding: 5px;
+  }
+}
+@media (max-width: 767.98px) {
+  .team-expert-card {
+    padding: 0px;
   }
 }
 /*!**********************************************************************************************************************************************************************!*\

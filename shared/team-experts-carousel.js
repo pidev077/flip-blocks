@@ -29,12 +29,12 @@ export function initTeamExpertsBlock(block) {
 
 		new Swiper(swiperEl, {
 			modules: [Navigation],
-			slidesPerView: 1.15,
-			spaceBetween: 20,
+			slidesPerView: 2,
+			spaceBetween: 12,
 			loop: slidesCount > 2,
 			navigation: nextEl ? { nextEl } : false,
 			breakpoints: {
-				576: { slidesPerView: 2, spaceBetween: 20 },
+				576: { spaceBetween: 20 },
 			},
 		});
 	}

@@ -46,6 +46,7 @@ const Edit = ( props ) => {
 		columns,
 		columnsGap,
 		responsiveToggle,
+		mobileColumns,
 		rowGap,
 		layout,
 		columnMaxWidth,
@@ -291,7 +292,10 @@ const Edit = ( props ) => {
 				className={ classnames(
 					'flip-layout-column-wrap-admin',
 					'flip-block-layout-column-gap',
-					responsiveToggle ? 'flip-is-responsive-column' : null
+					responsiveToggle ? 'flip-is-responsive-column' : null,
+					responsiveToggle && 2 === mobileColumns
+						? 'flip-mobile-columns-2'
+						: null
 				) }
 				style={ {
 					maxWidth: columnMaxWidth ? columnMaxWidth : null,

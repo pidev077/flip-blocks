@@ -5329,15 +5329,14 @@ function initTeamExpertsBlock(block) {
     var slidesCount = swiperEl.querySelectorAll(".swiper-slide").length;
     new swiper__WEBPACK_IMPORTED_MODULE_0__["default"](swiperEl, {
       modules: [swiper_modules__WEBPACK_IMPORTED_MODULE_1__.Navigation],
-      slidesPerView: 1.15,
-      spaceBetween: 20,
+      slidesPerView: 2,
+      spaceBetween: 12,
       loop: slidesCount > 2,
       navigation: nextEl ? {
         nextEl: nextEl
       } : false,
       breakpoints: {
         576: {
-          slidesPerView: 2,
           spaceBetween: 20
         }
       }
@@ -7979,6 +7978,7 @@ var Edit = function Edit(props) {
     columns = attributes.columns,
     columnsGap = attributes.columnsGap,
     responsiveToggle = attributes.responsiveToggle,
+    mobileColumns = attributes.mobileColumns,
     rowGap = attributes.rowGap,
     layout = attributes.layout,
     columnMaxWidth = attributes.columnMaxWidth,
@@ -8151,7 +8151,7 @@ var Edit = function Edit(props) {
   })), /*#__PURE__*/React.createElement("div", _extends({}, blockProps, {
     key: "columns"
   }), /*#__PURE__*/React.createElement("div", {
-    className: classnames__WEBPACK_IMPORTED_MODULE_0___default()('flip-layout-column-wrap-admin', 'flip-block-layout-column-gap', responsiveToggle ? 'flip-is-responsive-column' : null),
+    className: classnames__WEBPACK_IMPORTED_MODULE_0___default()('flip-layout-column-wrap-admin', 'flip-block-layout-column-gap', responsiveToggle ? 'flip-is-responsive-column' : null, responsiveToggle && 2 === mobileColumns ? 'flip-mobile-columns-2' : null),
     style: {
       maxWidth: columnMaxWidth ? columnMaxWidth : null,
       '--columnGap': columnsGap + 'px',
@@ -8699,6 +8699,7 @@ var Inspector = function Inspector(_ref) {
     rowGap = attributes.rowGap,
     columnMaxWidth = attributes.columnMaxWidth,
     responsiveToggle = attributes.responsiveToggle,
+    mobileColumns = attributes.mobileColumns,
     reverseOnMB = attributes.reverseOnMB,
     marginUnit = attributes.marginUnit,
     marginSync = attributes.marginSync,
@@ -8825,7 +8826,23 @@ var Inspector = function Inspector(_ref) {
         responsiveToggle: !responsiveToggle
       });
     }
-  }), /*#__PURE__*/React.createElement("hr", null), /*#__PURE__*/React.createElement(ToggleControl, {
+  }), responsiveToggle && 1 < columns && /*#__PURE__*/React.createElement(Fragment, null, /*#__PURE__*/React.createElement("hr", null), /*#__PURE__*/React.createElement(SelectControl, {
+    label: __('Columns on Mobile', 'flip-blocks'),
+    help: __('Choose how many columns to show per row on mobile devices.', 'flip-blocks'),
+    options: [{
+      value: 1,
+      label: __('1 Column', 'flip-blocks')
+    }, {
+      value: 2,
+      label: __('2 Columns', 'flip-blocks')
+    }],
+    value: mobileColumns,
+    onChange: function onChange(value) {
+      return setAttributes({
+        mobileColumns: parseInt(value)
+      });
+    }
+  })), /*#__PURE__*/React.createElement("hr", null), /*#__PURE__*/React.createElement(ToggleControl, {
     label: __('Reverse columns Mobile', 'flip-blocks'),
     help: __('Reverse the order of columns on mobile devices.', 'flip-blocks'),
     checked: reverseOnMB,
@@ -9040,7 +9057,7 @@ var Save = function Save(props) {
   // 	...BackgroundImageStyles( attributes ),
   // };
 
-  var className = classnames__WEBPACK_IMPORTED_MODULE_0___default()(['flip-layout-column-wrap', 'flip-block-layout-column-gap', attributes.responsiveToggle ? 'flip-is-responsive-column' : null, attributes.reverseOnMB ? 'reverse-column-mb' : null]);
+  var className = classnames__WEBPACK_IMPORTED_MODULE_0___default()(['flip-layout-column-wrap', 'flip-block-layout-column-gap', attributes.responsiveToggle ? 'flip-is-responsive-column' : null, attributes.responsiveToggle && 2 === attributes.mobileColumns ? 'flip-mobile-columns-2' : null, attributes.reverseOnMB ? 'reverse-column-mb' : null]);
   var blockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps.save({
     className: classNames || undefined,
     style: Object.assign(marginValue, paddingValue)
@@ -9123,6 +9140,10 @@ registerBlockType("flip-blocks/flip-columns", {
     responsiveToggle: {
       type: "boolean",
       "default": true
+    },
+    mobileColumns: {
+      type: "number",
+      "default": 1
     },
     reverseOnMB: {
       type: "boolean",
