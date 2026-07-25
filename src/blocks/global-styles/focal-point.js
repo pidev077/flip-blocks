@@ -63,8 +63,9 @@ function wrapPostFeaturedImage(PostFeaturedImage) {
 
 const applyWithSelect = withSelect((select) => {
     const { getEditedPostAttribute } = select('core/editor');
-    const featuredImageFocalPoint = getEditedPostAttribute('meta')['featured_image_focal_point'];
-    const featuredImageFocalPointMobile = getEditedPostAttribute('meta')['featured_image_focal_point_mobile'];
+    const meta = getEditedPostAttribute('meta') || {};
+    const featuredImageFocalPoint = meta['featured_image_focal_point'];
+    const featuredImageFocalPointMobile = meta['featured_image_focal_point_mobile'];
 
     return {
         featuredImageFocalPoint,
